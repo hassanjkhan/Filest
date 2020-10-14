@@ -96,7 +96,7 @@ class LoginViewController: UIViewController {
         
     }
     
-    @IBAction func Logout() {
+    func Logout() {
         let firebaseAuth = Auth.auth()
         do {
             try
@@ -124,8 +124,11 @@ class LoginViewController: UIViewController {
     }
     
     
+    //Online Helper functions
+    
+    
     @objc func textFieldDidChange(_ textField: UITextField) {
-        loginButton.backgroundColor = UIColor.init(red: 110.0/255.0, green: 177.0/255.0, blue: 255.0/255.0, alpha: 1)
+        loginButton.backgroundColor = UIColor.init(red: 0.0/255.0, green: 192.0/255.0, blue: 230.0/255.0, alpha: 1)
     }
     
     @objc func keyboardWillShow(notification:NSNotification){

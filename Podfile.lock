@@ -233,6 +233,8 @@ PODS:
     - FBSDKLoginKit/Login (= 5.15.1)
   - FBSDKLoginKit/Login (5.15.1):
     - FBSDKCoreKit (~> 5.0)
+  - Firebase (6.31.0):
+    - Firebase/Core (= 6.31.0)
   - Firebase/Analytics (6.31.0):
     - Firebase/Core
   - Firebase/Auth (6.31.0):
@@ -410,6 +412,7 @@ PODS:
   - SDWebImage/Core (5.9.0)
 
 DEPENDENCIES:
+  - Firebase
   - Firebase/Analytics
   - Firebase/Auth
   - Firebase/Core
@@ -478,6 +481,6 @@ SPEC CHECKSUMS:
   PromisesObjC: b14b1c6b68e306650688599de8a45e49fae81151
   SDWebImage: 62ae4a18473520c67b79e9724c31a63599cc9423
 
-PODFILE CHECKSUM: 43238bf939a272b00b09e45c71abf453bb3cdcc3
+PODFILE CHECKSUM: 9cdeabc6a176b0cacdf711e969eeded301d05fc9
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.10.0.rc.1

@@ -8,10 +8,19 @@
 
 import UIKit
 import FirebaseAuth
+
+
 class ProfileViewController: UIViewController {
 
+    
+    @IBOutlet weak var profileButton: UIButton!
+    @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var jobTitle: UILabel!
+    @IBOutlet weak var phoneButton: UIButton!
+    @IBOutlet weak var emailButton: UIButton!
     @IBOutlet weak var errorLabel: UILabel!
-  
+    @IBOutlet weak var signOutButton: UIButton!
+    
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask { get { return .portrait } }
   
     override func viewDidLoad() {
@@ -19,6 +28,25 @@ class ProfileViewController: UIViewController {
         
         // Do any additional setup after loading the view.
         errorLabel.alpha = 0
+        jobTitle.alpha = 0
+        
+        // Rounding sign up button
+        phoneButton.layer.cornerRadius = 17
+        phoneButton.clipsToBounds = true
+        
+        // Rounding sign up button
+        emailButton.layer.cornerRadius = 17
+        emailButton.clipsToBounds = true
+        
+        // Rounding sign up button
+        signOutButton.layer.cornerRadius = 23
+        signOutButton.clipsToBounds = true
+        
+        
+        
+      //  setUserInformation();
+        
+        
     }
     
     
@@ -46,6 +74,27 @@ class ProfileViewController: UIViewController {
     }
     
     
+    /*
+     Reads user data and sets the variables accordingly.
+     Reads name, email, phone number, profile photo
+     */
+    func setUserInformation(){
+//        var ref: DatabaseReference!
+//        //firebase reference to read and write data
+//        ref = Database.database().reference()
+//        let userID = Auth.auth().currentUser?.uid
+//
+//        ref.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
+//          // Get user value
+//          let value = snapshot.value as? NSDictionary
+//          let name = value?["name"] as? String ?? ""
+//          self.name.text = name
+//
+//          // ...
+//          }) { (error) in
+//            print(error.localizedDescription)
+//        }
+    }
   
     /*
     // MARK: - Navigation
