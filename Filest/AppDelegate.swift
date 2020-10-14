@@ -9,6 +9,8 @@
 import UIKit
 import Firebase
 import FirebaseUI
+import FirebaseDynamicLinks
+
 
 //let providers: [FUIAuthProvider] = [
 //  FUIGoogleAuth(),
