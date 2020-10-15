@@ -8,6 +8,8 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseDatabase
+import Firebase
 
 
 class ProfileViewController: UIViewController {
@@ -42,9 +44,7 @@ class ProfileViewController: UIViewController {
         signOutButton.layer.cornerRadius = 23
         signOutButton.clipsToBounds = true
         
-        
-        
-      //  setUserInformation();
+        setUserInformation();
         
         
     }
@@ -79,23 +79,13 @@ class ProfileViewController: UIViewController {
      Reads name, email, phone number, profile photo
      */
     func setUserInformation(){
-//        var ref: DatabaseReference!
-//        //firebase reference to read and write data
-//        ref = Database.database().reference()
-//        let userID = Auth.auth().currentUser?.uid
-//
-//        ref.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
-//          // Get user value
-//          let value = snapshot.value as? NSDictionary
-//          let name = value?["name"] as? String ?? ""
-//          self.name.text = name
-//
-//          // ...
-//          }) { (error) in
-//            print(error.localizedDescription)
-//        }
+        //let ref = Firestore.firestore()
+        //ref = Database.database().reference()
+        let user = Auth.auth().currentUser
+        self.name.text = user?.displayName
+        self.emailButton.setTitle("    " + (user?.email)!, for: .normal)
     }
-  
+
     /*
     // MARK: - Navigation
 

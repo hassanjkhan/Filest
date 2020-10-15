@@ -124,16 +124,21 @@ class SignUpViewController: UIViewController {
                 } else {
                     
                     // user created successfuly, now store the first and last name
-                    let database = Firestore.firestore()
-                    database.collection("users").addDocument(data: ["firstname":firstName, "lastname":lastName, "uid": result!.user.uid]) { (error) in
-                        
-                        if error != nil {
-                            
-                            //show error message
-                            self.showError(message: " weird error saving User data")
-                        }
-                        
+                    let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
+                    changeRequest?.displayName = firstName + " " + lastName
+                    changeRequest?.commitChanges { (error) in
+                      // ...
                     }
+//                    let database = Firestore.firestore()
+//                    database.collection("users").addDocument(data: ["firstname":firstName, "lastname":lastName, "uid": result!.user.uid]) { (error) in
+//
+//                        if error != nil {
+//
+//                            //show error message
+//                            self.showError(message: " weird error saving User data")
+//                        }
+//
+//                    }
                     
                     //send email verification
                     let user = Auth.auth().currentUser
