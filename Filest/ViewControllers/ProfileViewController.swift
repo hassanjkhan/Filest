@@ -112,6 +112,12 @@ class ProfileViewController: UIViewController {
                 let imageData = try! Data(contentsOf: imageUrl)
 
                 self.profileImage.image = UIImage(data: imageData)
+                
+                //self.profileImage.transform = CGAffineTransform(rotationAngle: (90.0 * .pi) / 180.0)
+                
+                //self.profileImage.setRounded()
+                self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width / 2
+                self.profileImage.clipsToBounds = true
             }
             
             
@@ -130,4 +136,17 @@ class ProfileViewController: UIViewController {
     }
     */
 
+}
+extension UIImageView {
+    
+    func setRounded(){
+        self.layoutIfNeeded()
+
+        let radius = self.frame.width / 2
+        self.layer.cornerRadius = radius
+        self.clipsToBounds = true
+        //self.layer.masksToBounds = true
+        
+        
+    }
 }
