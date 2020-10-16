@@ -31,6 +31,7 @@ class EditViewController: UIViewController {
         super.viewDidLoad()
 
         // Set up text fields and image if available
+        setUserInformation();
     }
     
     //open image picker
@@ -47,23 +48,25 @@ class EditViewController: UIViewController {
         
         let user = Auth.auth().currentUser
         let storageRef = Storage.storage().reference().child((user?.uid ?? "")+".png")
-        if let uploadData = profileImage.image!.pngData(){
+        let compressedImage = profileImage.image?.sd_resizedImage(with: CGSize(width: 1200, height: 1200), scaleMode: .fill)
+        if let uploadData = compressedImage!.pngData(){
+            
             storageRef.putData(uploadData, metadata: nil
                                , completion: { (metadata, error) in
                                 if error != nil {
                                     print ("error")
                                 } else {
-                                    storageRef.downloadURL { (url, error) in
-                                        let changeRequest = user?.createProfileChangeRequest()
-                                        //changeRequest?.displayName = (firstName ?? "") + " " + (lastName ?? "")
-                                        changeRequest?.photoURL = (url?.absoluteURL)!
-
-                                        changeRequest?.commitChanges { (error) in
-                                          // ...
-                                            print(url!)
-                                        }
-                                        
-                                    }
+//                                    storageRef.downloadURL { (url, error) in
+//                                        let changeRequest = user?.createProfileChangeRequest()
+//                                        //changeRequest?.displayName = (firstName ?? "") + " " + (lastName ?? "")
+//                                        changeRequest?.photoURL = (url?.absoluteURL)!
+//
+//                                        changeRequest?.commitChanges { (error) in
+//                                          // ...
+//                                            print(url!)
+//                                        }
+//
+//                                    }
                                 }
                 
             })
@@ -83,7 +86,46 @@ class EditViewController: UIViewController {
         //vc.modalTransitionStyle = .flipHorizontal
         //present(vc, animated: true)
     }
+    
+    
+    func setUserInformation(){
+        //let ref = Firestore.firestore()
+        //ref = Database.database().reference()
+        let user = Auth.auth().currentUser
+        let namesArray = user?.displayName?.split(separator: " ")
+        self.firstNameTextField.text = String(namesArray![0])
+        self.lastNameTextField.text  = String(namesArray![1])
+        self.emailTextField.text =           (user?.email)!
+        if user?.phoneNumber != nil {
+            self.phoneNumberTextField.text = user?.phoneNumber
+        }
+        //self.jobTitleTextField.text = user?.value(forKey: "job") as? String
+        
 
+        
+        let storageRef = Storage.storage().reference().child((user?.uid ?? "")+".png")
+        storageRef.downloadURL { (url, error) in
+            if error != nil {
+                
+            } else {
+                let imageUrlString = url?.absoluteString
+
+                let imageUrl = URL(string: imageUrlString!)!
+
+                let imageData = try! Data(contentsOf: imageUrl)
+
+                self.profileImage.image = UIImage(data: imageData)
+                
+                //self.profileImage.transform = CGAffineTransform(rotationAngle: (90.0 * .pi) / 180.0)
+                
+                //self.profileImage.setRounded()
+                self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width / 2
+                self.profileImage.clipsToBounds = true
+            }
+            
+            
+        }
+    }
     
     
 
@@ -125,6 +167,9 @@ extension EditViewController: UIImagePickerControllerDelegate, UINavigationContr
             guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
             //Setting image to your image view
             self?.profileImage.image = image
+                
+            self?.profileImage.layer.cornerRadius = self!.profileImage.frame.size.width / 2
+            self?.profileImage.clipsToBounds = true
         }
     }
 
