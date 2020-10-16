@@ -14,8 +14,7 @@ import Firebase
 
 class ProfileViewController: UIViewController {
 
-    
-    @IBOutlet weak var profileButton: UIButton!
+    @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var jobTitle: UILabel!
     @IBOutlet weak var phoneButton: UIButton!
@@ -66,14 +65,26 @@ class ProfileViewController: UIViewController {
     
     }
     
+
+
     func TransitiontoLogin(){
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let loginNavController = storyboard.instantiateViewController(identifier: "LoginNavigationController")
-        
-         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(loginNavController)
+        let LoginViewController = storyboard.instantiateViewController(identifier: "LoginViewController")
+        LoginViewController.modalPresentationStyle = .fullScreen
+        LoginViewController.modalTransitionStyle = .crossDissolve
+        present(LoginViewController, animated: true)
     }
     
     
+    @IBAction func TransitiontoEdit(){
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let EditViewController = storyboard.instantiateViewController(identifier: "EditViewController")
+        EditViewController.modalPresentationStyle = .fullScreen
+        EditViewController.modalTransitionStyle = .crossDissolve
+        present(EditViewController, animated: true)
+        //(UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(EditViewController)
+    }
     /*
      Reads user data and sets the variables accordingly.
      Reads name, email, phone number, profile photo
@@ -82,9 +93,32 @@ class ProfileViewController: UIViewController {
         //let ref = Firestore.firestore()
         //ref = Database.database().reference()
         let user = Auth.auth().currentUser
+        
         self.name.text = user?.displayName
         self.emailButton.setTitle("    " + (user?.email)!, for: .normal)
+        if user?.phoneNumber != nil {
+            self.phoneButton.setTitle(user?.phoneNumber, for: .normal)
+        }
+        
+        let storageRef = Storage.storage().reference().child((user?.uid ?? "")+".png")
+        storageRef.downloadURL { (url, error) in
+            if error != nil {
+                
+            } else {
+                let imageUrlString = url?.absoluteString
+
+                let imageUrl = URL(string: imageUrlString!)!
+
+                let imageData = try! Data(contentsOf: imageUrl)
+
+                self.profileImage.image = UIImage(data: imageData)
+            }
+            
+            
+        }
     }
+    
+
 
     /*
     // MARK: - Navigation
