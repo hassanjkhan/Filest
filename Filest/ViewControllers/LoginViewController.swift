@@ -118,9 +118,6 @@ class LoginViewController: UIViewController {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let mainTabBarController = storyboard.instantiateViewController(identifier: "MainTabBarController")
-       // mainTabBarController.modalPresentationStyle = .fullScreen
-       // mainTabBarController.modalTransitionStyle = .crossDissolve
-       // present(mainTabBarController, animated: true)
         
 //        // This is to get the SceneDelegate object from your view controller
 //        // then call the change root view controller function to change to main tab bar
@@ -129,8 +126,6 @@ class LoginViewController: UIViewController {
     
     
     //Online Helper functions
-    
-    
     @objc func textFieldDidChange(_ textField: UITextField) {
         loginButton.backgroundColor = UIColor.init(red: 0.0/255.0, green: 192.0/255.0, blue: 230.0/255.0, alpha: 1)
     }
@@ -158,9 +153,7 @@ class LoginViewController: UIViewController {
         //change color back to gray
         if passwordTextField.text == ""{
             loginButton.backgroundColor = UIColor.init(red: 167.0/255.0, green: 171.0/255.0, blue: 176.0/255.0, alpha: 1)
-        }
-        
-        
+        }        
         //shift down
         loginButton.frame.origin.y = registration.frame.origin.y - loginButton.frame.height - 5
         let reference = loginButton.frame.origin.y - (height * 0.35)
