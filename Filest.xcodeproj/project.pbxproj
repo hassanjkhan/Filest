@@ -16,6 +16,7 @@
 		8423C33D251190AE004EEB77 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8423C33B251190AE004EEB77 /* Utilities.swift */; };
 		846F013224FF5ACF00805339 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 846F013124FF5ACF00805339 /* GoogleService-Info.plist */; };
 		846F013424FF5B2D00805339 /* HelperFolder in Resources */ = {isa = PBXBuildFile; fileRef = 846F013324FF5B2D00805339 /* HelperFolder */; };
+		848A85F5253E99E400E42823 /* RandomCodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848A85F4253E99E400E42823 /* RandomCodeGenerator.swift */; };
 		84B1C06F25104CDD0051E6F6 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846F013624FF5B4D00805339 /* SignUpViewController.swift */; };
 		84B1C07025104CDE0051E6F6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846F013724FF5B4D00805339 /* ViewController.swift */; };
 		84B1C07125104CE00051E6F6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846F013824FF5B4D00805339 /* LoginViewController.swift */; };
@@ -45,6 +46,7 @@
 		846F013824FF5B4D00805339 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		846F013924FF5B4D00805339 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		846F013A24FF5B4D00805339 /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
+		848A85F4253E99E400E42823 /* RandomCodeGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomCodeGenerator.swift; sourceTree = "<group>"; };
 		84D08A7C2538D01F00B6C487 /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 		84D08A7F2538FC4200B6C487 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		84D08A842539057900B6C487 /* ProfileToEditProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileToEditProfile.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 				8418F679241ECB52002DC8A0 /* LaunchScreen.storyboard */,
 				846F013524FF5B4D00805339 /* ViewControllers */,
 				8418F67C241ECB52002DC8A0 /* Info.plist */,
+				848A85F4253E99E400E42823 /* RandomCodeGenerator.swift */,
 			);
 			path = Filest;
 			sourceTree = "<group>";
@@ -284,6 +287,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				84D08A7D2538D01F00B6C487 /* EditViewController.swift in Sources */,
+				848A85F5253E99E400E42823 /* RandomCodeGenerator.swift in Sources */,
 				84B1C07225104CE10051E6F6 /* Main.swift in Sources */,
 				84D08A802538FC4200B6C487 /* MainTabBarController.swift in Sources */,
 				84B1C06F25104CDD0051E6F6 /* SignUpViewController.swift in Sources */,

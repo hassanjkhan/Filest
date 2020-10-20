@@ -27,6 +27,7 @@ class ProfileViewController: UIViewController {
     var inBusiness: Bool!
     var fs: Firestore!
     var user: User!
+    var businessCode: String!
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask { get { return .portrait } }
   
@@ -65,30 +66,7 @@ class ProfileViewController: UIViewController {
         self.beginButton.isEnabled = false
         self.beginLabel.alpha = 0
         
-        
-        // check if user is in a business
-        let docref =  fs.collection("users").document(user!.uid)
-        //users/oYpWjZIkXcQBghpjMEmtDDOUetB3
-        docref.getDocument { (document, error) in
-            
-            if error != nil {
-                print("Document Error => ", error!)
-            } else {
-                if let document = document {
-                    if document.exists {
-                        self.inBusiness = true
-                        self.beginLabel.alpha = 1
-                        self.beginLabel.text = "Your business code is : 1234"
-                    } else {
-                        self.inBusiness = false
-                        self.beginButton.alpha = 1
-                        self.beginButton.isEnabled = true
-                        self.beginLabel.alpha = 1
-                    }
-                }
-            }
-            
-        }
+
         
     }
     
@@ -163,6 +141,29 @@ class ProfileViewController: UIViewController {
             
         }
         
+        // check if user is in a business
+        let docref =  fs.collection("users").document(user!.uid)
+        //users/oYpWjZIkXcQBghpjMEmtDDOUetB3
+        docref.getDocument { (document, error) in
+            
+            if error != nil {
+                print("Document Error => ", error!)
+            } else {
+                if let document = document {
+                    if document.exists {
+                        self.inBusiness = true
+                        self.beginLabel.alpha = 1
+                        self.beginLabel.text = "Your business code is : " + (document.get("companyID") as! String)
+                    } else {
+                        self.inBusiness = false
+                        self.beginButton.alpha = 1
+                        self.beginButton.isEnabled = true
+                        self.beginLabel.alpha = 1
+                    }
+                }
+            }
+            
+        }
     }
     
     /*
@@ -181,12 +182,14 @@ class ProfileViewController: UIViewController {
         let user = Auth.auth().currentUser
         let database = Firestore.firestore()
         
-        alert.addAction(UIAlertAction(title: "Join a businss", style: .default, handler:   { action in
+        alert.addAction(UIAlertAction(title: "Join a business", style: .default, handler:   { action in
             //add another alert that asks for code, checks if code exists, if it does then adds user to business
-            database.collection("users").document(user!.uid).setData(["companyID":"1234"])
+            let rcg = RandomCodeGenerator()
+            let code = rcg.GenerateCode()
+            database.collection("users").document(user!.uid).setData(["companyID": code])
         }))
         
-        alert.addAction(UIAlertAction(title: "Start a businss", style: .default, handler: { action in
+        alert.addAction(UIAlertAction(title: "Start a business", style: .default, handler: { action in
             
             //Create random code, show code on profile!
             database.collection("users").document(user!.uid).setData(["companyID":"1234"])
