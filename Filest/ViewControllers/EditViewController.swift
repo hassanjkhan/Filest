@@ -48,33 +48,24 @@ class EditViewController: UIViewController {
         
         let user = Auth.auth().currentUser
         let storageRef = Storage.storage().reference().child((user?.uid ?? "")+".png")
-        let compressedImage = profileImage.image?.sd_resizedImage(with: CGSize(width: 1200, height: 1200), scaleMode: .fill)
+        let compressedImage = profileImage.image?.sd_resizedImage(with: CGSize(width: 1200, height: 1600), scaleMode: .fill)
         if let uploadData = compressedImage!.pngData(){
             
             storageRef.putData(uploadData, metadata: nil
                                , completion: { (metadata, error) in
                                 if error != nil {
                                     print ("error")
-                                } else {
-//                                    storageRef.downloadURL { (url, error) in
-//                                        let changeRequest = user?.createProfileChangeRequest()
-//                                        //changeRequest?.displayName = (firstName ?? "") + " " + (lastName ?? "")
-//                                        changeRequest?.photoURL = (url?.absoluteURL)!
-//
-//                                        changeRequest?.commitChanges { (error) in
-//                                          // ...
-//                                            print(url!)
-//                                        }
-//
-//                                    }
                                 }
-                
             })
         }
 
         self.TransitiontoProfile()
     }
     
+    @IBAction func Cancel(_ sender: UIButton) {
+        self.TransitiontoProfile()
+    
+    }
     
     
     func TransitiontoProfile(){
