@@ -143,7 +143,6 @@ class ProfileViewController: UIViewController {
         
         // check if user is in a business
         let docref =  fs.collection("users").document(user!.uid)
-        //users/oYpWjZIkXcQBghpjMEmtDDOUetB3
         docref.getDocument { (document, error) in
             
             if error != nil {
@@ -153,7 +152,8 @@ class ProfileViewController: UIViewController {
                     if document.exists {
                         self.inBusiness = true
                         self.beginLabel.alpha = 1
-                        self.beginLabel.text = "Your business code is : " + (document.get("companyID") as! String)
+                        self.businessCode = (document.get("companyID") as! String)
+                        self.beginLabel.text = "Your business code is : " + self.businessCode
                     } else {
                         self.inBusiness = false
                         self.beginButton.alpha = 1
@@ -179,20 +179,33 @@ class ProfileViewController: UIViewController {
     func assignCompany(){
         
         let alert = UIAlertController(title: "Connect with your company", message: "Start or join a business!", preferredStyle: .alert)
-        let user = Auth.auth().currentUser
+        let joinAlert = UIAlertController(title: "Enter the company code", message: "This should be a code with 7 digits or numbers", preferredStyle: .alert)
         let database = Firestore.firestore()
         
-        alert.addAction(UIAlertAction(title: "Join a business", style: .default, handler:   { action in
-            //add another alert that asks for code, checks if code exists, if it does then adds user to business
-            let rcg = RandomCodeGenerator()
-            let code = rcg.GenerateCode()
-            database.collection("users").document(user!.uid).setData(["companyID": code])
+        alert.addAction(UIAlertAction(title: "Start a business", style: .default, handler:   { action in
+
+            // adding user to users with their companyID create a new collection in companies collection containing all the basics for actions
+            self.startBussiness(db: database)
+
         }))
         
-        alert.addAction(UIAlertAction(title: "Start a business", style: .default, handler: { action in
+        alert.addAction(UIAlertAction(title: "Join a business", style: .default, handler: { action in
             
-            //Create random code, show code on profile!
-            database.collection("users").document(user!.uid).setData(["companyID":"1234"])
+            joinAlert.addTextField { (textField) in
+                textField.placeholder = "ADCD123"
+            }
+            
+            joinAlert.addAction(UIAlertAction(title: "Join", style: .default, handler:   { action in
+                
+                //add another alert that asks for code, checks if code exists, if it does then adds user to business
+                let code = joinAlert.textFields![0].text
+                
+                self.joinBusiness(code: code ?? "")
+                
+            }))
+            
+            self.present(joinAlert, animated: true)
+            
         }))
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler:  { action in}))
@@ -200,6 +213,59 @@ class ProfileViewController: UIViewController {
         self.present(alert, animated: true)
         
     }
-
+    
+    func joinBusiness(code: String){
+        
+    }
+    func startBussiness(db: Firestore){
+        
+        let rcg = RandomCodeGenerator()
+        let code = rcg.GenerateCode()
+        
+        // check if that companyID already exists in companies, if not then go ahead else generate new code
+        db.collection("companies").document(code).getDocument { (document, error) in
+            if error != nil {
+                print("startbusiness Document Error => ", error!)
+            } else {
+                if let document = document {
+                    if document.exists {
+                        //call again and it will generate a new code
+                        self.startBussiness(db: db)
+                    } else {
+                        // This adds the user to users with their new companyID
+                        db.collection("users").document(self.user!.uid).setData(["companyID": code])
+                        
+                        // however we also need to add them to the companies
+                        // collection with all of the required information to start their business
+                        let employeeCollection = db.collection("companies").document(code).collection("employees").document(self.user.uid)
+                        employeeCollection.setData(["jobTitle" : ""])
+                        employeeCollection.setData(["department" : "admin"])
+                        employeeCollection.setData(["position" : "supervisor"])
+                        
+                        db.collection("companies").document(code).setData(["exists" : true])
+                        employeeCollection.setData(["exists" : true])
+                        
+                        
+                        let departmentDoc = db.collection("companies").document(code).collection("departments").document("admin")
+                        departmentDoc.collection("employees").document(self.user.uid).setData(["position" : "supervisor"])
+                        
+                        db.collection("companies").document(code).setData(["exists" : true])
+                        departmentDoc.setData(["exists" : true])
+                        
+                        
+                        let actionsCollection = db.collection("companies").document(code).collection("actions")
+                        actionsCollection.document("absent").setData(["exists" : true])
+                        actionsCollection.document("meetings").setData(["exists" : true])
+                        actionsCollection.document("expenses").setData(["exists" : true])
+                        actionsCollection.document("vacations").setData(["exists" : true])
+                        actionsCollection.document("feedback").setData(["exists" : true])
+                        actionsCollection.document("training").setData(["exists" : true])
+                    }
+                }
+            }
+        }
+    }
+    
+    
 }
 
