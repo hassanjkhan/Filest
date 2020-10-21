@@ -200,7 +200,7 @@ class ProfileViewController: UIViewController {
                 //add another alert that asks for code, checks if code exists, if it does then adds user to business
                 let code = joinAlert.textFields![0].text
                 
-                self.joinBusiness(code: code ?? "")
+                self.joinBusiness(code: code ?? "", db: database)
                 
             }))
             
@@ -208,15 +208,43 @@ class ProfileViewController: UIViewController {
             
         }))
         
-        alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler:  { action in}))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler:  { action in}))
         
         self.present(alert, animated: true)
         
     }
     
-    func joinBusiness(code: String){
-        
+    func joinBusiness(code: String, db: Firestore){
+        db.collection("companies").document(code).getDocument { (document, error) in
+            if error != nil {
+                print("joinbusiness Document Error => ", error!)
+            } else {
+                if let document = document {
+                    if document.exists {
+                       
+                        db.collection("users").document(self.user!.uid).setData(["companyID": code])
+                        
+                        // however we also need to add them to the companies
+                        // collection with all of the required information to start their business
+                        let employeeCollection = db.collection("companies").document(code).collection("employees").document(self.user.uid)
+                        employeeCollection.setData(["jobTitle" : ""])
+                        employeeCollection.setData(["department" : ""])
+                        employeeCollection.setData(["position" : "employee"])
+                        
+                        let successAlert = UIAlertController(title: "You've Joined!", message: "", preferredStyle: .alert)
+                        successAlert.addAction(UIAlertAction(title: "Great!", style: .default, handler:   { action in }))
+                        self.present(successAlert, animated: true)
+                        
+                    } else {
+                        let failedAlert = UIAlertController(title: "Not Found", message: "That code does not exist please try again", preferredStyle: .alert)
+                        failedAlert.addAction(UIAlertAction(title: "Okay", style: .default, handler:   { action in }))
+                        self.present(failedAlert, animated: true)
+                    }
+                }
+            }
+        }
     }
+    
     func startBussiness(db: Firestore){
         
         let rcg = RandomCodeGenerator()
