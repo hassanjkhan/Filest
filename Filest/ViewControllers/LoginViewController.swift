@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseAuth
+import Firebase
 
 class LoginViewController: UIViewController {
     
@@ -22,6 +23,8 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var loginButton: UIButton!
     
     @IBOutlet weak var forgotPasswordButton: UIButton!
+    
+    var user: User!
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask{ get { return .portrait } }
     
@@ -76,9 +79,10 @@ class LoginViewController: UIViewController {
                 self.errorLabel.text = error!.localizedDescription
                 self.errorLabel.alpha = 1
             } else {
-                let user = Auth.auth().currentUser
-                switch user?.isEmailVerified {
+                self.user = Auth.auth().currentUser
+                switch self.user?.isEmailVerified {
                 case true:
+                    self.setProfileCache()
                     self.TransitiontoHome()
                 case false:
                     self.errorLabel.text = "Please verify your email and try again."
@@ -112,6 +116,26 @@ class LoginViewController: UIViewController {
         }
         
     }
+    
+    
+    //sets up cache for profile image
+    func setProfileCache(){
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        let storageRef = Storage.storage().reference().child((user?.uid ?? "")+".png")
+        storageRef.downloadURL { (url, error) in
+            if error != nil {
+                print(error.debugDescription)
+            } else {
+                let imageUrlString = url?.absoluteString
+                let imageUrl = URL(string: imageUrlString!)!
+                let imageData = try! Data(contentsOf: imageUrl)
+    
+                delegate.profileCache.setObject(UIImage(data: imageData)!, forKey: ((self.user?.uid ?? "")+".png") as NSString)
+            }
+            
+        }
+    }
+        
     
     func TransitiontoHome(){
         //let vc = MainTabBarController()

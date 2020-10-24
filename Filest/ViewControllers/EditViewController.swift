@@ -13,7 +13,6 @@ import Firebase
 
 
 class EditViewController: UIViewController {
-
     
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var editImageButton: UIButton!
@@ -23,15 +22,37 @@ class EditViewController: UIViewController {
     @IBOutlet weak var phoneNumberTextField: UITextField!
     @IBOutlet weak var jobTitleTextField: UITextField!
     
-
-    
+    var user: User!
+    var verificationId: String?
+    var code: String?
+    var fs: Firestore!
+    var companyID: String?
+    var employeeData: DocumentReference!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Set up text fields and image if available
-        setUserInformation();
+        self.user = Auth.auth().currentUser
+        fs = Firestore.firestore()
+        setProfilePhoto()
+        fs.collection("users").document(user!.uid).getDocument { (document, error) in
+            if error != nil {
+                print("joinbusiness Document Error => ", error!)
+            } else {
+                if let document = document {
+                    if document.exists {
+                        self.companyID =  (document.get("companyID") as! String)
+                        self.employeeData = self.fs.collection("companies").document(self.companyID!).collection("employees").document(self.user!.uid)
+                        self.setUserInformation();
+                    }
+                }
+            }
+        }
+        
+        
+        
     }
     
     //open image picker
@@ -41,12 +62,37 @@ class EditViewController: UIViewController {
     
     // Save changes and transition home
     @IBAction func Save(_ sender: UIButton) {
-        //let firstName   = firstNameTextField.text
-        //let lastName    = lastNameTextField.text
-        //let jobTitle    = jobTitleTextField.text
-        //let phoneNumber = phoneNumberTextField.text
+        let firstName   = firstNameTextField.text
+        let lastName    = lastNameTextField.text
+        let jobTitle    = jobTitleTextField.text
+        let phoneNumber = phoneNumberTextField.text
         
-        let user = Auth.auth().currentUser
+
+        //save personal data
+        let changeRequest = self.user.createProfileChangeRequest()
+        changeRequest.displayName = (firstName ?? "") + " " + (lastName ?? "")
+       
+        changeRequest.commitChanges { (error) in
+          // ...
+        }
+        
+        employeeData.setData(["jobTitle": jobTitle], merge: true)
+        employeeData.setData(["phoneNumber": phoneNumber], merge: true)
+//        employeeData.getDocument(completion: { (document, error) in
+//            if error != nil {
+//                print("joinbusiness Document Error => ", error!)
+//            } else {
+//                if let document = document {
+//                    if document.exists {
+//
+//
+//                    }
+//                }
+//            }
+//        })
+
+        
+        // save image
         let storageRef = Storage.storage().reference().child((user?.uid ?? "")+".png")
         let compressedImage = profileImage.image?.sd_resizedImage(with: CGSize(width: 1200, height: 1600), scaleMode: .fill)
         if let uploadData = compressedImage!.pngData(){
@@ -58,16 +104,14 @@ class EditViewController: UIViewController {
                                 }
             })
         }
-
         self.TransitiontoProfile()
     }
+    
     
     @IBAction func Cancel(_ sender: UIButton) {
         self.TransitiontoProfile()
-    
     }
-    
-    
+
     func TransitiontoProfile(){
 
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -80,44 +124,69 @@ class EditViewController: UIViewController {
     
     
     func setUserInformation(){
-        //let ref = Firestore.firestore()
-        //ref = Database.database().reference()
-        let user = Auth.auth().currentUser
+        
         let namesArray = user?.displayName?.split(separator: " ")
         self.firstNameTextField.text = String(namesArray![0])
         self.lastNameTextField.text  = String(namesArray![1])
         self.emailTextField.text =           (user?.email)!
-        if user?.phoneNumber != nil {
-            self.phoneNumberTextField.text = user?.phoneNumber
-        }
-        //self.jobTitleTextField.text = user?.value(forKey: "job") as? String
+     
         
-
-        
-        let storageRef = Storage.storage().reference().child((user?.uid ?? "")+".png")
-        storageRef.downloadURL { (url, error) in
+        employeeData.getDocument { (document, error) in
             if error != nil {
-                
+                print("joinbusiness Document Error => ", error!)
             } else {
-                let imageUrlString = url?.absoluteString
-
-                let imageUrl = URL(string: imageUrlString!)!
-
-                let imageData = try! Data(contentsOf: imageUrl)
-
-                self.profileImage.image = UIImage(data: imageData)
                 
-                //self.profileImage.transform = CGAffineTransform(rotationAngle: (90.0 * .pi) / 180.0)
                 
-                //self.profileImage.setRounded()
-                self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width / 2
-                self.profileImage.clipsToBounds = true
+                if let document = document {
+                    if document.exists {
+                
+                        let jobTitle = document.get("jobTitle") as! String?
+                        let phoneNumber = document.get("phoneNumber")  as! String?
+                        
+                        if (jobTitle    != "none" && jobTitle     != "" && jobTitle     != nil) {  self.jobTitleTextField.text = jobTitle       }
+                        if (phoneNumber != "none" && phoneNumber  != "" && phoneNumber  != nil) {  self.phoneNumberTextField.text = phoneNumber }
+                        
+                    }
+                }
+        
             }
-            
-            
         }
+        
+        
+        
     }
     
+    func setProfilePhoto(){
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        let storageRef = Storage.storage().reference().child((user?.uid ?? "")+".png")
+
+        
+        if let cachedImage = delegate.profileCache.object(forKey: ((user?.uid ?? "")+".png") as NSString) {
+            self.profileImage.image = cachedImage
+            self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width / 2
+            self.profileImage.clipsToBounds = true
+        } else {
+            storageRef.downloadURL { (url, error) in
+                if error != nil {
+                    
+                } else {
+                    let imageUrlString = url?.absoluteString
+
+                    let imageUrl = URL(string: imageUrlString!)!
+
+                    let imageData = try! Data(contentsOf: imageUrl)
+
+                    self.profileImage.image = UIImage(data: imageData)
+                
+                    delegate.profileCache.setObject(self.profileImage.image!, forKey: ((self.user?.uid ?? "")+".png") as NSString)
+                    
+                    self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width / 2
+                    self.profileImage.clipsToBounds = true
+                }
+                
+            }
+        }
+    }
     
 
 }
