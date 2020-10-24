@@ -12,19 +12,11 @@ import FirebaseUI
 import FirebaseDynamicLinks
 
 
-//let providers: [FUIAuthProvider] = [
-//  FUIGoogleAuth(),
-//  FUIFacebookAuth(),
-////  FUITwitterAuth(),
-////  FUIPhoneAuth(authUI:FUIAuth.defaultAuthUI()),
-//]
-//self.authUI.providers = providers
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
+    //Caches all information for profile and edit profile
+    let profileCache = NSCache<NSString, UIImage>()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.

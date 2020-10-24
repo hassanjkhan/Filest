@@ -10,7 +10,7 @@ import Foundation
 
 class RandomCodeGenerator {
     
-    var elements = ["1","2","3","4","5","6","7","8","9","0","A","B","C","D","E","F","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z",]
+    var elements = ["A","B","C","D","E","F","H","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z",]
     
     func GenerateCode() -> String{
         var code = ""
@@ -19,6 +19,10 @@ class RandomCodeGenerator {
         }
         return code
     }
+    
+    
+    
+    
     
 }
 

@@ -25,7 +25,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var beginButton: UIButton!
 
     var inBusiness: Bool!
-    var fs: Firestore!
+    var fs: Firestore! 
     var user: User!
     var businessCode: String!
     
@@ -66,10 +66,7 @@ class ProfileViewController: UIViewController {
         self.beginButton.isEnabled = false
         self.beginLabel.alpha = 0
         
-
-        
     }
-    
     
     @IBAction func Logout(_ sender: UIButton) {
         let firebaseAuth = Auth.auth()
@@ -116,30 +113,56 @@ class ProfileViewController: UIViewController {
      Reads name, email, phone number, profile photo
      */
     func setUserInformation(){
+        
+        let delegate = UIApplication.shared.delegate as! AppDelegate
         self.name.text = user?.displayName
         self.emailButton.setTitle("    " + (user?.email)!, for: .normal)
-        if user?.phoneNumber != nil {
-            self.phoneButton.setTitle(user?.phoneNumber, for: .normal)
-        }
+        
+//        if user?.phoneNumber != nil {
+//            let number = user?.phoneNumber
+//            let start = number!.index(number!.startIndex, offsetBy: 0)
+//            let third = number!.index(number!.startIndex, offsetBy: 3)
+//            let firstThree = start..<third
+//            let sixth = number!.index(number!.startIndex, offsetBy: 6)
+//            let secondThree = third..<sixth
+//            let tenth = number!.index(number!.endIndex, offsetBy: 4)
+//            let lastFour = sixth..<tenth
+//
+//
+//            self.phoneButton.setTitle(number, for: .normal)
+//
+//        }
+        
         
         let storageRef = Storage.storage().reference().child((user?.uid ?? "")+".png")
-        storageRef.downloadURL { (url, error) in
-            if error != nil {
+    
+        if let cachedImage = delegate.profileCache.object(forKey: ((user?.uid ?? "")+".png") as NSString) {
+            self.profileImage.image = cachedImage
+            self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width / 2
+            self.profileImage.clipsToBounds = true
+        } else {
+            storageRef.downloadURL { (url, error) in
+                if error != nil {
+                    
+                } else {
+                    let imageUrlString = url?.absoluteString
+
+                    let imageUrl = URL(string: imageUrlString!)!
+
+                    let imageData = try! Data(contentsOf: imageUrl)
+
+                    self.profileImage.image = UIImage(data: imageData)
                 
-            } else {
-                let imageUrlString = url?.absoluteString
-
-                let imageUrl = URL(string: imageUrlString!)!
-
-                let imageData = try! Data(contentsOf: imageUrl)
-
-                self.profileImage.image = UIImage(data: imageData)
+                    delegate.profileCache.setObject(self.profileImage.image!, forKey: ((self.user?.uid ?? "")+".png") as NSString)
+                    
+                    self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width / 2
+                    self.profileImage.clipsToBounds = true
+                }
                 
-                self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width / 2
-                self.profileImage.clipsToBounds = true
             }
-            
         }
+        
+        
         
         // check if user is in a business
         let docref =  fs.collection("users").document(user!.uid)
@@ -154,6 +177,22 @@ class ProfileViewController: UIViewController {
                         self.beginLabel.alpha = 1
                         self.businessCode = (document.get("companyID") as! String)
                         self.beginLabel.text = "Your business code is : " + self.businessCode
+                        
+                        self.fs.collection("companies").document(self.businessCode).collection("employees").document(self.user!.uid).getDocument { (document, error) in
+                            if error != nil {
+                                print("set user info Document Error => ", error!)
+                            } else {
+                                if let document = document {
+                                    if document.exists {
+                                        let phoneNumber = "    " + (document.get("phoneNumber") as! String)
+                                        
+                                        self.phoneButton.setTitle(phoneNumber, for: .normal)
+                                        self.jobTitle.text = (document.get("jobTitle") as! String)
+                                        self.jobTitle.alpha = 1
+                                    }
+                                }
+                            }
+                        }
                     } else {
                         self.inBusiness = false
                         self.beginButton.alpha = 1
@@ -165,6 +204,8 @@ class ProfileViewController: UIViewController {
             
         }
     }
+    
+    
     
     /*
         Run assignCompany
@@ -186,7 +227,7 @@ class ProfileViewController: UIViewController {
 
             // adding user to users with their companyID create a new collection in companies collection containing all the basics for actions
             self.startBussiness(db: database)
-
+            
         }))
         
         alert.addAction(UIAlertAction(title: "Join a business", style: .default, handler: { action in
@@ -201,6 +242,7 @@ class ProfileViewController: UIViewController {
                 let code = joinAlert.textFields![0].text
                 
                 self.joinBusiness(code: code ?? "", db: database)
+                
                 
             }))
             
@@ -227,13 +269,22 @@ class ProfileViewController: UIViewController {
                         // however we also need to add them to the companies
                         // collection with all of the required information to start their business
                         let employeeCollection = db.collection("companies").document(code).collection("employees").document(self.user.uid)
-                        employeeCollection.setData(["jobTitle" : ""])
-                        employeeCollection.setData(["department" : ""])
-                        employeeCollection.setData(["position" : "employee"])
+                        employeeCollection.setData(["jobTitle" : "none"], merge: true)
+                        employeeCollection.setData(["department" : "none"], merge: true)
+                        employeeCollection.setData(["position" : "employee"], merge: true)
+                        employeeCollection.setData(["phoneNumber" : "none"], merge: true)
+                        
+                        
+                        self.setUserInformation()
+                        self.beginButton.isEnabled = false
+                        self.beginButton.alpha = 0
+                        
                         
                         let successAlert = UIAlertController(title: "You've Joined!", message: "", preferredStyle: .alert)
                         successAlert.addAction(UIAlertAction(title: "Great!", style: .default, handler:   { action in }))
                         self.present(successAlert, animated: true)
+                        
+                        
                         
                     } else {
                         let failedAlert = UIAlertController(title: "Not Found", message: "That code does not exist please try again", preferredStyle: .alert)
@@ -266,12 +317,12 @@ class ProfileViewController: UIViewController {
                         // however we also need to add them to the companies
                         // collection with all of the required information to start their business
                         let employeeCollection = db.collection("companies").document(code).collection("employees").document(self.user.uid)
-                        employeeCollection.setData(["jobTitle" : ""])
-                        employeeCollection.setData(["department" : "admin"])
-                        employeeCollection.setData(["position" : "supervisor"])
+                        employeeCollection.setData(["jobTitle" : "none"], merge: true)
+                        employeeCollection.setData(["department" : "admin"], merge: true)
+                        employeeCollection.setData(["position" : "supervisor"], merge: true)
+                        employeeCollection.setData(["phoneNumber" : "none"], merge: true)
                         
                         db.collection("companies").document(code).setData(["exists" : true])
-                        employeeCollection.setData(["exists" : true])
                         
                         
                         let departmentDoc = db.collection("companies").document(code).collection("departments").document("admin")
@@ -288,6 +339,15 @@ class ProfileViewController: UIViewController {
                         actionsCollection.document("vacations").setData(["exists" : true])
                         actionsCollection.document("feedback").setData(["exists" : true])
                         actionsCollection.document("training").setData(["exists" : true])
+                        
+                        self.setUserInformation()
+                        self.beginButton.isEnabled = false
+                        self.beginButton.alpha = 0
+                        
+                        
+                        let successAlert = UIAlertController(title: "You've Started a Business!", message: "", preferredStyle: .alert)
+                        successAlert.addAction(UIAlertAction(title: "Great!", style: .default, handler:   { action in }))
+                        self.present(successAlert, animated: true)
                     }
                 }
             }

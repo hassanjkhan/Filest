@@ -47,6 +47,7 @@
 		846F013924FF5B4D00805339 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		846F013A24FF5B4D00805339 /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
 		848A85F4253E99E400E42823 /* RandomCodeGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomCodeGenerator.swift; sourceTree = "<group>"; };
+		848F049025435E150059E0B7 /* Filest.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Filest.entitlements; sourceTree = "<group>"; };
 		84D08A7C2538D01F00B6C487 /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 		84D08A7F2538FC4200B6C487 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		84D08A842539057900B6C487 /* ProfileToEditProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileToEditProfile.swift; sourceTree = "<group>"; };
@@ -104,6 +105,7 @@
 		8418F66D241ECB50002DC8A0 /* Filest */ = {
 			isa = PBXGroup;
 			children = (
+				848F049025435E150059E0B7 /* Filest.entitlements */,
 				84D08A822539054700B6C487 /* Segues */,
 				8418F66E241ECB50002DC8A0 /* AppDelegate.swift */,
 				8418F670241ECB50002DC8A0 /* SceneDelegate.swift */,
@@ -359,6 +361,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = SQ5RL484UZ;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -421,6 +424,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = SQ5RL484UZ;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -446,6 +450,7 @@
 			baseConfigurationReference = 5556FC17A2BC600B165DA214 /* Pods-Filest.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Filest/Filest.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SQ5RL484UZ;
 				INFOPLIST_FILE = Filest/Info.plist;
@@ -465,6 +470,7 @@
 			baseConfigurationReference = 34CCBD61015509AE0E9BBA59 /* Pods-Filest.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Filest/Filest.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SQ5RL484UZ;
 				INFOPLIST_FILE = Filest/Info.plist;
