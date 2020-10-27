@@ -220,7 +220,7 @@ class ProfileViewController: UIViewController {
     func assignCompany(){
         
         let alert = UIAlertController(title: "Connect with your company", message: "Start or join a business!", preferredStyle: .alert)
-        let joinAlert = UIAlertController(title: "Enter the company code", message: "This should be a code with 7 digits or numbers", preferredStyle: .alert)
+        let joinAlert = UIAlertController(title: "Enter the company code", message: "This should be a code with 7 letters.", preferredStyle: .alert)
         let database = Firestore.firestore()
         
         alert.addAction(UIAlertAction(title: "Start a business", style: .default, handler:   { action in
@@ -233,7 +233,7 @@ class ProfileViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Join a business", style: .default, handler: { action in
             
             joinAlert.addTextField { (textField) in
-                textField.placeholder = "ADCD123"
+                textField.placeholder = "ADCDEFG"
             }
             
             joinAlert.addAction(UIAlertAction(title: "Join", style: .default, handler:   { action in
@@ -241,7 +241,12 @@ class ProfileViewController: UIViewController {
                 //add another alert that asks for code, checks if code exists, if it does then adds user to business
                 let code = joinAlert.textFields![0].text
                 
-                self.joinBusiness(code: code ?? "", db: database)
+                if code != nil && code != "" {
+                    self.joinBusiness(code: code ?? "", db: database)
+                } else {
+                    self.failedAlert()
+                }
+                
                 
                 
             }))
@@ -287,13 +292,17 @@ class ProfileViewController: UIViewController {
                         
                         
                     } else {
-                        let failedAlert = UIAlertController(title: "Not Found", message: "That code does not exist please try again", preferredStyle: .alert)
-                        failedAlert.addAction(UIAlertAction(title: "Okay", style: .default, handler:   { action in }))
-                        self.present(failedAlert, animated: true)
+                        self.failedAlert()
                     }
                 }
             }
         }
+    }
+    
+    func failedAlert(){
+        let failedAlert = UIAlertController(title: "Not Found", message: "That code does not exist please try again", preferredStyle: .alert)
+        failedAlert.addAction(UIAlertAction(title: "Okay", style: .default, handler:   { action in }))
+        self.present(failedAlert, animated: true)
     }
     
     func startBussiness(db: Firestore){
