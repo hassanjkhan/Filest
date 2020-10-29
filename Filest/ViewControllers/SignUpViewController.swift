@@ -196,7 +196,7 @@ class SignUpViewController: UIViewController {
     
     func TransitiontoLogin(){
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let loginNavController = storyboard.instantiateViewController(identifier: "LoginNavigationController")
+        let loginNavController = storyboard.instantiateViewController(identifier: "LoginViewController")
         
          (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(loginNavController)
     }
@@ -230,7 +230,6 @@ class SignUpViewController: UIViewController {
         let userInfo = notification.userInfo!
         var keyboardFrame:CGRect = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         keyboardFrame = self.view.convert(keyboardFrame, from: nil)
-        
         
         //shift up
         let height = UIScreen.main.bounds.size.height
