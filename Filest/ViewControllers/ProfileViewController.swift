@@ -118,22 +118,6 @@ class ProfileViewController: UIViewController {
         self.name.text = user?.displayName
         self.emailButton.setTitle("    " + (user?.email)!, for: .normal)
         
-//        if user?.phoneNumber != nil {
-//            let number = user?.phoneNumber
-//            let start = number!.index(number!.startIndex, offsetBy: 0)
-//            let third = number!.index(number!.startIndex, offsetBy: 3)
-//            let firstThree = start..<third
-//            let sixth = number!.index(number!.startIndex, offsetBy: 6)
-//            let secondThree = third..<sixth
-//            let tenth = number!.index(number!.endIndex, offsetBy: 4)
-//            let lastFour = sixth..<tenth
-//
-//
-//            self.phoneButton.setTitle(number, for: .normal)
-//
-//        }
-        
-        
         let storageRef = Storage.storage().reference().child((user?.uid ?? "")+".png")
     
         if let cachedImage = delegate.profileCache.object(forKey: ((user?.uid ?? "")+".png") as NSString) {
@@ -185,10 +169,16 @@ class ProfileViewController: UIViewController {
                                 if let document = document {
                                     if document.exists {
                                         let phoneNumber = "    " + (document.get("phoneNumber") as! String)
+                                        if document.get("phoneNumber") as! String != "none"{
+                                            self.phoneButton.setTitle(phoneNumber, for: .normal)
+                                        } else {
+                                            self.phoneButton.setTitle("    (000) - 000 - 0000", for: .normal)
+                                        }
+                                        if document.get("jobTitle") as! String != "none"{
+                                            self.jobTitle.text = (document.get("jobTitle") as! String)
+                                            self.jobTitle.alpha = 1
+                                        }
                                         
-                                        self.phoneButton.setTitle(phoneNumber, for: .normal)
-                                        self.jobTitle.text = (document.get("jobTitle") as! String)
-                                        self.jobTitle.alpha = 1
                                     }
                                 }
                             }
@@ -204,8 +194,6 @@ class ProfileViewController: UIViewController {
             
         }
     }
-    
-    
     
     /*
         Run assignCompany
@@ -246,8 +234,6 @@ class ProfileViewController: UIViewController {
                 } else {
                     self.failedAlert()
                 }
-                
-                
                 
             }))
             
@@ -325,11 +311,19 @@ class ProfileViewController: UIViewController {
                         
                         // however we also need to add them to the companies
                         // collection with all of the required information to start their business
-                        let employeeCollection = db.collection("companies").document(code).collection("employees").document(self.user.uid)
-                        employeeCollection.setData(["jobTitle" : "none"], merge: true)
-                        employeeCollection.setData(["department" : "admin"], merge: true)
-                        employeeCollection.setData(["position" : "supervisor"], merge: true)
-                        employeeCollection.setData(["phoneNumber" : "none"], merge: true)
+                        let employeeData = db.collection("companies").document(code).collection("employees").document(self.user.uid)
+                        employeeData.setData(["jobTitle" : "none"], merge: true)
+                        employeeData.setData(["department" : "admin"], merge: true)
+                        employeeData.setData(["position" : "supervisor"], merge: true)
+                        employeeData.setData(["phoneNumber" : "none"], merge: true)
+                        
+                        let namesArray = self.user.displayName?.split(separator: " ")
+                        let firstName = String(namesArray![0])
+                        let lastName   = String(namesArray![1])
+                        
+                        employeeData.setData(["givenName" : firstName], merge: true)
+                        employeeData.setData(["familyName" : lastName], merge: true)
+                        employeeData.setData(["email" : self.user.email ?? " "], merge: true)
                         
                         db.collection("companies").document(code).setData(["exists" : true])
                         

@@ -66,6 +66,7 @@ class EditViewController: UIViewController {
         let lastName    = lastNameTextField.text
         let jobTitle    = jobTitleTextField.text
         let phoneNumber = phoneNumberTextField.text
+        let email       = emailTextField.text
         
 
         //save personal data
@@ -77,19 +78,10 @@ class EditViewController: UIViewController {
         }
         
         employeeData.setData(["jobTitle": jobTitle], merge: true)
-        employeeData.setData(["phoneNumber": phoneNumber], merge: true)
-//        employeeData.getDocument(completion: { (document, error) in
-//            if error != nil {
-//                print("joinbusiness Document Error => ", error!)
-//            } else {
-//                if let document = document {
-//                    if document.exists {
-//
-//
-//                    }
-//                }
-//            }
-//        })
+        employeeData.setData(["phoneNumber": phoneNumber ?? " "], merge: true)
+        employeeData.setData(["givenName" : firstName ?? " "], merge: true)
+        employeeData.setData(["familyName" : lastName ?? " "], merge: true)
+        employeeData.setData(["email" : email], merge: true)
 
         
         // save image

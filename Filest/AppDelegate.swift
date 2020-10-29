@@ -17,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     //Caches all information for profile and edit profile
     let profileCache = NSCache<NSString, UIImage>()
+    let contactsCache = NSCache<NSString, UIImage>()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
