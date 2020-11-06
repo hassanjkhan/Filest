@@ -284,6 +284,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Meeting" image="Meeting"/>
+                                <connections>
+                                    <segue destination="Tct-4r-LKN" kind="show" id="O3y-d3-5Rk"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ek6-eT-NgH">
                                 <rect key="frame" x="10" y="44" width="395" height="248"/>
@@ -431,7 +434,7 @@
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="FriendCell" rowHeight="66" id="uZU-0K-J7C" customClass="FriendCell" customModule="RWConnect" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="FriendCell" rowHeight="66" id="uZU-0K-J7C" customClass="FriendCell" customModule="Filest" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="66"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uZU-0K-J7C" id="yJu-88-b0O">
@@ -800,11 +803,41 @@
             <objects>
                 <viewController id="Tct-4r-LKN" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Mx8-R5-OHX">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H5C-xc-DfB" customClass="FSCalendar">
+                                <rect key="frame" x="0.0" y="50" width="414" height="300"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="qMT-kD-Hti"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LyU-tw-tGr">
+                                <rect key="frame" x="10" y="10" width="48" height="30"/>
+                                <state key="normal" title="Cancel">
+                                    <color key="titleColor" systemColor="linkColor"/>
+                                </state>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="3wg-nu-ssk"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="H5C-xc-DfB" firstAttribute="top" secondItem="3wg-nu-ssk" secondAttribute="top" constant="50" id="7i9-mS-MzA"/>
+                            <constraint firstItem="H5C-xc-DfB" firstAttribute="top" secondItem="3wg-nu-ssk" secondAttribute="top" id="8Jm-Cy-NRf"/>
+                            <constraint firstItem="H5C-xc-DfB" firstAttribute="leading" secondItem="3wg-nu-ssk" secondAttribute="leading" id="FS5-er-1Qf"/>
+                            <constraint firstItem="3wg-nu-ssk" firstAttribute="trailing" secondItem="H5C-xc-DfB" secondAttribute="trailing" id="FZg-8w-3vw"/>
+                            <constraint firstItem="LyU-tw-tGr" firstAttribute="top" secondItem="3wg-nu-ssk" secondAttribute="top" id="UwC-ir-90E"/>
+                            <constraint firstItem="LyU-tw-tGr" firstAttribute="leading" secondItem="3wg-nu-ssk" secondAttribute="leading" constant="10" id="We7-aD-QKK"/>
+                            <constraint firstItem="H5C-xc-DfB" firstAttribute="top" secondItem="3wg-nu-ssk" secondAttribute="top" id="b8a-9y-Zj2"/>
+                            <constraint firstItem="H5C-xc-DfB" firstAttribute="top" secondItem="3wg-nu-ssk" secondAttribute="top" constant="50" id="igr-WC-YzG"/>
+                            <constraint firstItem="LyU-tw-tGr" firstAttribute="leading" secondItem="3wg-nu-ssk" secondAttribute="leading" id="jQC-BG-cOz"/>
+                            <constraint firstItem="H5C-xc-DfB" firstAttribute="top" secondItem="3wg-nu-ssk" secondAttribute="top" constant="50" id="l5O-Jv-Mv5"/>
+                            <constraint firstItem="LyU-tw-tGr" firstAttribute="leading" secondItem="3wg-nu-ssk" secondAttribute="leading" constant="10" id="poX-UV-dSU"/>
+                            <constraint firstItem="LyU-tw-tGr" firstAttribute="top" secondItem="3wg-nu-ssk" secondAttribute="top" constant="10" id="zpU-mX-hsY"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="qKH-iL-Vpz"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FS7-Qk-epO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -958,7 +991,7 @@
         <!--Edit Friend Table View Controller-->
         <scene sceneID="9Oh-Li-uBZ">
             <objects>
-                <tableViewController id="ZrW-mU-Hzg" customClass="EditFriendTableViewController" customModule="RWConnect" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="ZrW-mU-Hzg" customClass="EditFriendTableViewController" customModule="Filest" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="nAe-pL-dzd">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

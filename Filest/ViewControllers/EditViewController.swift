@@ -5,12 +5,10 @@
 //  Created by admin on 2020-10-15.
 //  Copyright © 2020 Z-Lux. All rights reserved.
 //
-
 import UIKit
 import Photos
 import FirebaseAuth
 import Firebase
-
 
 class EditViewController: UIViewController {
     
@@ -50,9 +48,6 @@ class EditViewController: UIViewController {
                 }
             }
         }
-        
-        
-        
     }
     
     //open image picker
@@ -74,19 +69,20 @@ class EditViewController: UIViewController {
         changeRequest.displayName = (firstName ?? "") + " " + (lastName ?? "")
        
         changeRequest.commitChanges { (error) in
-          // ...
+            if error != nil {
+                print (error as Any)
+            }
         }
         
-        employeeData.setData(["jobTitle": jobTitle], merge: true)
-        employeeData.setData(["phoneNumber": phoneNumber ?? " "], merge: true)
-        employeeData.setData(["givenName" : firstName ?? " "], merge: true)
-        employeeData.setData(["familyName" : lastName ?? " "], merge: true)
-        employeeData.setData(["email" : email], merge: true)
-
+        employeeData.setData(["jobTitle": jobTitle ?? "none"], merge: true)
+        employeeData.setData(["phoneNumber": phoneNumber ?? "none"], merge: true)
+        employeeData.setData(["givenName" : firstName ?? "none"], merge: true)
+        employeeData.setData(["familyName" : lastName ?? "none"], merge: true)
+        employeeData.setData(["email" : email ?? "none"], merge: true)
         
         // save image
         let storageRef = Storage.storage().reference().child((user?.uid ?? "")+".png")
-        let compressedImage = profileImage.image?.sd_resizedImage(with: CGSize(width: 1200, height: 1600), scaleMode: .fill)
+        let compressedImage = profileImage.image?.sd_resizedImage(with: CGSize(width: 150, height: 200), scaleMode: .fill)
         if let uploadData = compressedImage!.pngData(){
             
             storageRef.putData(uploadData, metadata: nil
@@ -98,7 +94,6 @@ class EditViewController: UIViewController {
         }
         self.TransitiontoProfile()
     }
-    
     
     @IBAction func Cancel(_ sender: UIButton) {
         self.TransitiontoProfile()
@@ -114,7 +109,6 @@ class EditViewController: UIViewController {
         //present(vc, animated: true)
     }
     
-    
     func setUserInformation(){
         
         let namesArray = user?.displayName?.split(separator: " ")
@@ -122,14 +116,13 @@ class EditViewController: UIViewController {
         self.lastNameTextField.text  = String(namesArray![1])
         self.emailTextField.text =           (user?.email)!
      
-        
         employeeData.getDocument { (document, error) in
             if error != nil {
                 print("joinbusiness Document Error => ", error!)
             } else {
-                
-                
+            
                 if let document = document {
+                    
                     if document.exists {
                 
                         let jobTitle = document.get("jobTitle") as! String?
@@ -140,18 +133,13 @@ class EditViewController: UIViewController {
                         
                     }
                 }
-        
             }
         }
-        
-        
-        
     }
     
     func setProfilePhoto(){
         let delegate = UIApplication.shared.delegate as! AppDelegate
         let storageRef = Storage.storage().reference().child((user?.uid ?? "")+".png")
-
         
         if let cachedImage = delegate.profileCache.object(forKey: ((user?.uid ?? "")+".png") as NSString) {
             self.profileImage.image = cachedImage
@@ -163,9 +151,7 @@ class EditViewController: UIViewController {
                     
                 } else {
                     let imageUrlString = url?.absoluteString
-
                     let imageUrl = URL(string: imageUrlString!)!
-
                     let imageData = try! Data(contentsOf: imageUrl)
 
                     self.profileImage.image = UIImage(data: imageData)
@@ -175,12 +161,9 @@ class EditViewController: UIViewController {
                     self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width / 2
                     self.profileImage.clipsToBounds = true
                 }
-                
             }
         }
     }
-    
-
 }
 
 extension EditViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -201,7 +184,6 @@ extension EditViewController: UIImagePickerControllerDelegate, UINavigationContr
     
     //get image from source type
     private func getImage(fromSourceType sourceType: UIImagePickerController.SourceType) {
-
         //Check is source type available
         if UIImagePickerController.isSourceTypeAvailable(sourceType) {
 
