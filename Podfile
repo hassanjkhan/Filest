@@ -11,6 +11,7 @@ target 'Filest' do
   pod 'Firebase/Core'
   pod 'Firebase/Firestore'
   pod 'FirebaseDynamicLinks'
+  pod 'FSCalendar'
   # Pods for Filest
 
 end
