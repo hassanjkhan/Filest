@@ -12,6 +12,8 @@ import Firebase
 
 class LoginViewController: UIViewController {
     
+    @IBOutlet weak var backgroundImage: UIImageView!
+    
     @IBOutlet weak var errorLabel: UILabel!
     
     @IBOutlet weak var emailTextField: UITextField!
@@ -25,6 +27,11 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var forgotPasswordButton: UIButton!
     
     var user: User!
+    var height: CGFloat!
+    var width: CGFloat!
+    var notif: NSNotification!
+    var verticalConstraint: NSLayoutConstraint!
+    var emailConstraint: NSLayoutConstraint!
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask{ get { return .portrait } }
     
@@ -59,6 +66,14 @@ class LoginViewController: UIViewController {
             selector: #selector(self.keyboardWillHide(notification:)),
             name:UIResponder.keyboardWillHideNotification, object: nil)
         
+        
+        height = UIScreen.main.bounds.size.height
+        width = UIScreen.main.bounds.size.width
+        backgroundImage.frame = CGRect(x: 0, y: 0, width: width, height: height)
+        
+        emailConstraint = NSLayoutConstraint(item: view!, attribute: .bottom, relatedBy: .equal, toItem: emailTextField, attribute: .bottom, multiplier: 1, constant: height * 0.55)
+     
+        NSLayoutConstraint.activate([emailConstraint])
         
     }
     
@@ -152,6 +167,12 @@ class LoginViewController: UIViewController {
     //Online Helper functions
     @objc func textFieldDidChange(_ textField: UITextField) {
         loginButton.backgroundColor = UIColor.init(red: 0.0/255.0, green: 192.0/255.0, blue: 230.0/255.0, alpha: 1)
+//        if notif != nil {
+//            let userInfo = notif.userInfo!
+//            var keyboardFrame:CGRect = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+//            keyboardFrame = self.view.convert(keyboardFrame, from: nil)
+//            loginButton.frame.origin.y = height - keyboardFrame.size.height - loginButton.frame.height - 10
+//        }
     }
     
     @objc func keyboardWillShow(notification:NSNotification){
@@ -159,32 +180,50 @@ class LoginViewController: UIViewController {
         var keyboardFrame:CGRect = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         keyboardFrame = self.view.convert(keyboardFrame, from: nil)
         
-        
-        //shift up
-        let height = UIScreen.main.bounds.size.height
         loginButton.frame.origin.y = height - keyboardFrame.size.height - loginButton.frame.height - 10
+         //shift up
+        verticalConstraint = NSLayoutConstraint(item: view!, attribute: .bottom, relatedBy: .equal, toItem: loginButton, attribute: .bottom, multiplier: 1, constant: keyboardFrame.size.height + 10)
+     
+        NSLayoutConstraint.activate([verticalConstraint])
         
-        let reference = loginButton.frame.origin.y - (height * 0.15)
-        forgotPasswordButton.frame.origin.y = reference
-        errorLabel.frame.origin.y = reference - errorLabel.frame.height
-        passwordTextField.frame.origin.y = errorLabel.frame.origin.y - passwordTextField.frame.height - 1
-        emailTextField.frame.origin.y = passwordTextField.frame.origin.y - emailTextField.frame.height - 12
+//        notif = notification
+//        let userInfo = notification.userInfo!
+//        var keyboardFrame:CGRect = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+//        keyboardFrame = self.view.convert(keyboardFrame, from: nil)
+//
+//         //shift up
+//        loginButton.frame.origin.y = height - keyboardFrame.size.height - loginButton.frame.height - 10
+
+        
+        
+//        let reference = height - keyboardFrame.size.height - 54
+//        forgotPasswordButton.frame.origin.y = reference
+//        errorLabel.frame.origin.y = reference - errorLabel.frame.height
+//        passwordTextField.frame.origin.y = errorLabel.frame.origin.y - passwordTextField.frame.height - 1
+//        emailTextField.frame.origin.y = passwordTextField.frame.origin.y - emailTextField.frame.height - 12
+
+        
     }
     
     @objc func keyboardWillHide(notification:NSNotification){
-        let height = UIScreen.main.bounds.size.height
         
         //change color back to gray
         if passwordTextField.text == ""{
             loginButton.backgroundColor = UIColor.init(red: 167.0/255.0, green: 171.0/255.0, blue: 176.0/255.0, alpha: 1)
-        }        
-        //shift down
+        }
+//        //shift down
         loginButton.frame.origin.y = registration.frame.origin.y - loginButton.frame.height - 5
-        let reference = loginButton.frame.origin.y - (height * 0.35)
-        forgotPasswordButton.frame.origin.y = reference
-        errorLabel.frame.origin.y = reference - errorLabel.frame.height
-        passwordTextField.frame.origin.y = errorLabel.frame.origin.y - passwordTextField.frame.height - 1
-        emailTextField.frame.origin.y = passwordTextField.frame.origin.y - emailTextField.frame.height - 12
+        
+        if verticalConstraint != nil {
+            NSLayoutConstraint.deactivate([verticalConstraint])
+        }
+        
+        
+//        let reference = loginButton.frame.origin.y - (height * 0.35)
+//        forgotPasswordButton.frame.origin.y = reference
+//        errorLabel.frame.origin.y = reference - errorLabel.frame.height
+//        passwordTextField.frame.origin.y = errorLabel.frame.origin.y - passwordTextField.frame.height - 1
+//        emailTextField.frame.origin.y = passwordTextField.frame.origin.y - emailTextField.frame.height - 12
     }
     
     
