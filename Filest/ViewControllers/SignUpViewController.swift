@@ -16,32 +16,22 @@ class SignUpViewController: UIViewController {
 
     
     @IBOutlet weak var firstNameTextField: UITextField!
-
     @IBOutlet weak var lastNameTextField: UITextField!
-
     @IBOutlet weak var emailTextField: UITextField!
-
     @IBOutlet weak var passwordTextField: UITextField!
-
     @IBOutlet weak var signUpButton: UIButton!
-
     @IBOutlet weak var errorLabel: UILabel!
-    
     @IBOutlet weak var passwordLabel: UILabel!
-    
     @IBOutlet weak var emailLabel: UILabel!
-    
     @IBOutlet weak var lastNameLabel: UILabel!
-    
     @IBOutlet weak var firstNameLabel: UILabel!
-    
     
     var mailUrl: String!
     
     // make rest of text fields, test to see if it works follow tutorial further
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+       
         //hide error label
         errorLabel.alpha = 0
         
@@ -54,7 +44,6 @@ class SignUpViewController: UIViewController {
         lastNameTextField.attributedPlaceholder  = NSAttributedString(string: "last name", attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
         emailTextField.attributedPlaceholder     = NSAttributedString(string: "email", attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
         passwordTextField.attributedPlaceholder  = NSAttributedString(string: "password", attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
-        
         
         // When password changes, change log in button color
         passwordTextField.addTarget(self, action: #selector(LoginViewController.textFieldDidChange(_:)), for: .editingChanged)
@@ -71,10 +60,14 @@ class SignUpViewController: UIViewController {
             self,
             selector: #selector(self.keyboardWillHide(notification:)),
             name:UIResponder.keyboardWillHideNotification, object: nil)
-         
+        
+        // Set Constraints
+        
+        
+
     }
 
-    //     Check the fields and validate that the data is correct. if everytnign is correct, this     method returns nil. otherise, it returns the error message
+    //     Check the fields and validate that the data is correct. if everytnign is correct, this method returns nil. otherise, it returns the error message
     func validateFields() -> String? {
            
         // Check that all fields are filled in
@@ -129,16 +122,6 @@ class SignUpViewController: UIViewController {
                     changeRequest?.commitChanges { (error) in
                       // ...
                     }
-//                    let database = Firestore.firestore()
-//                    database.collection("users").addDocument(data: ["firstname":firstName, "lastname":lastName, "uid": result!.user.uid]) { (error) in
-//
-//                        if error != nil {
-//
-//                            //show error message
-//                            self.showError(message: " weird error saving User data")
-//                        }
-//
-//                    }
                     
                     //send email verification
                     let user = Auth.auth().currentUser
@@ -227,57 +210,12 @@ class SignUpViewController: UIViewController {
     }
     
     @objc func keyboardWillShow(notification:NSNotification){
-        let userInfo = notification.userInfo!
-        var keyboardFrame:CGRect = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
-        keyboardFrame = self.view.convert(keyboardFrame, from: nil)
-        
-        //shift up
-        let height = UIScreen.main.bounds.size.height
-        signUpButton.frame.origin.y = height - keyboardFrame.size.height - signUpButton.frame.height*2 - 15
-        
-        let reference = signUpButton.frame.origin.y - (height * 0.15)
-        errorLabel.frame.origin.y = reference
-        
-        passwordTextField.frame.origin.y = reference - passwordTextField.frame.height
-        passwordLabel.frame.origin.y = passwordTextField.frame.origin.y - passwordLabel.frame.height - 8
-        
-        emailTextField.frame.origin.y = passwordLabel.frame.origin.y - emailTextField.frame.height - 14
-        emailLabel.frame.origin.y = emailTextField.frame.origin.y - emailLabel.frame.height - 8
-        
-        lastNameTextField.frame.origin.y = emailLabel.frame.origin.y - lastNameTextField.frame.height - 14
-        lastNameLabel.frame.origin.y = lastNameTextField.frame.origin.y - lastNameLabel.frame.height - 8
-        
-        firstNameTextField.frame.origin.y = lastNameLabel.frame.origin.y - firstNameTextField.frame.height - 14
-        firstNameLabel.frame.origin.y = firstNameTextField.frame.origin.y - firstNameLabel.frame.height - 8
-        
-        
-        
+
+
     }
     
     @objc func keyboardWillHide(notification:NSNotification){
-        let height = UIScreen.main.bounds.size.height
-        
-        //change color back to gray
-        if passwordTextField.text == "" && firstNameTextField.text == "" && lastNameTextField.text == "" && emailTextField.text == ""{
-            signUpButton.backgroundColor = UIColor.init(red: 167.0/255.0, green: 171.0/255.0, blue: 176.0/255.0, alpha: 1)
-        }
 
-
-        //shift down
-        signUpButton.frame.origin.y = height - signUpButton.frame.height - 100
-        let reference = signUpButton.frame.origin.y - (height * 0.35)
-        errorLabel.frame.origin.y = reference
-        passwordTextField.frame.origin.y = reference - passwordTextField.frame.height
-        passwordLabel.frame.origin.y = passwordTextField.frame.origin.y - passwordLabel.frame.height - 8
-        
-        emailTextField.frame.origin.y = passwordLabel.frame.origin.y - emailTextField.frame.height - 14
-        emailLabel.frame.origin.y = emailTextField.frame.origin.y - emailLabel.frame.height - 8
-        
-        lastNameTextField.frame.origin.y = emailLabel.frame.origin.y - lastNameTextField.frame.height - 14
-        lastNameLabel.frame.origin.y = lastNameTextField.frame.origin.y - lastNameLabel.frame.height - 8
-        
-        firstNameTextField.frame.origin.y = lastNameLabel.frame.origin.y - firstNameTextField.frame.height - 14
-        firstNameLabel.frame.origin.y = firstNameTextField.frame.origin.y - firstNameLabel.frame.height - 8
     }
 }
 

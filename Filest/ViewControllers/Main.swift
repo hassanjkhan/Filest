@@ -10,48 +10,59 @@ import UIKit
 
 class Main: UIViewController {
     
-//    @IBOutlet weak var Meeting: UIButton!
-//    @IBOutlet weak var Expenses: UIButton!
-//    @IBOutlet weak var Feedback: UIButton!
-//    @IBOutlet weak var Vacation: UIButton!
-//    @IBOutlet weak var Training: UIButton!
-//    @IBOutlet weak var Absent: UIButton!
+
     @IBOutlet weak var Absent: UIButton!
-    @IBOutlet weak var Expense: UIButton!
     @IBOutlet weak var Vacation: UIButton!
     @IBOutlet weak var Meeting: UIButton!
-    @IBOutlet weak var Training: UIButton!
-    @IBOutlet weak var Feedback: UIButton!
-  
+    
+    @IBOutlet weak var AbsentTitle: UILabel!
+    @IBOutlet weak var AbsentDescription: UILabel!
+    @IBOutlet weak var MeetingTitle: UILabel!
+    @IBOutlet weak var MeetingDescription: UILabel!
+    @IBOutlet weak var VacationTitle: UILabel!
+    @IBOutlet weak var VacationDescription: UILabel!
+    
+    
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask{ get { return .portrait } }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        Training.layer.cornerRadius = 20
-        Training.clipsToBounds = true
-        Training.layer.borderWidth = 4
+
+        let height = UIScreen.main.bounds.size.height * 0.27
+//        let width = UIScreen.main.bounds.size.height
+        Absent.layer.cornerRadius = 20
+        Absent.clipsToBounds = true
+        Absent.layer.borderWidth = 4
+        Absent.heightAnchor.constraint(equalToConstant: height).isActive = true
         
-        Vacation.layer.cornerRadius = 20
-        Vacation.clipsToBounds = true
-        Vacation.layer.borderWidth = 4
-        
-        Feedback.layer.cornerRadius = 20
-        Feedback.clipsToBounds = true
-        Feedback.layer.borderWidth = 4
-        
-        Expense.layer.cornerRadius = 20
-        Expense.clipsToBounds = true
-        Expense.layer.borderWidth = 4
         
         Meeting.layer.cornerRadius = 20
         Meeting.clipsToBounds = true
         Meeting.layer.borderWidth = 4
+        Meeting.heightAnchor.constraint(equalToConstant: height).isActive = true
         
-        Absent.layer.cornerRadius = 20
-        Absent.clipsToBounds = true
-        Absent.layer.borderWidth = 4
+
+        Vacation.layer.cornerRadius = 20
+        Vacation.clipsToBounds = true
+        Vacation.layer.borderWidth = 4
+        Vacation.heightAnchor.constraint(equalToConstant: height).isActive = true
+        
+        
+        
+//        AbsentTitle.frame = CGRect(x: 30, y: Absent.frame.origin.y + (height * 0.03), width: 176, height: 32)
+//        AbsentDescription.frame = CGRect(x:30, y: AbsentTitle.frame.origin.y + height - 55, width: 183, height: 16)
+//        
+//        MeetingTitle.frame = CGRect(x: 30, y: AbsentDescription.frame.origin.y + 64, width: 239, height: 32)
+//        MeetingDescription.frame = CGRect(x:30, y: MeetingTitle.frame.origin.y + height - 55 , width: 240, height: 16)
+//        
+//        VacationTitle.frame = CGRect(x: 30, y: MeetingDescription.frame.origin.y + 64, width: 116, height: 32)
+//        VacationDescription.frame = CGRect(x:30, y: VacationTitle.frame.origin.y + height - 55, width: 200, height: 16)
+//        
+        
+        
+
     }
     
 
