@@ -48,6 +48,10 @@ class EditViewController: UIViewController {
                 }
             }
         }
+        
+        phoneNumberTextField.attributedPlaceholder = NSAttributedString(string: "Phone number", attributes: [NSAttributedString.Key.foregroundColor: UIColor.init(red: 171.0/255.0, green: 171.0/255.0, blue: 180.0/255.0, alpha: 1)])
+        jobTitleTextField.attributedPlaceholder = NSAttributedString(string: "Job Title", attributes: [NSAttributedString.Key.foregroundColor: UIColor.init(red: 171.0/255.0, green: 171.0/255.0, blue: 180.0/255.0, alpha: 1)])
+        
     }
     
     //open image picker
@@ -63,6 +67,7 @@ class EditViewController: UIViewController {
         let phoneNumber = phoneNumberTextField.text
         let email       = emailTextField.text
         
+        let delegate = UIApplication.shared.delegate as! AppDelegate
 
         //save personal data
         let changeRequest = self.user.createProfileChangeRequest()
@@ -85,13 +90,19 @@ class EditViewController: UIViewController {
         let compressedImage = profileImage.image?.sd_resizedImage(with: CGSize(width: 150, height: 200), scaleMode: .fill)
         if let uploadData = compressedImage!.pngData(){
             
+            delegate.profileCache.setObject(compressedImage!, forKey: ((self.user?.uid ?? "")+".png") as NSString)
+            
             storageRef.putData(uploadData, metadata: nil
                                , completion: { (metadata, error) in
                                 if error != nil {
                                     print ("error")
                                 }
+                                    
+                                
             })
         }
+        
+        
         self.TransitiontoProfile()
     }
     
@@ -200,7 +211,7 @@ extension EditViewController: UIImagePickerControllerDelegate, UINavigationContr
             self.dismiss(animated: true) { [weak self] in
             guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
             //Setting image to your image view
-            self?.profileImage.image = image
+            self?.profileImage.image = image.sd_resizedImage(with: CGSize(width: 150, height: 200), scaleMode: .fill)
                 
             self?.profileImage.layer.cornerRadius = self!.profileImage.frame.size.width / 2
             self?.profileImage.clipsToBounds = true
