@@ -11,20 +11,17 @@ Filest is a iOS application used to preform business tasks. Its purpose is to sc
 
 ### Table of Contents
 
-[Signing_Up_Example](#abcd)
-[Log_In_Example](# 2. Log In Example)
-[Starting_A_New_Business](#Contacts and Main Tab)
+[1. Signing_Up_Example](#a)
+[2. Log In Example](#b)
+[3. Starting A New Business](#c)
+[4. Editing Profile](#d)
+[5. Contacts and Main Tab](#e)
+[Extra](#f)
 
-2. Log In Example
-3. Starting A New Business
-4. Editing Profile
-5. Contacts and Main Tab
-[Starting_A_New_Business](# Contacts and Main Tab)
-Extra
 
 # 1. Signing Up Example
 
-<p name="abcd" align="center">
+<p name="a" align="center">
   <img src="Videos/SignUpExample.gif" width="45%" height="45%"/>
 </p>
 
@@ -32,7 +29,7 @@ Extra
 
 ### After you have made your account and verified it you can log in.
 
-<p align="center">
+<p name="b" align="center">
   <img src="Videos/LogInExampleWithVerification.gif" />
 </p>
 
@@ -40,13 +37,15 @@ Extra
 
 ### Here you can see that you must start a business or join one to begin using the app! You can also see in real time the business code being generated and saved in firebase.
 
-![](Videos/StartingBusinessExample.gif)
+<p name="c" >
+  <img src="Videos/StartingBusinessExample.gif" />
+</p>
 
 ## 4. Editing Profile
 
 ### After you have joined or started a business you can now edit your profile! It stores your basic information as well as your photo!
 
-<p align="center">
+<p name="d" align="center">
   <img src="Videos/EditingProfileExample.gif" width="45%" height="45%"/>
 </p>
 
@@ -54,7 +53,7 @@ Extra
 
 ### Once people have joined your business you can see them on your contacts list! Then in your Main tab you can preform company tasks.
 
-<p align="center">
+<p name="e" align="center">
   <img src="Videos/Contacts&MainExample.gif" width="45%" height="45%"/>
 </p>
 
@@ -66,7 +65,7 @@ Extra
 
 - Here you can see the alert
 
-<p align="center">
+<p name="f" align="center">
   <img src="Videos/EmailVerificationExamplePart1.gif" width="45%" height="45%"/>
 </p>
 
