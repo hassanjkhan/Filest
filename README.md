@@ -24,41 +24,51 @@ Filest is a iOS application used to preform business tasks. Its purpose is to sc
 [Extra](#f)
 
 
+
+<a name="a"></a>
+
 # 1. Signing Up Example
 
-<p name="a" align="center">
+<p align="center">
   <img src="Videos/SignUpExample.gif" width="45%" height="45%"/>
 </p>
+
+<a name="b"></a>
 
 # 2. Log In Example
 
 ### After you have made your account and verified it you can log in.
 
-<p name="b" align="center">
+<p align="center">
   <img src="Videos/LogInExampleWithVerification.gif" />
 </p>
+
+<a name="c"></a>
 
 # 3.Starting A New Business
 
 ### Here you can see that you must start a business or join one to begin using the app! You can also see in real time the business code being generated and saved in firebase.
 
-<p name="c" >
-  <img src="Videos/StartingBusinessExample.gif" />
-</p>
+<img src="Videos/StartingBusinessExample.gif" />
+
+
+<a name="d"></a>
 
 ## 4. Editing Profile
 
 ### After you have joined or started a business you can now edit your profile! It stores your basic information as well as your photo!
 
-<p name="d" align="center">
+<p align="center">
   <img src="Videos/EditingProfileExample.gif" width="45%" height="45%"/>
 </p>
+
+<a name="e"></a>
 
 # Contacts and Main Tab
 
 ### Once people have joined your business you can see them on your contacts list! Then in your Main tab you can preform company tasks.
 
-<p name="e" align="center">
+<p align="center">
   <img src="Videos/Contacts&MainExample.gif" width="45%" height="45%"/>
 </p>
 
