@@ -11,7 +11,8 @@ Filest is a iOS application used to preform business tasks. Its purpose is to sc
 
 ### Table of Contents
 
-[1. Signing Up Example](## 1. Signing Up Example)
+[## 1. Signing Up Example](1. Signing Up Example)
+
 2. Log In Example
 3. Starting A New Business
 4. Editing Profile
