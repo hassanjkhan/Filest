@@ -54,7 +54,7 @@ Filest is a iOS application used to preform business tasks. Its purpose is to sc
 
 <a name="d"></a>
 
-## 4. Editing Profile
+# 4. Editing Profile
 
 ### After you have joined or started a business you can now edit your profile! It stores your basic information as well as your photo!
 
@@ -64,7 +64,7 @@ Filest is a iOS application used to preform business tasks. Its purpose is to sc
 
 <a name="e"></a>
 
-# Contacts and Main Tab
+# 5. Contacts and Main Tab
 
 ### Once people have joined your business you can see them on your contacts list! Then in your Main tab you can preform company tasks.
 
@@ -72,7 +72,7 @@ Filest is a iOS application used to preform business tasks. Its purpose is to sc
   <img src="Videos/Contacts&MainExample.gif" width="45%" height="45%"/>
 </p>
 
-## Extra: 
+# Extra: 
 
 <a name="f"></a>
 
