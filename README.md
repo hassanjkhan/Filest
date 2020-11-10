@@ -13,7 +13,7 @@ Filest is a iOS application used to preform business tasks. Its purpose is to sc
 
 [Signing_Up_Example](# 1. Signing Up Example)
 [Log_In_Example](# 2. Log In Example)
-[Starting_A_New_Business](# 3. Starting A New Business)
+[Starting_A_New_Business](#3.Starting A New Business)
 
 2. Log In Example
 3. Starting A New Business
@@ -35,7 +35,7 @@ Extra
   <img src="Videos/LogInExampleWithVerification.gif" />
 </p>
 
-## 3. Starting A New Business
+# 3.Starting A New Business
 
 ### Here you can see that you must start a business or join one to begin using the app! You can also see in real time the business code being generated and saved in firebase.
 
