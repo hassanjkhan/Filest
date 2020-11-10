@@ -4,6 +4,25 @@
 
 Filest is a iOS application used to perform business tasks. Its purpose is to schedule meetings, request vacation days, and notify management of your absence if you are going to be missing work. When you first download the app you can use it to start a business, have other employees join with your code, and see them displayed on your contact list. I am currently undergoing the process of getting the app approved to be on published onto the App Store.
 
+## Table of Contents
+
+[Tools Used](#tools)
+
+[1. Signing Up Example](#a)
+
+[2. Log In Example](#b)
+
+[3. Starting A New Business](#c)
+
+[4. Editing Profile](#d)
+
+[5. Contacts and Main Tab](#e)
+
+[Extra](#f)
+
+
+<a name="tools"></a>
+
 ## Tools Used
 
 ### - Google Firebase
@@ -25,22 +44,6 @@ Filest is a iOS application used to perform business tasks. Its purpose is to sc
     - Used to access photolibrary or camera to take a photo of you!
   4. NotificationCenter
     - Used to observe the keyboard to have the LogIn buttion slide up with the keyboard, and change color when user is about to log in.
-
-## Table of Contents
-
-[1. Signing Up Example](#a)
-
-[2. Log In Example](#b)
-
-[3. Starting A New Business](#c)
-
-[4. Editing Profile](#d)
-
-[5. Contacts and Main Tab](#e)
-
-[Extra](#f)
-
-
 
 <a name="a"></a>
 
