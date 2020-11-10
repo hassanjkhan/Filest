@@ -2,7 +2,7 @@
 
 ## 1. Signing Up Example
 
-<img src="Videos/SignUpExample.gif" width="40%" height="40%"/>
+<img src="Videos/SignUpExample.gif" width="45%" height="45%"/>
 
 ## 2. Email Verification
 
@@ -10,7 +10,7 @@ When you tap sign up you are alerted to open one of three mail apps that you may
 
 - Here you can see the alert
 
-<img src="Videos/EmailVerificationExamplePart1.gif" width="40%" height="40%"/>
+<img src="Videos/EmailVerificationExamplePart1.gif" width="45%" height="45%"/>
 
 - Here is the email verification
 
@@ -32,13 +32,13 @@ Here you can see that you must start a business or join one to begin using the a
 
 After you have joined or started a business you can now edit your profile! It stores your basic information as well as your photo!
 
-![](Videos/EditingProfileExample.gif)
+<img src="Videos/EditingProfileExample.gif" width="45%" height="45%"/>
 
 ## 6. Contacts and Main Tab
 
 Once people have joined your business you can see them on your contacts list! Then in your Main tab you can preform company tasks.
 
-![](Videos/Contacts&MainExample.gif)
+<img src="Videos/Contacts&MainExample.gif" width="45%" height="45%"/>
 
 ## Extra: 
 
