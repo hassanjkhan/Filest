@@ -11,7 +11,7 @@ Filest is a iOS application used to preform business tasks. Its purpose is to sc
 
 ### Table of Contents
 
-[Signing_Up_Example](# 1. Signing Up Example)
+[Signing_Up_Example](#abcd)
 [Log_In_Example](# 2. Log In Example)
 [Starting_A_New_Business](#Contacts and Main Tab)
 
@@ -24,7 +24,7 @@ Extra
 
 # 1. Signing Up Example
 
-<p align="center">
+<p name="abcd" align="center">
   <img src="Videos/SignUpExample.gif" width="45%" height="45%"/>
 </p>
 
