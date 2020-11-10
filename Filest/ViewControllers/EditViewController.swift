@@ -27,7 +27,6 @@ class EditViewController: UIViewController {
     var companyID: String?
     var employeeData: DocumentReference!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -97,8 +96,7 @@ class EditViewController: UIViewController {
                                 if error != nil {
                                     print ("error")
                                 }
-                                    
-                                
+                    
             })
         }
         
@@ -115,9 +113,7 @@ class EditViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let mainTabBarController = storyboard.instantiateViewController(identifier: "MainTabBarController")
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(mainTabBarController)
-        //vc.modalPresentationStyle = .fullScreen
-        //vc.modalTransitionStyle = .flipHorizontal
-        //present(vc, animated: true)
+
     }
     
     func setUserInformation(){
@@ -221,5 +217,5 @@ extension EditViewController: UIImagePickerControllerDelegate, UINavigationContr
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
     }
-    //https://stackoverflow.com/questions/52399079/accessing-the-camera-and-photo-library-in-swift-4
+    
 }

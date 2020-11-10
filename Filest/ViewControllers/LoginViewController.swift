@@ -47,7 +47,6 @@ class LoginViewController: UIViewController {
         // When password changes, change log in button color
         passwordTextField.addTarget(self, action: #selector(LoginViewController.textFieldDidChange(_:)), for: .editingChanged)
         
-        
         //changes text placeholder color
         emailTextField.attributedPlaceholder    = NSAttributedString(string: "email", attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
         passwordTextField.attributedPlaceholder = NSAttributedString(string: "password", attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
