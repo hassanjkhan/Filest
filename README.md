@@ -2,7 +2,9 @@
 
 ## 1. Signing Up Example
 
-<img align="center" src="Videos/SignUpExample.gif" width="45%" height="45%"/>
+<p align="center">
+  <img src="Videos/SignUpExample.gif" width="45%" height="45%"/>
+</p>
 
 ## 2. Email Verification
 
