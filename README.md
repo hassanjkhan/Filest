@@ -8,9 +8,8 @@
 
 When you tap sign up you are alerted to open one of three mail apps that you may have. Tapping on one will open the app if you have it installed. You are also sent an email verification via firebase email verification. Once you verify your email you can then log into Filest! Yay!
 
-- Here you can see the alert
 
-<img src="Videos/EmailVerificationExamplePart1.gif" width="45%" height="45%"/>
+<img src="Videos/EmailVerificationExamplePart1.gif" width="45%" height="45%"/> - Here you can see the alert
 
 - Here is the email verification
 
