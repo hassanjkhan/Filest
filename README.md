@@ -2,7 +2,10 @@
 
 ## 1. Signing Up Example
 
-![](Videos/SignUpExample.gif){:height="50%" width="50%"}
+![](Videos/SignUpExample.gif){
+  width: 50%;
+  height: 50%;
+}
 
 ## 2. Email Verification
 
