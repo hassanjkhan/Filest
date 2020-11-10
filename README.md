@@ -45,7 +45,7 @@ Filest is a iOS application used to perform business tasks. Its purpose is to sc
 
 <a name="c"></a>
 
-# 3.Starting A New Business
+# 3. Starting A New Business
 
 ### Here you can see that you must start a business or join one to begin using the app! You can also see in real time the business code being generated and saved in firebase.
 
