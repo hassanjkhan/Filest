@@ -64,13 +64,14 @@ Filest is a iOS application used to preform business tasks. Its purpose is to sc
 
 ## Extra: 
 
+<p name="f"></p>
 ## Email Verification
 
 ### When you tap sign up you are alerted to open one of three mail apps that you may have. Tapping on one will open the app if you have it installed. You are also sent an email verification via firebase email verification. Once you verify your email you can then log into Filest! Yay!
 
 - Here you can see the alert
 
-<p name="f" align="center">
+<p align="center">
   <img src="Videos/EmailVerificationExamplePart1.gif" width="45%" height="45%"/>
 </p>
 
