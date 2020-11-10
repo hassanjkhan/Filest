@@ -13,12 +13,13 @@ Filest is a iOS application used to preform business tasks. Its purpose is to sc
 
 [Signing_Up_Example](# 1. Signing Up Example)
 [Log_In_Example](# 2. Log In Example)
-[Starting_A_New_Business](#3.Starting A New Business)
+[Starting_A_New_Business](#Contacts and Main Tab)
 
 2. Log In Example
 3. Starting A New Business
 4. Editing Profile
 5. Contacts and Main Tab
+[Starting_A_New_Business](# Contacts and Main Tab)
 Extra
 
 # 1. Signing Up Example
@@ -49,7 +50,7 @@ Extra
   <img src="Videos/EditingProfileExample.gif" width="45%" height="45%"/>
 </p>
 
-## 5. Contacts and Main Tab
+# Contacts and Main Tab
 
 ### Once people have joined your business you can see them on your contacts list! Then in your Main tab you can preform company tasks.
 
