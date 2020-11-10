@@ -1,15 +1,32 @@
 # Filest
 
-### Description
+## Description
 
 Filest is a iOS application used to perform business tasks. Its purpose is to schedule meetings, request vacation days, and notify management of your absence if you are going to be missing work. When you first download the app you can use it to start a business, have other employees join with your code, and see them displayed on your contact list. I am currently undergoing the process of getting the app approved to be on published onto the App Store.
 
-### Tools Used
+## Tools Used
 
-- Google Firebase, Firestore, Storage
-- Xcode
+### - Google Firebase
 
-### Table of Contents
+  1. Authentication
+    - Used for signing up, logging in, and email verification.
+  2. Firestore
+    - Stores Business information of tasks, employees, departments, etc..
+  3. Storage
+    - Stores profile photos
+    
+### - Xcode
+
+  1. Constraints
+    - Added constraints to have each view fit with every iphone. Programmatically changed constraints after viewdidload for buttons that move with keyboard. 
+  2. NSCache
+    - Caches UIImages for contacts and profile when downloaded from firebase to improve speed, user experience, and depand from firebase.
+  3. UIImagePicker
+    - Used to access photolibrary or camera to take a photo of you!
+  4. NotificationCenter
+    - Used to observe the keyboard to have the LogIn buttion slide up with the keyboard, and change color when user is about to log in.
+
+## Table of Contents
 
 [1. Signing Up Example](#a)
 
