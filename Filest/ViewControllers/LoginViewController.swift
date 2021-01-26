@@ -163,17 +163,18 @@ class LoginViewController: UIViewController {
     //Online Helper functions
     @objc func textFieldDidChange(_ textField: UITextField) {
         loginButton.backgroundColor = UIColor.init(red: 0.0/255.0, green: 192.0/255.0, blue: 230.0/255.0, alpha: 1)
+
     }
     
     @objc func keyboardWillShow(notification:NSNotification){
         let userInfo = notification.userInfo!
         var keyboardFrame:CGRect = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         keyboardFrame = self.view.convert(keyboardFrame, from: nil)
-        
+
         loginButton.frame.origin.y = height - keyboardFrame.size.height - loginButton.frame.height - 10
+        
 //       shift up
         verticalConstraint = NSLayoutConstraint(item: view!, attribute: .bottom, relatedBy: .equal, toItem: loginButton, attribute: .bottom, multiplier: 1, constant: keyboardFrame.size.height + 10)
-     
         NSLayoutConstraint.activate([verticalConstraint])
         
     }
@@ -184,9 +185,9 @@ class LoginViewController: UIViewController {
         if passwordTextField.text == ""{
             loginButton.backgroundColor = UIColor.init(red: 167.0/255.0, green: 171.0/255.0, blue: 176.0/255.0, alpha: 1)
         }
+        
+        
 //      shift down
-        
-        
         if verticalConstraint != nil {
             NSLayoutConstraint.deactivate([verticalConstraint])
             loginButton.frame.origin.y = registration.frame.origin.y - loginButton.frame.height - 5
