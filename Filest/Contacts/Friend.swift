@@ -36,13 +36,7 @@ class Friend {
     
   static func defaultContacts() -> [Friend] {
     
-    let contacts = Array<Friend>()
-//
-//    contacts.append(Friend(firstName: "Mic", lastName: "Pringle", workEmail: "mic@example.com", profilePicture: UIImage(named: "user")))
-//    contacts.append(Friend(firstName: "Ray", lastName: "Wenderlich", workEmail: "ray@example.com", profilePicture: UIImage(named: "user")))
-//    contacts.append(Friend(firstName: "Sam", lastName: "Davies", workEmail: "sam@example.com", profilePicture: UIImage(named: "user")))
-//    contacts.append(Friend(firstName: "Greg", lastName: "Heo", workEmail: "greg@example.com", profilePicture: UIImage(named: "user")))
-    
+    let contacts = Array<Friend>()    
     return contacts
     
   }

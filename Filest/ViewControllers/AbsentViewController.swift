@@ -10,13 +10,27 @@ import UIKit
 import HorizonCalendar
 
 class AbsentViewController: UIViewController {
-
+    private var coverView: UIView!
     private var customView: CalendarView!
     private var selectedDay: Day?
+    @IBOutlet weak var dateButtonOutlet: UIButton!
+    @IBOutlet weak var addPeopleButtonOutlet: UIButton!
+    @IBOutlet weak var submitButtonOutlet: UIButton!
+    @IBOutlet weak var descriptionBoxOutlet: UITextView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        dateButtonOutlet.layer.borderWidth = 1.0;
+        dateButtonOutlet.layer.borderColor = (UIColor( red: 59/255, green: 64/255, blue:67/255, alpha: 1.0 )).cgColor
+        addPeopleButtonOutlet.layer.borderWidth = 1.0;
+        addPeopleButtonOutlet.layer.borderColor = (UIColor( red: 59/255, green: 64/255, blue:67/255, alpha: 1.0 )).cgColor
+        submitButtonOutlet.layer.borderWidth = 1.0;
+        submitButtonOutlet.layer.borderColor = (UIColor( red: 59/255, green: 64/255, blue:67/255, alpha: 1.0 )).cgColor
+//        descriptionBoxOutlet.layer.borderWidth = 1.0;
+//        descriptionBoxOutlet.layer.borderColor = (UIColor( red: 59/255, green: 64/255, blue:67/255, alpha: 1.0 )).cgColor
+//        
         customView = CalendarView(initialContent: makeContent())
         customView.isHidden = true
         customView.daySelectionHandler = { [weak self] day in
@@ -27,6 +41,7 @@ class AbsentViewController: UIViewController {
             let newContent = self.makeContent()
             self.customView.setContent(newContent)
           }
+
     }
     
     private func makeContent() -> CalendarViewContent {
@@ -106,11 +121,26 @@ class AbsentViewController: UIViewController {
      
             customView.addSubview(okayButton)
         
+            let headerView: UIView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 350, height: 60))
+            headerView.backgroundColor = UIColor(red: 112/255.0, green: 113/255.0, blue: 211/255.0, alpha: 1.0)
+            let footerView: UIView = UIView.init(frame: CGRect.init(x: 0, y: 240, width: 350, height: 60))
+            headerView.backgroundColor = UIColor(red: 112/255.0, green: 113/255.0, blue: 211/255.0, alpha: 1.0)
+
+            customView.addSubview(headerView)
+            customView.addSubview(footerView)
+            
             NSLayoutConstraint.activate([
                 okayButton.widthAnchor.constraint(equalToConstant: 100),
                 okayButton.heightAnchor.constraint(equalToConstant: 50),
                 okayButton.centerXAnchor.constraint(equalTo: customView.layoutMarginsGuide.centerXAnchor),
-                okayButton.centerYAnchor.constraint(equalTo: customView.layoutMarginsGuide.centerYAnchor)
+                okayButton.centerYAnchor.constraint(equalTo: customView.layoutMarginsGuide.centerYAnchor),
+                headerView.widthAnchor.constraint(equalToConstant: 350),
+                headerView.heightAnchor.constraint(equalToConstant: 60),
+                headerView.centerXAnchor.constraint(equalTo: customView.layoutMarginsGuide.centerXAnchor),
+                footerView.widthAnchor.constraint(equalToConstant: 350),
+                footerView.heightAnchor.constraint(equalToConstant: 60),
+                footerView.centerXAnchor.constraint(equalTo: customView.layoutMarginsGuide.centerXAnchor),
+                footerView.bottomAnchor.constraint(equalTo: customView.layoutMarginsGuide.bottomAnchor)
             ])
         
              // here we are adding the button its superView
@@ -121,11 +151,19 @@ class AbsentViewController: UIViewController {
     @IBAction func dateButton(_ sender: UIButton) {
         // this barButton is located at the top of your tableview navigation bar
         // when it pressed make sure you remove any other activities that were on the screen, for example dismiss a keyboard
-          loadCustomViewIntoController()
+          //loadCustomViewIntoController()
+        let pop = CalendarPopUpView()
+        self.view.addSubview(pop)
+        
     }
     
+
+    
     @objc func buttonAction(_ sender:UIButton) {
-        customView.isHidden = true
+//        customView.isHidden = true
+//        dateButtonOutlet.setTitle(selectedDay?.description, for: .normal)
+        
+        
     }
 }
 
@@ -136,41 +174,41 @@ class AbsentViewController: UIViewController {
     CalendarItemModel is a type that abstracts away the creation and configuration of a UIView. It's generic over a ViewRepresentable type, which can be any type conforming to         CalendarItemViewRepresentable. You can think of CalendarItemViewRepresentable as a blueprint for creating and updating instances of a particular type of view to be displayed in the calendar. For example, if we want to use a UILabel for our custom day view, we'll need to create a type that knows how to create and update that label. Here's a simple example:
 
 */
-struct DayLabel: CalendarItemViewRepresentable {
-
-  /// Properties that are set once when we initialize the view.
-  struct InvariantViewProperties: Hashable {
-    let font: UIFont
-    var textColor: UIColor
-    var backgroundColor: UIColor
-  }
-
-  /// Properties that will vary depending on the particular date being displayed.
-  struct ViewModel: Equatable {
-    let day: Day
-  }
-
-  static func makeView(
-    withInvariantViewProperties invariantViewProperties: InvariantViewProperties)
-    -> UILabel
-  {
-    let label = UILabel()
-
-    label.backgroundColor = invariantViewProperties.backgroundColor
-    label.font = invariantViewProperties.font
-    label.textColor = invariantViewProperties.textColor
-
-    label.textAlignment = .center
-    label.clipsToBounds = true
-    label.layer.cornerRadius = 12
-    
-    return label
-  }
-
-  static func setViewModel(_ viewModel: ViewModel, on view: UILabel) {
-    view.text = "\(viewModel.day.day)"
-  }
-
-}
-
-
+//struct DayLabel: CalendarItemViewRepresentable {
+//
+//  /// Properties that are set once when we initialize the view.
+//  struct InvariantViewProperties: Hashable {
+//    let font: UIFont
+//    var textColor: UIColor
+//    var backgroundColor: UIColor
+//  }
+//
+//  /// Properties that will vary depending on the particular date being displayed.
+//  struct ViewModel: Equatable {
+//    let day: Day
+//  }
+//
+//  static func makeView(
+//    withInvariantViewProperties invariantViewProperties: InvariantViewProperties)
+//    -> UILabel
+//  {
+//    let label = UILabel()
+//
+//    label.backgroundColor = invariantViewProperties.backgroundColor
+//    label.font = invariantViewProperties.font
+//    label.textColor = invariantViewProperties.textColor
+//
+//    label.textAlignment = .center
+//    label.clipsToBounds = true
+//    label.layer.cornerRadius = 12
+//
+//    return label
+//  }
+//
+//  static func setViewModel(_ viewModel: ViewModel, on view: UILabel) {
+//    view.text = "\(viewModel.day.day)"
+//  }
+//
+//}
+//
+//

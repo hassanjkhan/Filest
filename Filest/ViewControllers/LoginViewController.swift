@@ -13,17 +13,11 @@ import Firebase
 class LoginViewController: UIViewController {
     
     @IBOutlet weak var backgroundImage: UIImageView!
-    
     @IBOutlet weak var errorLabel: UILabel!
-    
     @IBOutlet weak var emailTextField: UITextField!
-    
     @IBOutlet weak var passwordTextField: UITextField!
-    
     @IBOutlet weak var registration: UIButton!
-    
     @IBOutlet weak var loginButton: UIButton!
-    
     @IBOutlet weak var forgotPasswordButton: UIButton!
     
     var user: User!
@@ -75,20 +69,21 @@ class LoginViewController: UIViewController {
         NSLayoutConstraint.activate([emailConstraint])
         
     }
+
     
     @IBAction func Login(_ sender: UIButton) {
         // ** check to see if authentication is valid here when backend is set up **
         // ...
         // after login is done, maybe put this in the login web service completion block
-        
+
         //this does not check if it is nil or value
         let email = emailTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         let password = passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-        
+
         Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
             if error != nil {
                 //could not sign in
-                
+
                 //you could add a error label to see what text is shown
                 self.errorLabel.text = error!.localizedDescription
                 self.errorLabel.alpha = 1
@@ -111,22 +106,22 @@ class LoginViewController: UIViewController {
                 }
             }
         }
-        
+
     }
     
     func Logout() {
         let firebaseAuth = Auth.auth()
         do {
             try
-                
+
                 firebaseAuth.signOut()
-            
+
         } catch let signOutError as NSError {
-            
+
             errorLabel.text = signOutError.localizedFailureReason
             errorLabel.alpha = 1
             print ("Error signing out: %@", signOutError)
-            
+
         }
     }
     
@@ -149,7 +144,6 @@ class LoginViewController: UIViewController {
     }
     
     func TransitiontoHome(){
-        //let vc = MainTabBarController()
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let mainTabBarController = storyboard.instantiateViewController(identifier: "MainTabBarController")

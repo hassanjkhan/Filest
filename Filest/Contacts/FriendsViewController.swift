@@ -80,17 +80,17 @@ class FriendsViewController: UITableViewController {
                                 print("Error getting documents getEmployeesData: \(err)")
                             } else {
                                 //self.table.beginUpdates()
+                                let delegate = UIApplication.shared.delegate as! AppDelegate
                                 for document in querySnapshot!.documents {
-                                    let userId               = document.documentID
-                                    let givenName            = document.get("givenName") as! String
-                                    let familyname           = document.get("familyName") as! String
-                                    let email                = document.get("email") as! String
-                                    let delegate             = UIApplication.shared.delegate as! AppDelegate
-                                    let storageRef           = Storage.storage().reference().child((userId)+".png")
+                                    let userId      = document.documentID
+                                    let givenName   = document.get("givenName") as! String
+                                    let familyname  = document.get("familyName") as! String
+                                    let email       = document.get("email") as! String
+                                    let storageRef  = Storage.storage().reference().child((userId)+".png")
                                     
                                     if let cachedImage = delegate.contactsCache.object(forKey: ((userId)+".png") as NSString) {
                                        
-                                        self.friendsList.append(Friend(firstName: givenName, lastName: familyname, workEmail: email, profilePicture: cachedImage))
+                                        self.friendsList.append(Friend(firstName: givenName , lastName: familyname , workEmail: email , profilePicture: cachedImage ))
                                         self.friendsList.sort { (Friend1: Friend, Friend2: Friend) -> Bool in
                                             return Friend1.firstName.prefix(0) < Friend2.firstName.prefix(0)
                                         }
@@ -104,12 +104,22 @@ class FriendsViewController: UITableViewController {
                                                 let imageUrl = URL(string: imageUrlString!)
                                                 let imageData = try! Data(contentsOf: imageUrl!)
                                                 
-                                                delegate.contactsCache.setObject(UIImage(data: imageData)!, forKey: ((userId)+".png") as NSString)
+                                                if imageUrl != nil {
+                                                    delegate.contactsCache.setObject(UIImage(data: imageData)!, forKey: ((userId)+".png") as NSString)
+                                                }
+                                                self.friendsList.append(Friend(firstName: givenName, lastName: familyname, workEmail: email, profilePicture: UIImage(data: imageData) ?? UIImage(named: "user")))
 
-                                                self.friendsList.append(Friend(firstName: givenName, lastName: familyname, workEmail: email, profilePicture: UIImage(data: imageData)))
                                                 self.friendsList.sort { (Friend1: Friend, Friend2: Friend) -> Bool in
                                                     return Friend1.firstName.prefix(0) < Friend2.firstName.prefix(0)
                                                 }
+                                                self.table.reloadData()
+                                            } else {
+                                                self.friendsList.append(Friend(firstName: givenName, lastName: familyname, workEmail: email, profilePicture: UIImage(named: "user")))
+
+                                                self.friendsList.sort { (Friend1: Friend, Friend2: Friend) -> Bool in
+                                                    return Friend1.firstName.prefix(0) < Friend2.firstName.prefix(0)
+                                                }
+                                                
                                                 self.table.reloadData()
                                             }
                                         }
