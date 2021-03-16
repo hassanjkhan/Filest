@@ -102,8 +102,17 @@ class SignUpViewController: UIViewController {
         } else {
             
             //Create cleaned version of data
-            let firstName = firstNameTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-            let lastName = lastNameTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+            
+            var firstName = firstNameTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+            let firstLetterFirstName = firstName.first
+            firstName.removeFirst()
+            firstName = (firstLetterFirstName?.uppercased())! + firstName
+            
+            var lastName = lastNameTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+            let firstLetterLastName = lastName.first
+            lastName.removeFirst()
+            lastName = (firstLetterLastName?.uppercased())! + lastName
+            
             let email = emailTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             let password = passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             

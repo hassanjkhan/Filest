@@ -13,11 +13,15 @@ import FirebaseDynamicLinks
 
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     //Caches all information for profile and edit profile
     let profileCache = NSCache<NSString, UIImage>()
     let contactsCache = NSCache<NSString, UIImage>()
+    
+    //Stores dates for absence from calendarpopupview
+    let firstSelectedDate = Date.init()
+    let secondSelectedDate = Date.init()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.

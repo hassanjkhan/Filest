@@ -101,7 +101,7 @@ class LoginViewController: UIViewController {
                     self.errorLabel.text = "None error"
                     self.errorLabel.alpha = 1
                 case .some(_):
-                    self.errorLabel.text = "some error"
+                    self.errorLabel.text = "error# 112"
                     self.errorLabel.alpha = 1
                 }
             }

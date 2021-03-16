@@ -23,7 +23,8 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var signOutButton: UIButton!
     @IBOutlet weak var beginLabel: UILabel!
     @IBOutlet weak var beginButton: UIButton!
-
+    @IBOutlet weak var TopTabView: UIView!
+    
     var inBusiness: Bool!
     var fs: Firestore! 
     var user: User!
@@ -65,6 +66,8 @@ class ProfileViewController: UIViewController {
         self.beginButton.alpha = 0
         self.beginButton.isEnabled = false
         self.beginLabel.alpha = 0
+        self.TopTabView.bottomAnchor.constraint(equalTo: jobTitle.bottomAnchor, constant: 10.0).isActive = true
+
         
     }
     

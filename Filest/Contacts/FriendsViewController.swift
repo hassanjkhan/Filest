@@ -55,14 +55,14 @@ class FriendsViewController: UITableViewController {
     }
   }
     
-  @IBAction private func addFriends(sender: UIBarButtonItem) {
-    // 1
-    let contactPicker = CNContactPickerViewController()
-    contactPicker.delegate = self
-    // 2
-    contactPicker.predicateForEnablingContact = NSPredicate(format: "emailAddresses.@count > 0")
-    present(contactPicker, animated: true)
-  }
+    @IBAction private func addFriends(sender: UIBarButtonItem) {
+        // 1
+        let contactPicker = CNContactPickerViewController()
+        contactPicker.delegate = self
+        // 2
+        contactPicker.predicateForEnablingContact = NSPredicate(format: "emailAddresses.@count > 0")
+        present(contactPicker, animated: true)
+    }
     
     
     func addContacts(){

@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:/Users/hassankhan/Desktop/Filest_Project/Filest/EmployeeCell.xib">
+   </FileRef>
+   <FileRef
       location = "group:Filest.xcodeproj">
    </FileRef>
    <FileRef

@@ -19,10 +19,10 @@ class CalendarPopUpView: UIView {
         let year = calendar.component(.year, from: Date())
         let startDate = calendar.date(from: DateComponents(year: year, month: month, day: 01))!
         let endDate = calendar.date(from: DateComponents(year: year+1, month: 12, day: 31))!
-        let lowerDate = calendar.date(from: DateComponents(year: 2019, month: 01, day: 20))!
+        //let lowerDate = calendar.date(from: DateComponents(year: 2019, month: 01, day: 20))!
         let firstSelectedDay = self.firstSelectedDay
         let secondSelectedDay = self.secondSelectedDay
-        let firstSelectedDate = calendar.date(from: DateComponents(year: (firstSelectedDay?.month.year), month: (firstSelectedDay?.month.month), day: (firstSelectedDay?.day))) ?? lowerDate
+        let firstSelectedDate = calendar.date(from: DateComponents(year: (firstSelectedDay?.month.year), month: (firstSelectedDay?.month.month), day: (firstSelectedDay?.day))) ?? Date.init()
         var secondSelectedDate = calendar.date(from: DateComponents(year: (secondSelectedDay?.month.year), month: (secondSelectedDay?.month.month), day: (secondSelectedDay?.day)))!
         
         if (secondSelectedDay == nil || (secondSelectedDate < firstSelectedDate)){
@@ -44,7 +44,7 @@ class CalendarPopUpView: UIView {
         
         .withDayRangeItemProvider(for: [dateRangeToHighlight]) { dayRangeLayoutContext in
               CalendarItem<DayRangeIndicatorView, [CGRect]>(
-                viewModel: dayRangeLayoutContext.daysAndFrames.map { $0.frame },
+                 viewModel: dayRangeLayoutContext.daysAndFrames.map { $0.frame },
                 styleID: "DayRangeStyle",
                 buildView: { DayRangeIndicatorView() },
                 updateViewModel: { dayRangeIndicatorView, dayFrames in
@@ -67,8 +67,6 @@ class CalendarPopUpView: UIView {
             return CalendarItemModel<DayLabel>(
                 invariantViewProperties: invariantViewProperties,
                 viewModel: .init(day: day))
-        
-            
     
         }
 
@@ -105,18 +103,11 @@ class CalendarPopUpView: UIView {
     fileprivate let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 28, weight: .bold)
+        label.font = UIFont.systemFont(ofSize: 31, weight: .bold)
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.5
         label.text = "When will you be Absent?"
         label.textColor = .white
-        label.textAlignment = .center
-        return label
-    }()
-    
-    fileprivate let subtitleLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
-        label.text = "in app "
         label.textAlignment = .center
         return label
     }()
@@ -124,7 +115,7 @@ class CalendarPopUpView: UIView {
     fileprivate let segmentedContainer: UIView = {
         let v = UIView()
         v.translatesAutoresizingMaskIntoConstraints = false
-        v.backgroundColor = .systemGroupedBackground
+        v.backgroundColor = .systemGray6
         v.layer.cornerRadius = 24
         return v
     }()
@@ -140,7 +131,7 @@ class CalendarPopUpView: UIView {
     fileprivate let container: UIView = {
         let v = UIView()
         v.translatesAutoresizingMaskIntoConstraints = false
-        v.backgroundColor = .systemGroupedBackground
+        v.backgroundColor = .systemGray6
         v.layer.cornerRadius = 24
         return v
     }()
@@ -159,23 +150,40 @@ class CalendarPopUpView: UIView {
     fileprivate let buttonContainer: UIView = {
         let v = UIView()
         v.translatesAutoresizingMaskIntoConstraints = false
-        v.backgroundColor = .systemGroupedBackground
+        v.backgroundColor = .systemGray6
         v.layer.cornerRadius = 24
         return v
     }()
     
+    @objc fileprivate func animateShake(){
+        container.transform = CGAffineTransform(translationX: 20, y: 0)
+        UIView.animate(withDuration: 1.4, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1, options: .curveEaseInOut, animations: {
+                    self.container.transform = CGAffineTransform.identity
+        }, completion: nil)
+        UIView.animate(withDuration: 1, delay: 0.1, options: .curveEaseInOut, animations: {
+            self.backgroundColor = UIColor(red: 235/255, green: 23/255, blue: 23/255, alpha: 0.6)
+        }, completion:nil)
+        UIView.animate(withDuration: 0.5, delay: 0.3, options: .curveEaseInOut, animations: {
+            self.backgroundColor = UIColor.init(red: 125/255, green: 113/255, blue:  211/255, alpha: 0.6)
+        }, completion:nil)
+        
+    }
+    
     @objc fileprivate func animateOut(){
-
-        UIView.animate(withDuration: 0.65, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseIn, animations: {
-            self.container.transform = CGAffineTransform(translationX: 0, y: -self.frame.height)
-            self.titleLabel.transform = CGAffineTransform(translationX: 0, y: -self.frame.height)
-            self.alpha = 0
-        }) { (complete) in
-            if complete {
-                self.removeFromSuperview()
+        if (self.firstSelectedDay == nil && self.secondSelectedDay ==  nil){
+            animateShake()
+        } else {
+            UIView.animate(withDuration: 0.65, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseIn, animations: {
+                self.container.transform = CGAffineTransform(translationX: 0, y: -self.frame.height)
+                self.titleLabel.transform = CGAffineTransform(translationX: 0, y: -self.frame.height)
+                self.alpha = 0
+            }) { (complete) in
+                if complete {
+                    self.removeFromSuperview()
+                }
             }
         }
-        
+
     }
     
     @objc fileprivate func animateIn(){
@@ -207,7 +215,11 @@ class CalendarPopUpView: UIView {
         self.addSubview(titleLabel)
         self.addSubview(container)
         titleLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        titleLabel.centerYAnchor.constraint(equalTo:  container.topAnchor, constant: -30.0).isActive = true
+        titleLabel.centerYAnchor.constraint(equalTo:  container.centerYAnchor).isActive = true
+        titleLabel.rightAnchor.constraint(lessThanOrEqualTo: container.rightAnchor, constant: 0).isActive = true
+        titleLabel.leftAnchor.constraint(lessThanOrEqualTo: container.leftAnchor, constant: 0).isActive = true
+
+        
         container.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         container.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         container.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.9).isActive = true
