@@ -184,6 +184,9 @@ class CalendarPopUpView: UIView {
                                                                 year: (self.firstSelectedDay?.month.year),
                                                                 month: (self.firstSelectedDay?.month.month),
                                                                 day: (self.firstSelectedDay?.day))) ?? Date.init())
+//            if(secondDate < firstDate){
+//                
+//            }
             AbsentSingleton.settoDate(toDate: calendar.date(from: DateComponents(
                                                             year: (self.secondSelectedDay?.month.year),
                                                             month: (self.secondSelectedDay?.month.month),

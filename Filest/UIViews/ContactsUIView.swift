@@ -1,21 +1,21 @@
 //
-//  addEmployeesUIView.swift
+//  ContactsUIView.swift
 //  Filest
 //
-//  Created by Hassan Khan on 2021-03-13.
+//  Created by Hassan Khan on 2021-03-22.
 //  Copyright © 2021 Z-Lux. All rights reserved.
 //
 
+import Foundation
 import UIKit
 import FirebaseDatabase
 import Firebase
 import FirebaseAuth
 
-class addEmployeesUIView: UIView {
+class ContactsUIView : UIView {
     var fs: Firestore!
     var user: User!
     var businessCode: String!
-    var parentVC: AbsentViewController!
     
     let tableView = UITableView()
     var employees : [Employees] = [Employees]()
@@ -35,30 +35,14 @@ class addEmployeesUIView: UIView {
         return v
     }()
     
-    fileprivate let bottomContainer: UIView = {
-        let v = UIView()
-        v.translatesAutoresizingMaskIntoConstraints = false
-        v.backgroundColor = UIColor.init(red: 125/255, green:  113/255, blue:  211/255, alpha: 1.0)
-        return v
-    }()
+
     
-    fileprivate let selectButton: UIButton = {
-        let b = UIButton()
-        b.translatesAutoresizingMaskIntoConstraints = false
-        b.backgroundColor = .white
-        b.setTitleColor(UIColor.init(red: 125/255, green:  113/255, blue:  211/255, alpha: 1.0), for: .normal)
-        b.setTitle("Select", for: .normal)
-        b.addTarget(self, action: #selector(animateOut), for: .touchUpInside)
-        b.layer.cornerRadius = 23
-        return b
-    }()
-    
-    fileprivate let searchBar: UITextField = {
-        let t = UITextField()
-        t.translatesAutoresizingMaskIntoConstraints = false
-        t.backgroundColor = UIColor.init(red: 197/255, green:  189/255, blue:  252/255, alpha: 1.0)
-        return t
-    }()
+//    fileprivate let searchBar: UITextField = {
+//        let t = UITextField()
+//        t.translatesAutoresizingMaskIntoConstraints = false
+//        t.backgroundColor = UIColor.init(red: 197/255, green:  189/255, blue:  252/255, alpha: 1.0)
+//        return t
+//    }()
     
         
     fileprivate let titleLabel: UILabel = {
@@ -67,96 +51,55 @@ class addEmployeesUIView: UIView {
         label.font = UIFont.systemFont(ofSize: 31, weight: .bold)
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.2
-        label.text = "Who would you like to notify?"
+        label.text = "Contacts"
         label.textColor = .white
         label.textAlignment = .center
         return label
     }()
-    
-    @objc fileprivate func animateIn(){
-        SelectFetchEmployees(textField: UITextField.init())
-        self.container.transform = CGAffineTransform(translationX: 0, y: self.frame.height)
-        self.alpha = 0
-        UIView.animate(withDuration: 0.65, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseIn, animations: {
-            self.container.transform = .identity
-            self.titleLabel.transform = .identity
-            self.alpha = 1
-        })
-        self.parentVC.isModalInPresentation = true
-        
-    }
-    
-    @objc fileprivate func animateOut(){
-        UIView.animate(withDuration: 0.65, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseIn, animations: {
-            self.container.transform = CGAffineTransform(translationX: 0, y: self.frame.height)
-            self.alpha = 0
-        }) { (complete) in
-            if complete {
-                self.removeFromSuperview()
-                self.parentVC.isModalInPresentation = false
-                
-            }
-        }
-        
 
-    }
     
-    required init(VC: AbsentViewController){
-        super.init(frame: VC.accessibilityFrame)
+    override init(frame: CGRect){
+        super.init(frame: frame)
         self.frame = UIScreen.main.bounds
-        self.backgroundColor = UIColor.init(red: 125/255, green: 113/255, blue:  211/255, alpha: 0.6)
-        self.parentVC = VC
+        self.backgroundColor = .systemBackground
+        
+        
                 
         self.addSubview(container)
         
         container.addSubview(topContainer)
+        container.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         container.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         container.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         container.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
-        container.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.975 ).isActive = true
-        
         
         topContainer.topAnchor.constraint(equalTo:container.topAnchor).isActive = true
         topContainer.leftAnchor.constraint(equalTo: container.leftAnchor).isActive = true
         topContainer.rightAnchor.constraint(equalTo: container.rightAnchor).isActive = true
-        topContainer.heightAnchor.constraint(equalToConstant: 65.0).isActive = true
+        topContainer.heightAnchor.constraint(equalToConstant: 90.0).isActive = true
         
         topContainer.addSubview(titleLabel)
-        titleLabel.centerYAnchor.constraint(equalTo: topContainer.centerYAnchor).isActive = true
+        titleLabel.centerYAnchor.constraint(equalTo: topContainer.bottomAnchor, constant: -30).isActive = true
         titleLabel.centerXAnchor.constraint(equalTo: topContainer.centerXAnchor).isActive = true
         titleLabel.rightAnchor.constraint(lessThanOrEqualTo: topContainer.rightAnchor, constant: -25).isActive = true
         titleLabel.leftAnchor.constraint(lessThanOrEqualTo: topContainer.leftAnchor, constant: 25).isActive = true
         
         container.addSubview(tableView)
-        container.addSubview(bottomContainer)
-        bottomContainer.addSubview(selectButton)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.topAnchor.constraint(equalTo: topContainer.bottomAnchor).isActive = true
         tableView.leftAnchor.constraint(equalTo: container.leftAnchor).isActive = true
         tableView.rightAnchor.constraint(equalTo: container.rightAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: bottomContainer.topAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         
-        
-        bottomContainer.heightAnchor.constraint(equalToConstant: 150.0).isActive = true
-        bottomContainer.leftAnchor.constraint(equalTo: container.leftAnchor).isActive = true
-        bottomContainer.rightAnchor.constraint(equalTo: container.rightAnchor).isActive = true
-        bottomContainer.bottomAnchor.constraint(equalTo:container.bottomAnchor).isActive = true
-        
-        selectButton.centerXAnchor.constraint(equalTo: bottomContainer.centerXAnchor).isActive = true
-        selectButton.topAnchor.constraint(equalTo: bottomContainer.topAnchor, constant: 20).isActive = true
-        selectButton.widthAnchor.constraint(equalTo: bottomContainer.widthAnchor, multiplier: 0.40).isActive = true
-        selectButton.heightAnchor.constraint(equalTo: bottomContainer.heightAnchor, multiplier: 0.30).isActive = true
-        
+
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "EmployeeCell", bundle: nil), forCellReuseIdentifier: "EmployeeCell")
 
         user = Auth.auth().currentUser
         fs = Firestore.firestore()
+        SelectFetchEmployees(textField: UITextField.init())
         
-        
-        
-        animateIn()
 
         
     }
@@ -183,7 +126,7 @@ class addEmployeesUIView: UIView {
                                 
                                 for document in querySnapshot!.documents {
                                     let userID = document.documentID
-                                    let selected = AbsentSingleton.getto().contains(userID)
+                                    let selected = false
                                     let givenName   = document.get("givenName") as! String
                                     let familyname  = document.get("familyName") as! String
                                     let jobTitle    = document.get("jobTitle") as! String
@@ -224,21 +167,11 @@ class addEmployeesUIView: UIView {
         }
     }
     
-//    func savePeopleInSingleton() {
-//        var selectedEmployees = [String]()
-//        for person in employees {
-//            if person.selected == true {
-//                selectedEmployees.append(person.uid)
-//            }
-//        }
-//        AbsentSingleton.setto(to: selectedEmployees)
-//    }
-    
     
     
 }
 
-extension addEmployeesUIView: UITableViewDataSource, UITableViewDelegate{
+extension ContactsUIView: UITableViewDataSource, UITableViewDelegate{
         
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return employees.count
@@ -249,7 +182,7 @@ extension addEmployeesUIView: UITableViewDataSource, UITableViewDelegate{
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return 95
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -259,36 +192,23 @@ extension addEmployeesUIView: UITableViewDataSource, UITableViewDelegate{
         cell.EmployeeUIImage.image = currentEmployee.photo
         cell.nameUILabel.text = currentEmployee.name
         cell.jobUILabel.text = currentEmployee.job
+        cell.selectUISwitch.alpha = 0
         
-        cell.selectUISwitch.setOn(currentEmployee.selected, animated: false)
-
-        if cell.isSelected { // stored value to know if the switch is on or off
-            tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
-        } else {
-            tableView.deselectRow(at: indexPath, animated: true)
-        }
         return cell
     }
     
-    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        return false // to disable interaction since it happens on the switch
-    }
-
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // do your thing when selecting
+        let contactUIView = ContactUIView(View: self,employee: employees[indexPath.row])
+        self.addSubview(contactUIView)
+        contactUIView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        contactUIView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        contactUIView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        contactUIView.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
         
-        let currentEmployee = employees[indexPath.row]
-        currentEmployee.selected = true
-        AbsentSingleton.addto(uid: currentEmployee.uid)
     }
 
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        // do your thing when deselecting
-        
-        let currentEmployee = employees[indexPath.row]
-        currentEmployee.selected = false
-        AbsentSingleton.removeto(uid:  currentEmployee.uid)
-    }
-
+    
 }
+
+

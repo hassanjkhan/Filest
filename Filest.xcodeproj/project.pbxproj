@@ -13,8 +13,10 @@
 		4767A45725A63D2A00BDAB6E /* MeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4767A45625A63D2A00BDAB6E /* MeetingViewController.swift */; };
 		47A57BB42607ED4C0024802D /* AbsentSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A57BB32607ED4C0024802D /* AbsentSingleton.swift */; };
 		47A57BB726081B290024802D /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A57BB626081B290024802D /* DateExtension.swift */; };
+		47A57BBA260902A90024802D /* ContactsUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A57BB9260902A90024802D /* ContactsUIView.swift */; };
+		47A57BBD260905040024802D /* ContactsUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A57BBC260905040024802D /* ContactsUIViewController.swift */; };
+		47A57BC626090AD00024802D /* ContactUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A57BC526090AD00024802D /* ContactUIView.swift */; };
 		47CB945325FC41C1005E4FF6 /* DayRangeIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CB945225FC41C1005E4FF6 /* DayRangeIndicatorView.swift */; };
-		47CB945625FD60C7005E4FF6 /* AddEmployeesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CB945525FD60C7005E4FF6 /* AddEmployeesViewController.swift */; };
 		47CB945925FD622C005E4FF6 /* addEmployeesUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CB945825FD622C005E4FF6 /* addEmployeesUIView.swift */; };
 		47CB945F25FD76BA005E4FF6 /* Employees.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CB945E25FD76BA005E4FF6 /* Employees.swift */; };
 		47CB946225FD76E1005E4FF6 /* EmployeeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CB946125FD76E1005E4FF6 /* EmployeeCell.swift */; };
@@ -51,8 +53,10 @@
 		4767A45625A63D2A00BDAB6E /* MeetingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingViewController.swift; sourceTree = "<group>"; };
 		47A57BB32607ED4C0024802D /* AbsentSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbsentSingleton.swift; sourceTree = "<group>"; };
 		47A57BB626081B290024802D /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
+		47A57BB9260902A90024802D /* ContactsUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsUIView.swift; sourceTree = "<group>"; };
+		47A57BBC260905040024802D /* ContactsUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsUIViewController.swift; sourceTree = "<group>"; };
+		47A57BC526090AD00024802D /* ContactUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUIView.swift; sourceTree = "<group>"; };
 		47CB945225FC41C1005E4FF6 /* DayRangeIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayRangeIndicatorView.swift; sourceTree = "<group>"; };
-		47CB945525FD60C7005E4FF6 /* AddEmployeesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEmployeesViewController.swift; sourceTree = "<group>"; };
 		47CB945825FD622C005E4FF6 /* addEmployeesUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addEmployeesUIView.swift; sourceTree = "<group>"; };
 		47CB945E25FD76BA005E4FF6 /* Employees.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Employees.swift; sourceTree = "<group>"; };
 		47CB946125FD76E1005E4FF6 /* EmployeeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeCell.swift; sourceTree = "<group>"; };
@@ -113,6 +117,8 @@
 			children = (
 				471820C325F98FAA00CF2A87 /* CalendarPopUpView.swift */,
 				47CB945825FD622C005E4FF6 /* addEmployeesUIView.swift */,
+				47A57BB9260902A90024802D /* ContactsUIView.swift */,
+				47A57BC526090AD00024802D /* ContactUIView.swift */,
 			);
 			path = UIViews;
 			sourceTree = "<group>";
@@ -200,6 +206,7 @@
 		846F013524FF5B4D00805339 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				47A57BBC260905040024802D /* ContactsUIViewController.swift */,
 				846F013624FF5B4D00805339 /* SignUpViewController.swift */,
 				846F013924FF5B4D00805339 /* ProfileViewController.swift */,
 				846F013824FF5B4D00805339 /* LoginViewController.swift */,
@@ -209,7 +216,6 @@
 				4767A45625A63D2A00BDAB6E /* MeetingViewController.swift */,
 				473807D725BE5CA300E0EF02 /* AbsentViewController.swift */,
 				47CB945225FC41C1005E4FF6 /* DayRangeIndicatorView.swift */,
-				47CB945525FD60C7005E4FF6 /* AddEmployeesViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -364,8 +370,9 @@
 				84D08A7D2538D01F00B6C487 /* EditViewController.swift in Sources */,
 				47A57BB726081B290024802D /* DateExtension.swift in Sources */,
 				47CB945325FC41C1005E4FF6 /* DayRangeIndicatorView.swift in Sources */,
+				47A57BC626090AD00024802D /* ContactUIView.swift in Sources */,
 				84B1C07225104CE10051E6F6 /* Main.swift in Sources */,
-				47CB945625FD60C7005E4FF6 /* AddEmployeesViewController.swift in Sources */,
+				47A57BBD260905040024802D /* ContactsUIViewController.swift in Sources */,
 				844DBC1625491CC500AD91E2 /* FriendsViewController.swift in Sources */,
 				84D08A802538FC4200B6C487 /* MainTabBarController.swift in Sources */,
 				84B1C06F25104CDD0051E6F6 /* SignUpViewController.swift in Sources */,
@@ -385,6 +392,7 @@
 				4751B73E2604491100C149D3 /* UIColorExtension.swift in Sources */,
 				8423C33D251190AE004EEB77 /* Utilities.swift in Sources */,
 				473807D825BE5CA300E0EF02 /* AbsentViewController.swift in Sources */,
+				47A57BBA260902A90024802D /* ContactsUIView.swift in Sources */,
 				47DAB440260443E6007C9D83 /* RandomCodeGenerator.swift in Sources */,
 				47CB946225FD76E1005E4FF6 /* EmployeeCell.swift in Sources */,
 				8418F671241ECB50002DC8A0 /* SceneDelegate.swift in Sources */,

@@ -10,7 +10,7 @@ import Foundation
 
 class AbsentSingleton {
     
-    static let sharedInstance = AbsentSingleton(fromDate: Date(timeIntervalSinceReferenceDate: -123456789.0), toDate: Date(timeIntervalSinceReferenceDate: -123456789.0))
+    static let sharedInstance = AbsentSingleton(fromDate: .yesterday, toDate: .yesterday)
     
     var fromDate: Date
     var toDate: Date
@@ -25,7 +25,7 @@ class AbsentSingleton {
     private init(fromDate: Date, toDate: Date){
         self.fromDate = fromDate
         self.toDate = toDate
-        self.to = []
+        self.to = Array.init()
         self.description = String.init()
         self.lockedView = false
     }
@@ -54,7 +54,7 @@ class AbsentSingleton {
     }
     
     class func addto(uid: String){
-        if (uid != ""){
+        if (uid.count > 0){
             sharedInstance.to.append(uid)
         }
         
@@ -77,9 +77,9 @@ class AbsentSingleton {
         }
         
     }
-    class func setto(to: [String]){
-        sharedInstance.to = to
-    }
+//    class func setto(to: [String]){
+//        sharedInstance.to = to
+//    }
     
     class func getdescription() -> String{
         return sharedInstance.description

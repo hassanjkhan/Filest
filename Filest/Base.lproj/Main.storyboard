@@ -340,9 +340,6 @@
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="248" id="e8d-ah-rVO"/>
                                 </constraints>
                                 <state key="normal" title="Meeting" image="Meeting"/>
-                                <connections>
-                                    <segue destination="Tct-4r-LKN" kind="show" id="O3y-d3-5Rk"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ek6-eT-NgH">
                                 <rect key="frame" x="10" y="44" width="408" height="248"/>
@@ -360,9 +357,6 @@
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="248" id="JM1-Md-rUS"/>
                                 </constraints>
                                 <state key="normal" title="Vacation" image="Vacation"/>
-                                <connections>
-                                    <segue destination="4DV-x1-Hgc" kind="show" id="5ux-yX-lYa"/>
-                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Absent / Late" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ed8-j5-glh">
                                 <rect key="frame" x="30" y="64" width="176" height="32"/>
@@ -470,6 +464,22 @@
             </objects>
             <point key="canvasLocation" x="960.86956521739137" y="-528.34821428571422"/>
         </scene>
+        <!--Contacts-->
+        <scene sceneID="QrJ-tq-2bs">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nvl-AN-BVQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <viewController id="DsC-aP-xKg" customClass="ContactsUIViewController" customModule="Filest" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="EOf-1l-rLE">
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="4qa-ZI-6d1"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Contacts" image="rectangle.stack.person.crop" catalog="system" id="j2C-PX-nxc"/>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="959" y="240"/>
+        </scene>
         <!--Employee  View Controller-->
         <scene sceneID="Egf-Wm-fil">
             <objects>
@@ -554,12 +564,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f40-Yb-8XX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="960" y="240"/>
+            <point key="canvasLocation" x="3450" y="1156"/>
         </scene>
-        <!--Main Tab Bar Controller-->
+        <!--Tab Bar Controller-->
         <scene sceneID="5rb-PE-Keq">
             <objects>
-                <tabBarController storyboardIdentifier="MainTabBarController" id="zar-hG-5EQ" customClass="MainTabBarController" customModule="Filest" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="MainTabBarController" id="zar-hG-5EQ" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="zDR-Qd-1qv">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -568,9 +578,8 @@
                     </tabBar>
                     <connections>
                         <segue destination="cTA-sM-dG1" kind="relationship" relationship="viewControllers" id="Brp-aV-bOB"/>
-                        <segue destination="QMr-dj-D29" kind="relationship" relationship="viewControllers" id="ljU-QS-ogF"/>
                         <segue destination="Mnv-2a-hSL" kind="relationship" relationship="viewControllers" id="3jb-7g-4F7"/>
-                        <segue destination="TLO-Zy-1AJ" kind="relationship" relationship="viewControllers" id="DDA-Ug-sF9"/>
+                        <segue destination="DsC-aP-xKg" kind="relationship" relationship="viewControllers" id="zJL-DK-cfN"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FnD-80-tdT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -772,7 +781,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ppz-p5-6eF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="960" y="1030"/>
+            <point key="canvasLocation" x="960" y="-1302"/>
         </scene>
         <!--EditViewController-->
         <scene sceneID="rH3-jg-S9m">
@@ -943,56 +952,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xPT-OU-PuH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1943" y="1030"/>
-        </scene>
-        <!--Notification-->
-        <scene sceneID="buy-2n-HUA">
-            <objects>
-                <viewController title="Notification" id="TLO-Zy-1AJ" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8MM-Fk-fHm">
-                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" id="OHj-oy-rwR">
-                                <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Notifications" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q7x-8Y-VbU">
-                                        <rect key="frame" x="159" y="93" width="97" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <viewLayoutGuide key="safeArea" id="cKS-ie-bDf"/>
-                                <color key="backgroundColor" systemColor="systemGreenColor"/>
-                            </view>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="X5f-v6-wPj"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Notification" image="Notification" id="UsL-TK-nTM"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="eXa-6p-1Lz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="960" y="-1302"/>
-        </scene>
-        <!--Meeting View Controller-->
-        <scene sceneID="blC-fS-jVJ">
-            <objects>
-                <viewController id="Tct-4r-LKN" customClass="MeetingViewController" customModule="Filest" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Mx8-R5-OHX">
-                        <rect key="frame" x="0.0" y="0.0" width="428" height="872"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="3wg-nu-ssk"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="qKH-iL-Vpz"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="FS7-Qk-epO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3418" y="-529"/>
+            <point key="canvasLocation" x="1900" y="-1302"/>
         </scene>
         <!--Absent View Controller-->
         <scene sceneID="1OP-y1-9Zo">
@@ -1140,32 +1100,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6s2-1J-Gv6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3417.7570093457944" y="-1302.3758099352053"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="1Uw-Yz-Fx3">
-            <objects>
-                <viewController id="4DV-x1-Hgc" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="rLE-VL-PAY">
-                        <rect key="frame" x="0.0" y="0.0" width="428" height="872"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Vacation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F2w-kN-Y0r">
-                                <rect key="frame" x="183" y="251" width="67" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="koD-gL-BPB"/>
-                        <color key="backgroundColor" red="1" green="0.95666110710516272" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="xkR-pq-n42"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="JHZ-we-c0l" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3418" y="240"/>
+            <point key="canvasLocation" x="1900" y="-529"/>
         </scene>
         <!--Edit Friend Table View Controller-->
         <scene sceneID="9Oh-Li-uBZ">
@@ -1283,7 +1218,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LtO-ot-cVw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1943" y="240"/>
+            <point key="canvasLocation" x="4236" y="1156"/>
         </scene>
     </scenes>
     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1293,7 +1228,6 @@
         <image name="Filest_Background" width="1127" height="2436.666748046875"/>
         <image name="Home" width="18.333333969116211" height="18.333333969116211"/>
         <image name="Meeting" width="1044" height="585"/>
-        <image name="Notification" width="15.333333015441895" height="18.333333969116211"/>
         <image name="Profile" width="15.333333015441895" height="18"/>
         <image name="Top_Tab" width="1126" height="562"/>
         <image name="Vacation" width="511" height="334"/>
@@ -1311,9 +1245,6 @@
         </systemColor>
         <systemColor name="systemGrayColor">
             <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemGreenColor">
-            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -2,7 +2,7 @@
 //  RandomCodeGenerator.swift
 //  Filest
 //
-//  Created by admin on 2020-10-20.
+//  Created by Hassan on 2020-10-20.
 //  Copyright © 2020 Z-Lux. All rights reserved.
 //
 

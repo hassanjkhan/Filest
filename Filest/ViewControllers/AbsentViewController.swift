@@ -102,11 +102,12 @@ class AbsentViewController: UIViewController, UITextViewDelegate {
         let db = Firestore.firestore()
         let AR = AbsentSingleton.sharedInstance
         db.collection("companies").document(companyID ?? "" ).collection("absent").addDocument(data:
-                                                                                                ["description" : AR.description,
+                                                                                    ["description" : AR.description,
                                                                                      "from" : self.user!.uid,
                                                                                      "to" : AR.to,
                                                                                      "dateFrom" : AR.fromDate,
-                                                                                     "dateTo" : AR.toDate])
+                                                                                     "dateTo" : AR.toDate,
+                                                                                     "approved:": false])
         AbsentSingleton.refresh()
         
         self.dismiss(animated: true) 
@@ -200,6 +201,7 @@ class AbsentViewController: UIViewController, UITextViewDelegate {
         if (fromDate > yesterday){
             if (fromDate >= toDate){
                 self.dateButtonOutlet.setTitle(dateParse(Date:fromDate), for: .normal)
+                AbsentSingleton.settoDate(toDate: AbsentSingleton.getfromDate())
             } else {
                 self.dateButtonOutlet.setTitle(dateParse(Date:fromDate) + " to " + dateParse(Date: toDate), for: .normal)
             }
