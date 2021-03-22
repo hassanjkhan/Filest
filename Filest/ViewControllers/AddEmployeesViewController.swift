@@ -13,8 +13,11 @@ class AddEmployeesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let addEmployee = addEmployeesUIView()
-        self.view.addSubview(addEmployee)
+       // let addEmployee = addEmployeesUIView()
+       // self.view.addSubview(addEmployee)
     }
+    
+
+
     
 }

@@ -9,13 +9,19 @@
 /* Begin PBXBuildFile section */
 		471820C425F98FAA00CF2A87 /* CalendarPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471820C325F98FAA00CF2A87 /* CalendarPopUpView.swift */; };
 		473807D825BE5CA300E0EF02 /* AbsentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473807D725BE5CA300E0EF02 /* AbsentViewController.swift */; };
+		4751B73E2604491100C149D3 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4751B73D2604491100C149D3 /* UIColorExtension.swift */; };
 		4767A45725A63D2A00BDAB6E /* MeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4767A45625A63D2A00BDAB6E /* MeetingViewController.swift */; };
+		47A57BB42607ED4C0024802D /* AbsentSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A57BB32607ED4C0024802D /* AbsentSingleton.swift */; };
+		47A57BB726081B290024802D /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A57BB626081B290024802D /* DateExtension.swift */; };
 		47CB945325FC41C1005E4FF6 /* DayRangeIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CB945225FC41C1005E4FF6 /* DayRangeIndicatorView.swift */; };
 		47CB945625FD60C7005E4FF6 /* AddEmployeesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CB945525FD60C7005E4FF6 /* AddEmployeesViewController.swift */; };
 		47CB945925FD622C005E4FF6 /* addEmployeesUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CB945825FD622C005E4FF6 /* addEmployeesUIView.swift */; };
 		47CB945F25FD76BA005E4FF6 /* Employees.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CB945E25FD76BA005E4FF6 /* Employees.swift */; };
 		47CB946225FD76E1005E4FF6 /* EmployeeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CB946125FD76E1005E4FF6 /* EmployeeCell.swift */; };
 		47CB953826001A51005E4FF6 /* EmployeeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47CB953726001A50005E4FF6 /* EmployeeCell.xib */; };
+		47DAB4382604423B007C9D83 /* UIImageColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DAB4372604423B007C9D83 /* UIImageColors.swift */; };
+		47DAB440260443E6007C9D83 /* RandomCodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DAB43F260443E5007C9D83 /* RandomCodeGenerator.swift */; };
+		47DE70482603C6AD005E7D25 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DE70472603C6AD005E7D25 /* UIImageExtension.swift */; };
 		8418F66F241ECB50002DC8A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8418F66E241ECB50002DC8A0 /* AppDelegate.swift */; };
 		8418F671241ECB50002DC8A0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8418F670241ECB50002DC8A0 /* SceneDelegate.swift */; };
 		8418F676241ECB50002DC8A0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8418F674241ECB50002DC8A0 /* Main.storyboard */; };
@@ -28,7 +34,6 @@
 		844DBC1925491CC500AD91E2 /* EditFriendTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844DBC1525491CC500AD91E2 /* EditFriendTableViewController.swift */; };
 		846F013224FF5ACF00805339 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 846F013124FF5ACF00805339 /* GoogleService-Info.plist */; };
 		846F013424FF5B2D00805339 /* HelperFolder in Resources */ = {isa = PBXBuildFile; fileRef = 846F013324FF5B2D00805339 /* HelperFolder */; };
-		848A85F5253E99E400E42823 /* RandomCodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848A85F4253E99E400E42823 /* RandomCodeGenerator.swift */; };
 		84B1C06F25104CDD0051E6F6 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846F013624FF5B4D00805339 /* SignUpViewController.swift */; };
 		84B1C07125104CE00051E6F6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846F013824FF5B4D00805339 /* LoginViewController.swift */; };
 		84B1C07225104CE10051E6F6 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846F013A24FF5B4D00805339 /* Main.swift */; };
@@ -42,7 +47,10 @@
 /* Begin PBXFileReference section */
 		471820C325F98FAA00CF2A87 /* CalendarPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarPopUpView.swift; sourceTree = "<group>"; };
 		473807D725BE5CA300E0EF02 /* AbsentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbsentViewController.swift; sourceTree = "<group>"; };
+		4751B73D2604491100C149D3 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		4767A45625A63D2A00BDAB6E /* MeetingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingViewController.swift; sourceTree = "<group>"; };
+		47A57BB32607ED4C0024802D /* AbsentSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbsentSingleton.swift; sourceTree = "<group>"; };
+		47A57BB626081B290024802D /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		47CB945225FC41C1005E4FF6 /* DayRangeIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayRangeIndicatorView.swift; sourceTree = "<group>"; };
 		47CB945525FD60C7005E4FF6 /* AddEmployeesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEmployeesViewController.swift; sourceTree = "<group>"; };
 		47CB945825FD622C005E4FF6 /* addEmployeesUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addEmployeesUIView.swift; sourceTree = "<group>"; };
@@ -50,6 +58,9 @@
 		47CB946125FD76E1005E4FF6 /* EmployeeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeCell.swift; sourceTree = "<group>"; };
 		47CB953525FFDFF1005E4FF6 /* EmployeeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = EmployeeCell.xib; path = /Users/hassankhan/Desktop/Filest_Project/Filest/EmployeeCell.xib; sourceTree = "<absolute>"; };
 		47CB953726001A50005E4FF6 /* EmployeeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmployeeCell.xib; sourceTree = "<group>"; };
+		47DAB4372604423B007C9D83 /* UIImageColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageColors.swift; sourceTree = "<group>"; };
+		47DAB43F260443E5007C9D83 /* RandomCodeGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomCodeGenerator.swift; sourceTree = "<group>"; };
+		47DE70472603C6AD005E7D25 /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		5D5D92F0459853EE025D9CFA /* Pods-Filest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Filest.release.xcconfig"; path = "Target Support Files/Pods-Filest/Pods-Filest.release.xcconfig"; sourceTree = "<group>"; };
 		62FDF55041CD3DCD8376896C /* Pods-Filest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Filest.debug.xcconfig"; path = "Target Support Files/Pods-Filest/Pods-Filest.debug.xcconfig"; sourceTree = "<group>"; };
 		8418F66B241ECB50002DC8A0 /* Filest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Filest.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -70,7 +81,6 @@
 		846F013824FF5B4D00805339 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		846F013924FF5B4D00805339 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		846F013A24FF5B4D00805339 /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
-		848A85F4253E99E400E42823 /* RandomCodeGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomCodeGenerator.swift; sourceTree = "<group>"; };
 		84D08A7C2538D01F00B6C487 /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 		84D08A7F2538FC4200B6C487 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		84FCD1212513D938004E02A2 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = Filest/Constants.swift; sourceTree = SOURCE_ROOT; };
@@ -116,6 +126,15 @@
 			path = TableVIewComponents;
 			sourceTree = "<group>";
 		};
+		47DAB43E260443BC007C9D83 /* UIImageExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				47DE70472603C6AD005E7D25 /* UIImageExtension.swift */,
+				47DAB4372604423B007C9D83 /* UIImageColors.swift */,
+			);
+			name = UIImageExtensions;
+			sourceTree = "<group>";
+		};
 		4FB64C27B44746A65A28DD25 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -146,6 +165,7 @@
 		8418F66D241ECB50002DC8A0 /* Filest */ = {
 			isa = PBXGroup;
 			children = (
+				47DAB43E260443BC007C9D83 /* UIImageExtensions */,
 				47CB953726001A50005E4FF6 /* EmployeeCell.xib */,
 				47CB945D25FD75FB005E4FF6 /* TableVIewComponents */,
 				47CB945B25FD7426005E4FF6 /* UIViews */,
@@ -160,7 +180,6 @@
 				8418F679241ECB52002DC8A0 /* LaunchScreen.storyboard */,
 				846F013524FF5B4D00805339 /* ViewControllers */,
 				8418F67C241ECB52002DC8A0 /* Info.plist */,
-				848A85F4253E99E400E42823 /* RandomCodeGenerator.swift */,
 			);
 			path = Filest;
 			sourceTree = "<group>";
@@ -168,8 +187,12 @@
 		8423C33A251190A0004EEB77 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				47DAB43F260443E5007C9D83 /* RandomCodeGenerator.swift */,
 				8423C33B251190AE004EEB77 /* Utilities.swift */,
 				84FCD1212513D938004E02A2 /* Constants.swift */,
+				4751B73D2604491100C149D3 /* UIColorExtension.swift */,
+				47A57BB32607ED4C0024802D /* AbsentSingleton.swift */,
+				47A57BB626081B290024802D /* DateExtension.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -339,8 +362,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				84D08A7D2538D01F00B6C487 /* EditViewController.swift in Sources */,
+				47A57BB726081B290024802D /* DateExtension.swift in Sources */,
 				47CB945325FC41C1005E4FF6 /* DayRangeIndicatorView.swift in Sources */,
-				848A85F5253E99E400E42823 /* RandomCodeGenerator.swift in Sources */,
 				84B1C07225104CE10051E6F6 /* Main.swift in Sources */,
 				47CB945625FD60C7005E4FF6 /* AddEmployeesViewController.swift in Sources */,
 				844DBC1625491CC500AD91E2 /* FriendsViewController.swift in Sources */,
@@ -350,6 +373,7 @@
 				844DBC1925491CC500AD91E2 /* EditFriendTableViewController.swift in Sources */,
 				471820C425F98FAA00CF2A87 /* CalendarPopUpView.swift in Sources */,
 				8418F66F241ECB50002DC8A0 /* AppDelegate.swift in Sources */,
+				47A57BB42607ED4C0024802D /* AbsentSingleton.swift in Sources */,
 				84B1C07325104CE20051E6F6 /* ProfileViewController.swift in Sources */,
 				47CB945F25FD76BA005E4FF6 /* Employees.swift in Sources */,
 				84FCD1222513D938004E02A2 /* Constants.swift in Sources */,
@@ -357,10 +381,14 @@
 				844DBC1725491CC500AD91E2 /* FriendCell.swift in Sources */,
 				4767A45725A63D2A00BDAB6E /* MeetingViewController.swift in Sources */,
 				84B1C07125104CE00051E6F6 /* LoginViewController.swift in Sources */,
+				47DAB4382604423B007C9D83 /* UIImageColors.swift in Sources */,
+				4751B73E2604491100C149D3 /* UIColorExtension.swift in Sources */,
 				8423C33D251190AE004EEB77 /* Utilities.swift in Sources */,
 				473807D825BE5CA300E0EF02 /* AbsentViewController.swift in Sources */,
+				47DAB440260443E6007C9D83 /* RandomCodeGenerator.swift in Sources */,
 				47CB946225FD76E1005E4FF6 /* EmployeeCell.swift in Sources */,
 				8418F671241ECB50002DC8A0 /* SceneDelegate.swift in Sources */,
+				47DE70482603C6AD005E7D25 /* UIImageExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

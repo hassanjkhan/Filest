@@ -11,9 +11,8 @@ target 'Filest' do
   pod 'Firebase/Core'
   pod 'Firebase/Firestore'
   pod 'FirebaseDynamicLinks'
-  pod 'FSCalendar'
   pod 'HorizonCalendar'
-  pod 'ExytePopupView'
+  
   # Pods for Filest
 
 end

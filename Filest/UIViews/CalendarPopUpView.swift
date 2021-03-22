@@ -12,13 +12,16 @@ import HorizonCalendar
 class CalendarPopUpView: UIView {
     private var firstSelectedDay: Day?
     private var secondSelectedDay: Day?
+    var parentVC: AbsentViewController!
+    var calendar: Calendar!
+
     
     fileprivate func makeContent() -> CalendarViewContent {
-        let calendar = Calendar.current
+        
         let month = calendar.component(.month, from: Date())
         let year = calendar.component(.year, from: Date())
         let startDate = calendar.date(from: DateComponents(year: year, month: month, day: 01))!
-        let endDate = calendar.date(from: DateComponents(year: year+1, month: 12, day: 31))!
+        let endDate = calendar.date(from: DateComponents(year: year+1, month: month, day: 31))!
         //let lowerDate = calendar.date(from: DateComponents(year: 2019, month: 01, day: 20))!
         let firstSelectedDay = self.firstSelectedDay
         let secondSelectedDay = self.secondSelectedDay
@@ -105,7 +108,7 @@ class CalendarPopUpView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 31, weight: .bold)
         label.adjustsFontSizeToFitWidth = true
-        label.minimumScaleFactor = 0.5
+        label.minimumScaleFactor = 0.2
         label.text = "When will you be Absent?"
         label.textColor = .white
         label.textAlignment = .center
@@ -170,9 +173,23 @@ class CalendarPopUpView: UIView {
     }
     
     @objc fileprivate func animateOut(){
-        if (self.firstSelectedDay == nil && self.secondSelectedDay ==  nil){
+        let secondDate = calendar.date(from: DateComponents(year: (secondSelectedDay?.month.year), month: (secondSelectedDay?.month.month), day: (secondSelectedDay?.day))) ?? Date.init()
+        let firstDate = calendar.date(from: DateComponents(year: (firstSelectedDay?.month.year), month: (firstSelectedDay?.month.month), day: (firstSelectedDay?.day))) ?? Date.init()
+        let yesterday = Date.yesterday
+        
+        if (self.firstSelectedDay == nil && self.secondSelectedDay ==  nil) || ((secondSelectedDay != nil && secondDate < yesterday) || firstDate < yesterday) {
             animateShake()
         } else {
+            AbsentSingleton.setfromDate(fromDate: calendar.date(from: DateComponents(
+                                                                year: (self.firstSelectedDay?.month.year),
+                                                                month: (self.firstSelectedDay?.month.month),
+                                                                day: (self.firstSelectedDay?.day))) ?? Date.init())
+            AbsentSingleton.settoDate(toDate: calendar.date(from: DateComponents(
+                                                            year: (self.secondSelectedDay?.month.year),
+                                                            month: (self.secondSelectedDay?.month.month),
+                                                            day: (self.secondSelectedDay?.day))) ?? Date.init())
+            parentVC.setDateTitle()
+            
             UIView.animate(withDuration: 0.65, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseIn, animations: {
                 self.container.transform = CGAffineTransform(translationX: 0, y: -self.frame.height)
                 self.titleLabel.transform = CGAffineTransform(translationX: 0, y: -self.frame.height)
@@ -180,6 +197,7 @@ class CalendarPopUpView: UIView {
             }) { (complete) in
                 if complete {
                     self.removeFromSuperview()
+                    self.parentVC.isModalInPresentation = false
                 }
             }
         }
@@ -195,6 +213,7 @@ class CalendarPopUpView: UIView {
             self.titleLabel.transform = .identity
             self.alpha = 1
         })
+        parentVC.isModalInPresentation = true
         
     }
     
@@ -207,15 +226,18 @@ class CalendarPopUpView: UIView {
     
 
     
-    override init(frame: CGRect){
-        super.init(frame:frame)
+    required init(VC: AbsentViewController){
+        super.init(frame:VC.accessibilityFrame)
+        calendar = Calendar.current
         
         self.backgroundColor = UIColor.init(red: 125/255, green: 113/255, blue:  211/255, alpha: 0.6)
         self.frame = UIScreen.main.bounds
-        self.addSubview(titleLabel)
+        self.parentVC = VC
         self.addSubview(container)
+        self.addSubview(titleLabel)
+        
         titleLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        titleLabel.centerYAnchor.constraint(equalTo:  container.centerYAnchor).isActive = true
+        titleLabel.bottomAnchor.constraint(equalTo:  container.topAnchor, constant: -15).isActive = true
         titleLabel.rightAnchor.constraint(lessThanOrEqualTo: container.rightAnchor, constant: 0).isActive = true
         titleLabel.leftAnchor.constraint(lessThanOrEqualTo: container.leftAnchor, constant: 0).isActive = true
 

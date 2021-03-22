@@ -45,8 +45,11 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GOM-TU-Um7">
+                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="GOM-TU-Um7">
                         <rect key="frame" x="355" y="40.5" width="51" height="31"/>
+                        <connections>
+                            <action selector="switchSelected:" destination="Gya-0A-0ar" eventType="valueChanged" id="VUr-7M-MPC"/>
+                        </connections>
                     </switch>
                 </subviews>
                 <color key="backgroundColor" systemColor="systemGray6Color"/>

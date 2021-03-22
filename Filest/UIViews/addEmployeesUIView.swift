@@ -15,9 +15,18 @@ class addEmployeesUIView: UIView {
     var fs: Firestore!
     var user: User!
     var businessCode: String!
+    var parentVC: AbsentViewController!
     
     let tableView = UITableView()
     var employees : [Employees] = [Employees]()
+    
+    fileprivate let container: UIView = {
+        let v = UIView()
+        v.translatesAutoresizingMaskIntoConstraints = false
+        v.backgroundColor = .systemGray6
+        v.layer.cornerRadius = 24
+        return v
+    }()
     
     fileprivate let topContainer: UIView = {
         let v = UIView()
@@ -36,10 +45,11 @@ class addEmployeesUIView: UIView {
     fileprivate let selectButton: UIButton = {
         let b = UIButton()
         b.translatesAutoresizingMaskIntoConstraints = false
-        b.backgroundColor = UIColor.init(red: 0/255, green:  153/255, blue:  0/255, alpha: 1.0)
+        b.backgroundColor = .white
+        b.setTitleColor(UIColor.init(red: 125/255, green:  113/255, blue:  211/255, alpha: 1.0), for: .normal)
         b.setTitle("Select", for: .normal)
-        //button.addTarget(self, action: #selector(animateOut), for: .touchUpInside)
-        b.layer.cornerRadius = 24
+        b.addTarget(self, action: #selector(animateOut), for: .touchUpInside)
+        b.layer.cornerRadius = 23
         return b
     }()
     
@@ -50,7 +60,7 @@ class addEmployeesUIView: UIView {
         return t
     }()
     
-    
+        
     fileprivate let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -63,16 +73,54 @@ class addEmployeesUIView: UIView {
         return label
     }()
     
+    @objc fileprivate func animateIn(){
+        SelectFetchEmployees(textField: UITextField.init())
+        self.container.transform = CGAffineTransform(translationX: 0, y: self.frame.height)
+        self.alpha = 0
+        UIView.animate(withDuration: 0.65, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseIn, animations: {
+            self.container.transform = .identity
+            self.titleLabel.transform = .identity
+            self.alpha = 1
+        })
+        self.parentVC.isModalInPresentation = true
+        
+    }
     
-    override init(frame: CGRect){
-        super.init(frame:frame)
-        self.frame = UIScreen.main.bounds
-        self.backgroundColor = .white
+    @objc fileprivate func animateOut(){
+        //savePeopleInSingleton()
+        UIView.animate(withDuration: 0.65, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseIn, animations: {
+            self.container.transform = CGAffineTransform(translationX: 0, y: self.frame.height)
+            self.alpha = 0
+        }) { (complete) in
+            if complete {
+                self.removeFromSuperview()
+                self.parentVC.isModalInPresentation = false
                 
-        self.addSubview(topContainer)
-        topContainer.topAnchor.constraint(equalTo:self.topAnchor).isActive = true
-        topContainer.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
-        topContainer.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+            }
+        }
+        
+
+    }
+    
+    required init(VC: AbsentViewController){
+        super.init(frame: VC.accessibilityFrame)
+        self.frame = UIScreen.main.bounds
+        self.backgroundColor = UIColor.init(red: 125/255, green: 113/255, blue:  211/255, alpha: 0.6)
+        self.parentVC = VC
+                
+        self.addSubview(container)
+        
+        container.addSubview(topContainer)
+        container.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        //container.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        container.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        container.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
+        container.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.975 ).isActive = true
+        
+        
+        topContainer.topAnchor.constraint(equalTo:container.topAnchor).isActive = true
+        topContainer.leftAnchor.constraint(equalTo: container.leftAnchor).isActive = true
+        topContainer.rightAnchor.constraint(equalTo: container.rightAnchor).isActive = true
         topContainer.heightAnchor.constraint(equalToConstant: 65.0).isActive = true
         
         topContainer.addSubview(titleLabel)
@@ -81,24 +129,26 @@ class addEmployeesUIView: UIView {
         titleLabel.rightAnchor.constraint(lessThanOrEqualTo: topContainer.rightAnchor, constant: -25).isActive = true
         titleLabel.leftAnchor.constraint(lessThanOrEqualTo: topContainer.leftAnchor, constant: 25).isActive = true
         
-        self.addSubview(tableView)
-        self.addSubview(bottomContainer)
+        container.addSubview(tableView)
+        container.addSubview(bottomContainer)
         bottomContainer.addSubview(selectButton)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.topAnchor.constraint(equalTo: topContainer.bottomAnchor).isActive = true
-        tableView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        tableView.widthAnchor.constraint(equalToConstant: self.frame.width).isActive = true
+        tableView.leftAnchor.constraint(equalTo: container.leftAnchor).isActive = true
+        tableView.rightAnchor.constraint(equalTo: container.rightAnchor).isActive = true
+//        tableView.centerXAnchor.constraint(equalTo: container.centerXAnchor).isActive = true
+//        tableView.widthAnchor.constraint(equalToConstant: container.frame.width).isActive = true
         tableView.bottomAnchor.constraint(equalTo: bottomContainer.topAnchor).isActive = true
         
         
         bottomContainer.heightAnchor.constraint(equalToConstant: 150.0).isActive = true
-        bottomContainer.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
-        bottomContainer.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
-        bottomContainer.bottomAnchor.constraint(equalTo:self.bottomAnchor).isActive = true
+        bottomContainer.leftAnchor.constraint(equalTo: container.leftAnchor).isActive = true
+        bottomContainer.rightAnchor.constraint(equalTo: container.rightAnchor).isActive = true
+        bottomContainer.bottomAnchor.constraint(equalTo:container.bottomAnchor).isActive = true
         
         selectButton.centerXAnchor.constraint(equalTo: bottomContainer.centerXAnchor).isActive = true
         selectButton.topAnchor.constraint(equalTo: bottomContainer.topAnchor, constant: 20).isActive = true
-        selectButton.widthAnchor.constraint(equalTo: bottomContainer.widthAnchor, multiplier: 0.45).isActive = true
+        selectButton.widthAnchor.constraint(equalTo: bottomContainer.widthAnchor, multiplier: 0.40).isActive = true
         selectButton.heightAnchor.constraint(equalTo: bottomContainer.heightAnchor, multiplier: 0.30).isActive = true
         
         tableView.delegate = self
@@ -108,7 +158,10 @@ class addEmployeesUIView: UIView {
         user = Auth.auth().currentUser
         fs = Firestore.firestore()
         
-        self.SelectFetchEmployees(textField: UITextField.init())
+        
+        
+        animateIn()
+
         
     }
     required init?(coder: NSCoder) {
@@ -134,12 +187,14 @@ class addEmployeesUIView: UIView {
                                 
                                 for document in querySnapshot!.documents {
                                     let userID = document.documentID
+                                    let selected = AbsentSingleton.getto().contains(userID)
                                     let givenName   = document.get("givenName") as! String
                                     let familyname  = document.get("familyName") as! String
                                     let jobTitle    = document.get("jobTitle") as! String
                                     let storageRef  = Storage.storage().reference().child((userID)+".png")
                                     if let cachedImage = delegate.contactsCache.object(forKey: ((userID)+".png") as NSString) {
-                                        self.employees.append(Employees(name: (givenName + " " + familyname), job: jobTitle, photo: cachedImage, selected: false)!)
+                                        self.employees.append(Employees(name: (givenName + " " + familyname), job: jobTitle, photo: cachedImage, selected: selected, uid: userID)!)
+                                        
                                         self.employees.sort { (Employee1: Employees, Employee2: Employees) -> Bool in
                                             return Employee1.name < Employee2.name
                                         }
@@ -154,9 +209,9 @@ class addEmployeesUIView: UIView {
                                                 if imageUrl != nil {
                                                     delegate.contactsCache.setObject(UIImage(data: imageData)!, forKey: ((userID)+".png") as NSString)
                                                 }
-                                                self.employees.append(Employees(name: (givenName + " " + familyname), job: jobTitle, photo: (UIImage(data: imageData) ??        UIImage(named: "user"))!, selected: false)!)
+                                                self.employees.append(Employees(name: (givenName + " " + familyname), job: jobTitle, photo: (UIImage(data: imageData) ??        UIImage(named: "user"))!, selected: selected, uid: userID)!)
                                             } else {
-                                                self.employees.append(Employees(name: (givenName + " " + familyname), job: jobTitle, photo: UIImage(named: "user")!, selected: false)!)
+                                                self.employees.append(Employees(name: (givenName + " " + familyname), job: jobTitle, photo: UIImage(named: "user")!, selected: selected, uid: userID)!)
                                             }
                                             self.employees.sort { (Employee1: Employees, Employee2: Employees) -> Bool in
                                                 return Employee1.name < Employee2.name
@@ -172,7 +227,16 @@ class addEmployeesUIView: UIView {
             }
         }
     }
-            
+    
+    func savePeopleInSingleton() {
+        var selectedEmployees = [String]()
+        for person in employees {
+            if person.selected == true {
+                selectedEmployees.append(person.uid)
+            }
+        }
+        AbsentSingleton.setto(to: selectedEmployees)
+    }
     
     
     
@@ -197,19 +261,38 @@ extension addEmployeesUIView: UITableViewDataSource, UITableViewDelegate{
 
         let currentEmployee = employees[indexPath.row]
         cell.EmployeeUIImage.image = currentEmployee.photo
-
         cell.nameUILabel.text = currentEmployee.name
         cell.jobUILabel.text = currentEmployee.job
-        cell.selectUISwitch.isOn = currentEmployee.selected
+        
+        cell.selectUISwitch.setOn(currentEmployee.selected, animated: false)
+
+        if cell.isSelected { // stored value to know if the switch is on or off
+            tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
+        } else {
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
         return cell
     }
     
-//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        let SearchResultViewController = storyboard.instantiateViewController(identifier: "SearchResultViewController") as! SearchResultViewController
-//        SearchResultViewController.setResult(results: searchResults, extra: extrasearchResults, index: indexPath.row)
-//        delegate.currentSearch = searchTextField.text ?? ""
-//        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(SearchResultViewController)
-//
-//    }
+    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        return false // to disable interaction since it happens on the switch
+    }
+
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // do your thing when selecting
+        
+        let currentEmployee = employees[indexPath.row]
+        currentEmployee.selected = true
+        AbsentSingleton.addto(uid: currentEmployee.uid)
+    }
+
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        // do your thing when deselecting
+        
+        let currentEmployee = employees[indexPath.row]
+        currentEmployee.selected = false
+        AbsentSingleton.removeto(uid:  currentEmployee.uid)
+    }
+
 }

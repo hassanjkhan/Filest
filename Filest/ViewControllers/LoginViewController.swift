@@ -46,6 +46,7 @@ class LoginViewController: UIViewController {
         passwordTextField.attributedPlaceholder = NSAttributedString(string: "password", attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
         
         //allows for tap to dismiss keyboard
+        
         self.hideKeyboardWhenTappedAround()
         
         // observes keyboard to shift all items up and down

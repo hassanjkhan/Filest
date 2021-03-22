@@ -65,7 +65,7 @@
                                     <segue destination="rgu-1u-71V" kind="show" id="tt3-Zn-Ayi"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="examplejs101@gmail.com" borderStyle="roundedRect" placeholder="Phone number or email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hWS-Rg-7yL">
+                            <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="hassanjkhan6@gmail.com" borderStyle="roundedRect" placeholder="Phone number or email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hWS-Rg-7yL">
                                 <rect key="frame" x="29" y="387" width="370" height="34"/>
                                 <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -77,7 +77,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Password123!" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZqI-th-8gB">
+                            <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Ilh4ever1!" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZqI-th-8gB">
                                 <rect key="frame" x="29" y="433" width="370" height="34"/>
                                 <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -510,13 +510,13 @@
                                                                 <constraint firstAttribute="height" constant="19.333333333333332" id="G0V-1c-uLd"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                            <color key="textColor" systemColor="darkTextColor"/>
+                                                            <color key="textColor" systemColor="systemGrayColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="252" horizontalCompressionResistancePriority="749" text="email@example.com" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fro-7u-oq6">
                                                             <rect key="frame" x="0.0" y="19.333333333333336" width="284.66666666666669" height="16.666666666666664"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                            <color key="textColor" red="0.75686274509999996" green="0.75686274509999996" blue="0.75686274509999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="textColor" systemColor="systemGray2Color"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
@@ -587,7 +587,7 @@
                         <subviews>
                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ae7-eI-YMK" userLabel="TopTabView">
                                 <rect key="frame" x="0.0" y="0.0" width="428" height="204"/>
-                                <color key="backgroundColor" red="0.27059024570000001" green="0.27058452370000002" blue="0.27058839800000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" red="0.34574854370000002" green="0.34580290320000001" blue="0.34573665260000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O63-h9-Plj">
                                 <rect key="frame" x="156.66666666666666" y="788" width="114.99999999999997" height="48"/>
@@ -621,7 +621,7 @@
                                 <state key="normal" title="   (000) - 000 - 0000"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="phone number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ps-PK-9XW">
-                                <rect key="frame" x="31" y="259" width="64" height="10"/>
+                                <rect key="frame" x="32" y="259" width="64" height="10"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="64" id="pqU-2b-iE8"/>
                                     <constraint firstAttribute="height" constant="10" id="vPu-k3-kQg"/>
@@ -720,7 +720,7 @@
                             <constraint firstItem="OwW-Z4-755" firstAttribute="centerX" secondItem="cHa-fk-LGa" secondAttribute="centerX" id="4Vi-zg-u7j"/>
                             <constraint firstItem="OwW-Z4-755" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="cHa-fk-LGa" secondAttribute="leading" constant="10" id="5Ke-C9-uqM"/>
                             <constraint firstItem="a8f-JP-4SU" firstAttribute="top" secondItem="YYM-aR-Pmp" secondAttribute="top" constant="9" id="5XM-tB-kdj"/>
-                            <constraint firstItem="5ps-PK-9XW" firstAttribute="leading" secondItem="7fT-iA-D8i" secondAttribute="leading" constant="16" id="7uo-SU-34L"/>
+                            <constraint firstItem="5ps-PK-9XW" firstAttribute="leading" secondItem="7fT-iA-D8i" secondAttribute="leading" constant="17" id="7uo-SU-34L"/>
                             <constraint firstItem="ae7-eI-YMK" firstAttribute="centerX" secondItem="cHa-fk-LGa" secondAttribute="centerX" id="BPw-Yz-dsw"/>
                             <constraint firstItem="cHa-fk-LGa" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="PhE-QA-ic6" secondAttribute="trailing" constant="10" id="EcA-8V-cWL"/>
                             <constraint firstItem="ae7-eI-YMK" firstAttribute="leading" secondItem="cHa-fk-LGa" secondAttribute="leading" id="IZz-hc-Dqv"/>
@@ -760,6 +760,7 @@
                         <outlet property="TopTabView" destination="ae7-eI-YMK" id="Ixf-q0-KsV"/>
                         <outlet property="beginButton" destination="tGt-lN-iHd" id="8UQ-pQ-w02"/>
                         <outlet property="beginLabel" destination="7ji-cj-7tq" id="Vyp-WL-BKr"/>
+                        <outlet property="editButton" destination="T8d-ke-a7M" id="FkY-UX-x91"/>
                         <outlet property="emailButton" destination="YYM-aR-Pmp" id="mNT-lU-CvA"/>
                         <outlet property="errorLabel" destination="WjU-CP-5wF" id="Eh0-0a-upZ"/>
                         <outlet property="jobTitle" destination="OwW-Z4-755" id="WUv-VQ-DuS"/>
@@ -1021,7 +1022,6 @@
                                 </state>
                                 <connections>
                                     <action selector="addEmployeesButton:" destination="Ykq-Nb-9hx" eventType="touchUpInside" id="D3g-iy-L0L"/>
-                                    <segue destination="O63-uH-voe" kind="show" id="PCi-7y-nNc"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9wA-gp-igW">
@@ -1092,6 +1092,9 @@
                                 <state key="normal" title="Submit">
                                     <color key="titleColor" red="0.61206036809999997" green="0.63093745710000004" blue="0.65882784130000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
+                                <connections>
+                                    <action selector="submitButton:" destination="Ykq-Nb-9hx" eventType="touchUpInside" id="52t-PZ-CS6"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="msj-P7-Y4W"/>
@@ -1138,22 +1141,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6s2-1J-Gv6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3417.7570093457944" y="-1302.3758099352053"/>
-        </scene>
-        <!--Add Employees View Controller-->
-        <scene sceneID="HSe-te-S8w">
-            <objects>
-                <viewController id="O63-uH-voe" customClass="AddEmployeesViewController" customModule="Filest" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="70y-jb-hNC">
-                        <rect key="frame" x="0.0" y="0.0" width="428" height="872"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="26c-9F-Q7k"/>
-                        <color key="backgroundColor" red="0.082569487390000001" green="0.1017664298" blue="0.11372733860000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="FfB-91-811"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="56v-0M-UNp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4371" y="-1302"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="1Uw-Yz-Fx3">
@@ -1313,14 +1300,17 @@
         <image name="rectangle.stack.person.crop" catalog="system" width="128" height="122"/>
         <image name="square.and.pencil" catalog="system" width="128" height="115"/>
         <image name="user" width="512" height="512"/>
-        <systemColor name="darkTextColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="linkColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray2Color">
+            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGrayColor">
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

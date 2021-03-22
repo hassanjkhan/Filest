@@ -12,8 +12,7 @@ import FirebaseUI
 import FirebaseDynamicLinks
 
 
-@UIApplicationMain
- class AppDelegate: UIResponder, UIApplicationDelegate {
+@UIApplicationMain class AppDelegate: UIResponder, UIApplicationDelegate {
 
     //Caches all information for profile and edit profile
     let profileCache = NSCache<NSString, UIImage>()
@@ -26,9 +25,7 @@ import FirebaseDynamicLinks
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
-        //let authUI = FUIAuth.defaultAuthUI()
-        // You need to adopt a FUIAuthDelegate protocol to receive callback
-        //authUI.delegate = self
+        
         return true
     }
 

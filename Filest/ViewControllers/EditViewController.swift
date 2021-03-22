@@ -86,20 +86,22 @@ class EditViewController: UIViewController {
         
         // save image
         let storageRef = Storage.storage().reference().child((user?.uid ?? "")+".png")
-        let compressedImage = profileImage.image?.sd_resizedImage(with: CGSize(width: 150, height: 200), scaleMode: .fill)
-        if let uploadData = compressedImage!.pngData(){
+//        let ImageWidth = profileImage.image?.size.width
+//        let ImageHeight = profileImage.image?.size.height
+//        let scale = ImageWidth! / 200
+//        let compressedImage = profileImage.image?.sd_resizedImage(with: CGSize(width: ImageWidth! / scale, height: ImageHeight! / scale), scaleMode: .aspectFill)
+        
+        if let uploadData = profileImage.image?.pngData(){
             
-            delegate.profileCache.setObject(compressedImage!, forKey: ((self.user?.uid ?? "")+".png") as NSString)
+            delegate.profileCache.setObject(profileImage.image!, forKey: ((self.user?.uid ?? "")+".png") as NSString)
             
             storageRef.putData(uploadData, metadata: nil
                                , completion: { (metadata, error) in
                                 if error != nil {
                                     print ("error")
                                 }
-                    
             })
         }
-        
         
         self.TransitiontoProfile()
     }
@@ -207,7 +209,10 @@ extension EditViewController: UIImagePickerControllerDelegate, UINavigationContr
             self.dismiss(animated: true) { [weak self] in
             guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
             //Setting image to your image view
-            self?.profileImage.image = image.sd_resizedImage(with: CGSize(width: 150, height: 200), scaleMode: .fill)
+            let ImageWidth = image.size.width
+            let ImageHeight = image.size.height
+            let scale = ImageWidth / 200
+            self?.profileImage.image = image.sd_resizedImage(with: CGSize(width: ImageWidth / scale, height: ImageHeight / scale), scaleMode: .aspectFill)
                 
             self?.profileImage.layer.cornerRadius = self!.profileImage.frame.size.width / 2
             self?.profileImage.clipsToBounds = true

@@ -16,10 +16,11 @@ class Employees {
     var job: String
     var photo: UIImage?
     var selected: Bool
+    var uid: String
     
     //MARK: Initialization
     
-    init?(name: String, job: String, photo: UIImage, selected: Bool) {
+    init?(name: String, job: String, photo: UIImage, selected: Bool, uid: String) {
         
         // The name must not be empty
         guard !name.isEmpty else {
@@ -31,22 +32,24 @@ class Employees {
         self.job = job
         self.photo = photo
         self.selected = selected
+        self.uid = uid
+        
         
     }
-    
-    init?(name: String, job: String, selected: Bool) {
-        
-        // The name must not be empty
-        guard !name.isEmpty else {
-            return nil
-        }
-
-        // Initialize stored properties.
-        self.name = name
-        self.job = job
-        self.selected = selected
-        
-    }
+//
+//    init?(name: String, job: String, selected: Bool) {
+//
+//        // The name must not be empty
+//        guard !name.isEmpty else {
+//            return nil
+//        }
+//
+//        // Initialize stored properties.
+//        self.name = name
+//        self.job = job
+//        self.selected = selected
+//
+//    }
     
     
 }

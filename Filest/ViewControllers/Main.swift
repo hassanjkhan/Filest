@@ -29,6 +29,17 @@ class Main: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+        
+        Meeting.isEnabled = false
+        Meeting.alpha = 0
+        MeetingTitle.alpha = 0
+        MeetingDescription.alpha = 0
+        
+        Vacation.isEnabled = false
+        Vacation.alpha = 0
+        VacationTitle.alpha = 0
+        VacationDescription.alpha = 0
+        
 
         let height = UIScreen.main.bounds.size.height * 0.27
         

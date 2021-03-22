@@ -33,14 +33,14 @@
   return [self init];
 }
 
-- (NSMutableDictionary*)queryForKey:(NSString *)key
+- (NSMutableDictionary *)queryForKey:(NSString *)key
 {
   NSMutableDictionary *query = [NSMutableDictionary dictionary];
   [FBSDKTypeUtility dictionary:query setObject:(__bridge id)([FBSDKDynamicFrameworkLoader loadkSecClassGenericPassword]) forKey:(__bridge id)[FBSDKDynamicFrameworkLoader loadkSecClass]];
   [FBSDKTypeUtility dictionary:query setObject:self.service forKey:(__bridge id)[FBSDKDynamicFrameworkLoader loadkSecAttrService]];
   [FBSDKTypeUtility dictionary:query setObject:key forKey:(__bridge id)[FBSDKDynamicFrameworkLoader loadkSecAttrGeneric]];
 
-#if !TARGET_IPHONE_SIMULATOR
+#if !TARGET_OS_SIMULATOR
   [FBSDKTypeUtility dictionary:query setObject:self.accessGroup forKey:[FBSDKDynamicFrameworkLoader loadkSecAttrAccessGroup]];
 #endif
 

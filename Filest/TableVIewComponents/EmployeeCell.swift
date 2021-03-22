@@ -23,6 +23,17 @@ class EmployeeCell: UITableViewCell {
             
         }
     }
+    @IBAction func switchSelected(_ sender: UISwitch) {
+        guard let tv = self.superview as? UITableView, let ip = tv.indexPath(for: self) else {
+            fatalError("Unable to cast self.superview as UITableView or get indexPath")
+        }
+        setSelected(sender.isOn, animated: true)
+        if sender.isOn {
+            tv.delegate?.tableView?(tv, didSelectRowAt: ip)
+        } else {
+            tv.delegate?.tableView?(tv, didDeselectRowAt: ip)
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()

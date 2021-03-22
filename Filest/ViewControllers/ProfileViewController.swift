@@ -12,6 +12,7 @@ import FirebaseDatabase
 import Firebase
 
 
+
 class ProfileViewController: UIViewController {
 
     @IBOutlet weak var profileImage: UIImageView!
@@ -24,6 +25,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var beginLabel: UILabel!
     @IBOutlet weak var beginButton: UIButton!
     @IBOutlet weak var TopTabView: UIView!
+    @IBOutlet weak var editButton: UIButton!
     
     var inBusiness: Bool!
     var fs: Firestore! 
@@ -67,7 +69,9 @@ class ProfileViewController: UIViewController {
         self.beginButton.isEnabled = false
         self.beginLabel.alpha = 0
         self.TopTabView.bottomAnchor.constraint(equalTo: jobTitle.bottomAnchor, constant: 10.0).isActive = true
-
+        
+        
+        
         
     }
     
@@ -122,12 +126,15 @@ class ProfileViewController: UIViewController {
         self.emailButton.setTitle("    " + (user?.email)!, for: .normal)
         
         let storageRef = Storage.storage().reference().child((user?.uid ?? "")+".png")
-    
+        let group = DispatchGroup()
+        group.enter()
         if let cachedImage = delegate.profileCache.object(forKey: ((user?.uid ?? "")+".png") as NSString) {
             self.profileImage.image = cachedImage
             self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width / 2
             self.profileImage.clipsToBounds = true
+            group.leave()
         } else {
+            
             storageRef.downloadURL { (url, error) in
                 if error != nil {
                     
@@ -144,10 +151,41 @@ class ProfileViewController: UIViewController {
                     
                     self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width / 2
                     self.profileImage.clipsToBounds = true
+                    group.leave()
                 }
                 
             }
         }
+        
+        
+        
+        group.notify(queue: .main) {
+            //set colors based images
+            var primaryColor = self.profileImage.image?.getColors().primary.withAlphaComponent(0.75)
+            var colors = primaryColor?.rgba
+            if (colors?.red == 1 && colors?.green == 1 && colors?.blue == 1){
+                primaryColor = self.profileImage.image?.getColors().secondary.withAlphaComponent(0.75)
+                colors = primaryColor?.rgba
+            }
+            if (colors?.red == 1 && colors?.green == 1 && colors?.blue == 1){
+                primaryColor = self.profileImage.image?.getColors().background.withAlphaComponent(0.75)
+                colors = primaryColor?.rgba
+            }
+            
+            
+            
+            if (colors!.red < 0.1 && colors!.green < 0.1 && colors!.blue < 0.1){
+                primaryColor = UIColor.init(red: 90/255, green: 90/255, blue: 90/255, alpha: 1)
+            } else if (colors!.blue > 0.5){
+                self.editButton.setTitleColor(.white, for: .normal)
+            }
+   
+            self.TopTabView.backgroundColor =  primaryColor ?? .systemGray
+            self.phoneButton.backgroundColor = primaryColor ?? .systemGray
+            self.emailButton.backgroundColor = primaryColor ?? .systemGray
+            
+        }
+        
         
         
         
@@ -306,7 +344,7 @@ class ProfileViewController: UIViewController {
             } else {
                 if let document = document {
                     if document.exists {
-                        //call again and it will generate a new code
+                        // call again and it will generate a new code
                         self.startBussiness(db: db)
                     } else {
                         // This adds the user to users with their new companyID
@@ -315,21 +353,17 @@ class ProfileViewController: UIViewController {
                         // however we also need to add them to the companies
                         // collection with all of the required information to start their business
                         let employeeData = db.collection("companies").document(code).collection("employees").document(self.user.uid)
-                        employeeData.setData(["jobTitle" : "none"], merge: true)
-                        employeeData.setData(["department" : "admin"], merge: true)
-                        employeeData.setData(["position" : "supervisor"], merge: true)
-                        employeeData.setData(["phoneNumber" : "none"], merge: true)
+                        employeeData.setData(["jobTitle" : "none","department" : "admin","phoneNumber" : "none"], merge: true)
                         
                         let namesArray = self.user.displayName?.split(separator: " ")
-                        let firstName = String(namesArray![0])
+                        let firstName  = String(namesArray![0])
                         let lastName   = String(namesArray![1])
                         
-                        employeeData.setData(["givenName" : firstName], merge: true)
-                        employeeData.setData(["familyName" : lastName], merge: true)
-                        employeeData.setData(["email" : self.user.email ?? " "], merge: true)
+                        employeeData.setData(["givenName" : firstName,"familyName" : lastName, "email" : self.user.email ?? " "], merge: true)
+                        //employeeData.setData(["familyName" : lastName], merge: true)
+                        //employeeData.setData(["email" : self.user.email ?? " "], merge: true)
                         
                         db.collection("companies").document(code).setData(["exists" : true])
-                        
                         
                         let departmentDoc = db.collection("companies").document(code).collection("departments").document("admin")
                         departmentDoc.collection("employees").document(self.user.uid).setData(["position" : "supervisor"])
@@ -337,21 +371,20 @@ class ProfileViewController: UIViewController {
                         db.collection("companies").document(code).setData(["exists" : true])
                         departmentDoc.setData(["exists" : true])
                         
-                        
-                        let actionsCollection = db.collection("companies").document(code).collection("actions")
-                        actionsCollection.document("absent").setData(["exists" : true])
-                        actionsCollection.document("meetings").setData(["exists" : true])
-                        actionsCollection.document("expenses").setData(["exists" : true])
-                        actionsCollection.document("vacations").setData(["exists" : true])
-                        actionsCollection.document("feedback").setData(["exists" : true])
-                        actionsCollection.document("training").setData(["exists" : true])
+//                        db.collection("companies").document(code).collection("absent").addDocument(data:
+//                                                                                                    ["Description" : "I am sick",
+//                                                                                                     "From" : self.user!.uid,
+//                                                                                                     "To" : [self.user!.uid],
+//                                                                                                     "Date From" : Date.init(),
+//                                                                                                     "Date To" : Date.init()])
+                            
                         
                         self.setUserInformation()
                         self.beginButton.isEnabled = false
                         self.beginButton.alpha = 0
                         
                         
-                        let successAlert = UIAlertController(title: "You've Started a Business!", message: "", preferredStyle: .alert)
+                        let successAlert = UIAlertController(title: "You've Started a Business!", message: "Share your company ID to your employees to have them join your business!", preferredStyle: .alert)
                         successAlert.addAction(UIAlertAction(title: "Great!", style: .default, handler:   { action in }))
                         self.present(successAlert, animated: true)
                     }
