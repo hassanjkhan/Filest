@@ -30,10 +30,6 @@
 		8418F678241ECB52002DC8A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8418F677241ECB52002DC8A0 /* Assets.xcassets */; };
 		8418F67B241ECB52002DC8A0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8418F679241ECB52002DC8A0 /* LaunchScreen.storyboard */; };
 		8423C33D251190AE004EEB77 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8423C33B251190AE004EEB77 /* Utilities.swift */; };
-		844DBC1625491CC500AD91E2 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844DBC1225491CA800AD91E2 /* FriendsViewController.swift */; };
-		844DBC1725491CC500AD91E2 /* FriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844DBC1325491CB400AD91E2 /* FriendCell.swift */; };
-		844DBC1825491CC500AD91E2 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844DBC1425491CBE00AD91E2 /* Friend.swift */; };
-		844DBC1925491CC500AD91E2 /* EditFriendTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844DBC1525491CC500AD91E2 /* EditFriendTableViewController.swift */; };
 		846F013224FF5ACF00805339 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 846F013124FF5ACF00805339 /* GoogleService-Info.plist */; };
 		846F013424FF5B2D00805339 /* HelperFolder in Resources */ = {isa = PBXBuildFile; fileRef = 846F013324FF5B2D00805339 /* HelperFolder */; };
 		84B1C06F25104CDD0051E6F6 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846F013624FF5B4D00805339 /* SignUpViewController.swift */; };
@@ -75,10 +71,6 @@
 		8418F67A241ECB52002DC8A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8418F67C241ECB52002DC8A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8423C33B251190AE004EEB77 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
-		844DBC1225491CA800AD91E2 /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
-		844DBC1325491CB400AD91E2 /* FriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendCell.swift; sourceTree = "<group>"; };
-		844DBC1425491CBE00AD91E2 /* Friend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
-		844DBC1525491CC500AD91E2 /* EditFriendTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditFriendTableViewController.swift; sourceTree = "<group>"; };
 		846F013124FF5ACF00805339 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		846F013324FF5B2D00805339 /* HelperFolder */ = {isa = PBXFileReference; lastKnownFileType = folder; path = HelperFolder; sourceTree = "<group>"; };
 		846F013624FF5B4D00805339 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -175,7 +167,6 @@
 				47CB953726001A50005E4FF6 /* EmployeeCell.xib */,
 				47CB945D25FD75FB005E4FF6 /* TableVIewComponents */,
 				47CB945B25FD7426005E4FF6 /* UIViews */,
-				84C5B7DF2548E34300E77268 /* Contacts */,
 				8418F66E241ECB50002DC8A0 /* AppDelegate.swift */,
 				8418F670241ECB50002DC8A0 /* SceneDelegate.swift */,
 				8418F674241ECB50002DC8A0 /* Main.storyboard */,
@@ -220,17 +211,6 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
-		84C5B7DF2548E34300E77268 /* Contacts */ = {
-			isa = PBXGroup;
-			children = (
-				844DBC1525491CC500AD91E2 /* EditFriendTableViewController.swift */,
-				844DBC1425491CBE00AD91E2 /* Friend.swift */,
-				844DBC1325491CB400AD91E2 /* FriendCell.swift */,
-				844DBC1225491CA800AD91E2 /* FriendsViewController.swift */,
-			);
-			path = Contacts;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -261,7 +241,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1130;
-				LastUpgradeCheck = 1210;
+				LastUpgradeCheck = 1240;
 				ORGANIZATIONNAME = "Z-Lux";
 				TargetAttributes = {
 					8418F66A241ECB50002DC8A0 = {
@@ -373,19 +353,15 @@
 				47A57BC626090AD00024802D /* ContactUIView.swift in Sources */,
 				84B1C07225104CE10051E6F6 /* Main.swift in Sources */,
 				47A57BBD260905040024802D /* ContactsUIViewController.swift in Sources */,
-				844DBC1625491CC500AD91E2 /* FriendsViewController.swift in Sources */,
 				84D08A802538FC4200B6C487 /* MainTabBarController.swift in Sources */,
 				84B1C06F25104CDD0051E6F6 /* SignUpViewController.swift in Sources */,
 				47CB945925FD622C005E4FF6 /* addEmployeesUIView.swift in Sources */,
-				844DBC1925491CC500AD91E2 /* EditFriendTableViewController.swift in Sources */,
 				471820C425F98FAA00CF2A87 /* CalendarPopUpView.swift in Sources */,
 				8418F66F241ECB50002DC8A0 /* AppDelegate.swift in Sources */,
 				47A57BB42607ED4C0024802D /* AbsentSingleton.swift in Sources */,
 				84B1C07325104CE20051E6F6 /* ProfileViewController.swift in Sources */,
 				47CB945F25FD76BA005E4FF6 /* Employees.swift in Sources */,
 				84FCD1222513D938004E02A2 /* Constants.swift in Sources */,
-				844DBC1825491CC500AD91E2 /* Friend.swift in Sources */,
-				844DBC1725491CC500AD91E2 /* FriendCell.swift in Sources */,
 				4767A45725A63D2A00BDAB6E /* MeetingViewController.swift in Sources */,
 				84B1C07125104CE00051E6F6 /* LoginViewController.swift in Sources */,
 				47DAB4382604423B007C9D83 /* UIImageColors.swift in Sources */,
@@ -535,7 +511,6 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
-				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				VALIDATE_PRODUCT = YES;
 			};

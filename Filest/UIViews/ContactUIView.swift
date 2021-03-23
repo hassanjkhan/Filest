@@ -34,9 +34,9 @@ class ContactUIView: UIView {
     }()
     
     @objc fileprivate func animateIn(){
-        self.container.transform = CGAffineTransform(translationX: 0, y: self.frame.height)
+        self.container.transform = CGAffineTransform(translationX: self.frame.width, y: 0)
         self.alpha = 0
-        UIView.animate(withDuration: 0.65, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseIn, animations: {
+        UIView.animate(withDuration: 0.65, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1, options: .curveEaseIn, animations: {
             self.container.transform = .identity
             self.titleLabel.transform = .identity
             self.alpha = 1
@@ -57,8 +57,6 @@ class ContactUIView: UIView {
         
 
     }
-    
-    
         
     fileprivate let titleLabel: UILabel = {
         let label = UILabel()
