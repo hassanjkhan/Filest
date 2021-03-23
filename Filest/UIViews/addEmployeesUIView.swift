@@ -94,7 +94,7 @@ class addEmployeesUIView: UIView {
             if complete {
                 self.removeFromSuperview()
                 self.parentVC.isModalInPresentation = false
-                
+                self.parentVC.updatetoEmployees()
             }
         }
         
@@ -223,18 +223,6 @@ class addEmployeesUIView: UIView {
             }
         }
     }
-    
-//    func savePeopleInSingleton() {
-//        var selectedEmployees = [String]()
-//        for person in employees {
-//            if person.selected == true {
-//                selectedEmployees.append(person.uid)
-//            }
-//        }
-//        AbsentSingleton.setto(to: selectedEmployees)
-//    }
-    
-    
     
 }
 

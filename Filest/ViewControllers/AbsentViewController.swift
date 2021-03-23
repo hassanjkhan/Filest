@@ -11,6 +11,7 @@ import HorizonCalendar
 import FirebaseAuth
 import FirebaseDatabase
 import Firebase
+import SwiftUI
 
 class AbsentViewController: UIViewController, UITextViewDelegate {
 
@@ -19,6 +20,7 @@ class AbsentViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var submitButtonOutlet: UIButton!
     @IBOutlet weak var descriptionBoxOutlet: UITextView!
     @IBOutlet weak var descriptionUILabel: UILabel!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     var user: User!
     var fs: Firestore!
@@ -74,13 +76,16 @@ class AbsentViewController: UIViewController, UITextViewDelegate {
         
     }
    
+
     
     
     @IBAction func addEmployeesButton(_ sender: Any) {
         let addEmployee = addEmployeesUIView(VC: self)
         self.view.addSubview(addEmployee)
-       
+        
     }
+    
+
     
     @IBAction func dateButton(_ sender: UIButton) {
         let pop = CalendarPopUpView(VC: self)
@@ -206,6 +211,56 @@ class AbsentViewController: UIViewController, UITextViewDelegate {
                 self.dateButtonOutlet.setTitle(dateParse(Date:fromDate) + " to " + dateParse(Date: toDate), for: .normal)
             }
             
+        }
+    }
+
+    
+    fileprivate lazy var stack: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [])
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.distribution = .equalCentering
+        stack.alignment = .leading
+        stack.spacing = 5
+        stack.axis = .horizontal
+
+        return stack
+    }()
+    
+
+    func updatetoEmployees(){
+
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        
+        scrollView.addSubview(stack)
+        
+        for s in stack.arrangedSubviews {
+            stack.removeArrangedSubview(s)
+            s.removeFromSuperview()
+        }
+        
+        
+        
+        stack.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
+        stack.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
+        stack.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
+        stack.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
+        stack.heightAnchor.constraint(equalTo: scrollView.heightAnchor).isActive = true
+
+        for e in AbsentSingleton.getto(){
+
+            if let cachedImage = delegate.contactsCache.object(forKey: (e+".png") as NSString) {
+                let IV = UIImageView()
+                IV.image = cachedImage
+                IV.layer.masksToBounds = false
+                IV.layer.cornerRadius = 30
+                IV.clipsToBounds = true
+                IV.contentMode = .scaleAspectFill
+                stack.addArrangedSubview(IV)
+                IV.topAnchor.constraint(equalTo: stack.topAnchor).isActive = true
+                IV.widthAnchor.constraint(equalToConstant: 60).isActive = true
+
+            }
+
         }
     }
 }

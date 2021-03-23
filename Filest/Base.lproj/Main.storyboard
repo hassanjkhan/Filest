@@ -970,6 +970,14 @@
                                     <action selector="submitButton:" destination="Ykq-Nb-9hx" eventType="touchUpInside" id="52t-PZ-CS6"/>
                                 </connections>
                             </button>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jga-pU-C4Z">
+                                <rect key="frame" x="0.0" y="270" width="428" height="62"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="wiL-ED-bCY"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="hIf-bd-pu8"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="vSK-Ae-C4H"/>
+                            </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="msj-P7-Y4W"/>
                         <color key="backgroundColor" red="0.087497418014390677" green="0.10279189604567983" blue="0.11204705328461539" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -992,14 +1000,17 @@
                             <constraint firstItem="OtC-YA-UaP" firstAttribute="height" secondItem="JfD-KE-XLe" secondAttribute="height" multiplier="0.085" constant="1" id="af9-Is-e5V"/>
                             <constraint firstItem="1fA-az-uFH" firstAttribute="centerY" secondItem="A7b-fk-MIa" secondAttribute="centerY" id="ewS-uv-jWn"/>
                             <constraint firstItem="V1e-5s-b0r" firstAttribute="centerX" secondItem="msj-P7-Y4W" secondAttribute="centerX" id="fna-E5-USA"/>
+                            <constraint firstItem="Jga-pU-C4Z" firstAttribute="leading" secondItem="JfD-KE-XLe" secondAttribute="leading" id="m0C-ia-kZP"/>
                             <constraint firstItem="msj-P7-Y4W" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="nS7-32-oQl" secondAttribute="bottom" constant="20" id="m60-f7-yPq"/>
                             <constraint firstItem="9wA-gp-igW" firstAttribute="leading" secondItem="JfD-KE-XLe" secondAttribute="leading" constant="-3" id="nZA-ms-H6k"/>
                             <constraint firstItem="9wA-gp-igW" firstAttribute="top" secondItem="OtC-YA-UaP" secondAttribute="bottom" id="ohf-g0-5Uh"/>
                             <constraint firstItem="A7b-fk-MIa" firstAttribute="top" secondItem="NMc-ij-hFh" secondAttribute="bottom" constant="-1" id="puE-7i-QtO"/>
+                            <constraint firstItem="Jga-pU-C4Z" firstAttribute="top" secondItem="A7b-fk-MIa" secondAttribute="bottom" constant="10" id="pw1-OR-WmU"/>
                             <constraint firstItem="eq4-oX-b2P" firstAttribute="leading" secondItem="msj-P7-Y4W" secondAttribute="leading" constant="7" id="rGe-JL-TJQ"/>
                             <constraint firstItem="NMc-ij-hFh" firstAttribute="leading" secondItem="JfD-KE-XLe" secondAttribute="leading" constant="40" id="sGK-vD-Xis"/>
                             <constraint firstItem="9wA-gp-igW" firstAttribute="centerX" secondItem="msj-P7-Y4W" secondAttribute="centerX" id="slC-Qd-IVh"/>
                             <constraint firstItem="nS7-32-oQl" firstAttribute="leading" secondItem="JfD-KE-XLe" secondAttribute="leading" constant="-3" id="u2z-Uk-oR6"/>
+                            <constraint firstAttribute="trailing" secondItem="Jga-pU-C4Z" secondAttribute="trailing" id="wMx-ZM-jki"/>
                             <constraint firstItem="nS7-32-oQl" firstAttribute="top" relation="greaterThanOrEqual" secondItem="A7b-fk-MIa" secondAttribute="bottom" constant="150" id="xKq-lr-R4R"/>
                         </constraints>
                     </view>
@@ -1009,12 +1020,13 @@
                         <outlet property="dateButtonOutlet" destination="9wA-gp-igW" id="bGh-nx-xtk"/>
                         <outlet property="descriptionBoxOutlet" destination="NMc-ij-hFh" id="IP8-bV-L1i"/>
                         <outlet property="descriptionUILabel" destination="V1e-5s-b0r" id="Qf8-5x-T2z"/>
+                        <outlet property="scrollView" destination="Jga-pU-C4Z" id="jU0-83-M0z"/>
                         <outlet property="submitButtonOutlet" destination="nS7-32-oQl" id="nAt-HD-pc0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6s2-1J-Gv6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1900" y="-529"/>
+            <point key="canvasLocation" x="1899.5327102803737" y="-529.37365010799135"/>
         </scene>
     </scenes>
     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -26,6 +26,13 @@ class ContactUIView: UIView {
         return v
     }()
     
+    fileprivate let profilePhoto: UIImageView = {
+        let p = UIImageView(image: UIImage(named: "user"))
+        p.layer.cornerRadius = p.frame.size.width / 2
+        p.clipsToBounds = true
+        return p
+    }()
+    
     fileprivate let topContainer: UIView = {
         let v = UIView()
         v.translatesAutoresizingMaskIntoConstraints = false
@@ -88,7 +95,7 @@ class ContactUIView: UIView {
         topContainer.topAnchor.constraint(equalTo:container.topAnchor).isActive = true
         topContainer.leftAnchor.constraint(equalTo: container.leftAnchor).isActive = true
         topContainer.rightAnchor.constraint(equalTo: container.rightAnchor).isActive = true
-        topContainer.heightAnchor.constraint(equalToConstant: 90.0).isActive = true
+        topContainer.heightAnchor.constraint(equalToConstant: 200).isActive = true
         
         topContainer.addSubview(titleLabel)
         titleLabel.centerYAnchor.constraint(equalTo: topContainer.bottomAnchor, constant: -30).isActive = true

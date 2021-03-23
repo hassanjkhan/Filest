@@ -68,6 +68,7 @@ class ProfileViewController: UIViewController {
         self.beginButton.alpha = 0
         self.beginButton.isEnabled = false
         self.beginLabel.alpha = 0
+        self.TopTabView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
         self.TopTabView.bottomAnchor.constraint(equalTo: jobTitle.bottomAnchor, constant: 10.0).isActive = true
         
         
@@ -161,14 +162,14 @@ class ProfileViewController: UIViewController {
         
         group.notify(queue: .main) {
             //set colors based images
-            var primaryColor = self.profileImage.image?.getColors().primary.withAlphaComponent(0.75)
+            var primaryColor = self.profileImage.image?.getColors().primary.withAlphaComponent(0.85)
             var colors = primaryColor?.rgba
             if (colors?.red == 1 && colors?.green == 1 && colors?.blue == 1){
-                primaryColor = self.profileImage.image?.getColors().secondary.withAlphaComponent(0.75)
+                primaryColor = self.profileImage.image?.getColors().secondary.withAlphaComponent(0.85)
                 colors = primaryColor?.rgba
             }
             if (colors?.red == 1 && colors?.green == 1 && colors?.blue == 1){
-                primaryColor = self.profileImage.image?.getColors().background.withAlphaComponent(0.75)
+                primaryColor = self.profileImage.image?.getColors().background.withAlphaComponent(0.85)
                 colors = primaryColor?.rgba
             }
             
