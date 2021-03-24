@@ -22,7 +22,7 @@
                                 <autoresizingMask key="autoresizingMask"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8lw-mH-D3d">
-                                <rect key="frame" x="126" y="873" width="176" height="34"/>
+                                <rect key="frame" x="126" y="862" width="176" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="176" id="DrG-DE-av5"/>
                                 </constraints>
@@ -95,11 +95,11 @@
                             <constraint firstAttribute="bottom" secondItem="8lw-mH-D3d" secondAttribute="bottom" constant="18" id="MLI-Kn-KHP"/>
                             <constraint firstItem="iAW-Bf-lii" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="OCo-xg-vzN"/>
                             <constraint firstItem="8lw-mH-D3d" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="T5C-e1-yX3"/>
+                            <constraint firstItem="8lw-mH-D3d" firstAttribute="top" secondItem="iAW-Bf-lii" secondAttribute="bottom" constant="25" id="Ywi-JQ-6xp"/>
                             <constraint firstItem="hWS-Rg-7yL" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="a9J-9q-3Zg"/>
                             <constraint firstItem="ZqI-th-8gB" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="g9G-K0-wH3"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="iAW-Bf-lii" secondAttribute="bottom" constant="55" id="qFw-PB-eAr"/>
                             <constraint firstItem="g21-XD-zAV" firstAttribute="top" secondItem="ZqI-th-8gB" secondAttribute="bottom" constant="6" id="vbP-ER-eb0"/>
-                            <constraint firstAttribute="bottom" secondItem="8lw-mH-D3d" secondAttribute="bottom" constant="19" id="yAC-fI-RuG"/>
+                            <constraint firstAttribute="bottom" secondItem="8lw-mH-D3d" secondAttribute="bottom" constant="30" id="yAC-fI-RuG"/>
                             <constraint firstItem="g21-XD-zAV" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="yvO-28-5tx"/>
                         </constraints>
                     </view>

@@ -67,10 +67,14 @@ class SignUpViewController: UIViewController {
         // add same clean and check for email
         
         let cleanedPassword = passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-     
-        if Utilities.isPasswordValid(cleanedPassword) == false {
+        let cleanedEmail = emailTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        if !Utilities.isPasswordValid(cleanedPassword){
             // password isn't valid
             return "Please make sure your password is at least 8 characters, contains a special character, and a number."
+        }
+        
+        if !Utilities.isEmailValid(cleanedEmail){
+            return "Please make sure your email is formatted correctly."
         }
         
         return nil
@@ -99,15 +103,15 @@ class SignUpViewController: UIViewController {
             lastName.removeFirst()
             lastName = (firstLetterLastName?.uppercased())! + lastName
             
-            let email = emailTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-            let password = passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+            let email = emailTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+            let password = passwordTextField.text!//.trimmingCharacters(in: .whitespacesAndNewlines)
             
             //Create User
             Auth.auth().createUser(withEmail: email, password: password) { (result, err) in
                 if err != nil {
                     
                     // There was an error in creating user
-                    self.showError(message: err.debugDescription)
+                    self.showError(message: "There was an error in creating user")//err.debugDescription)
                     
                 } else {
                     
@@ -122,41 +126,33 @@ class SignUpViewController: UIViewController {
                     let user = Auth.auth().currentUser
                     
                     user?.sendEmailVerification(completion: { (error) in
-                        //                            let error = error else {
-                        //                                print("User email verification sent")
-                        //                            }
-                        //                         self.errorLabel.alpha = 1
-                        //                         self.errorLabel.text = error.debugDescription
+                        // now that verification email has been sent and account created, open mail app!
+                        
+                        let alert = UIAlertController(title: "We sent you a verification email!", message: "What mail app would you like to use?", preferredStyle: .alert)
+                        
+                        alert.addAction(UIAlertAction(title: "Gmail", style: .default, handler:   { action in
+                            
+                            self.mailUrl = "googlegmail://"
+                            self.openEmailUrl()
+                            self.TransitiontoLogin()
+                        }))
+                        
+                        alert.addAction(UIAlertAction(title: "Outlook", style: .default, handler: { action in
+                            
+                            self.mailUrl = "ms-outlook://"
+                            self.openEmailUrl()
+                            self.TransitiontoLogin()
+                        }))
+                        
+                        alert.addAction(UIAlertAction(title: "Default", style: .default, handler:  { action in
+                            
+                            self.mailUrl = "mailto:"
+                            self.openEmailUrl()
+                            self.TransitiontoLogin()
+                        }))
+                        
+                        self.present(alert, animated: true)
                     })
-                    
-
-                    
-                    // now that verification email has been sent and account created, open mail app!
-                    
-                    let alert = UIAlertController(title: "We sent you a verification email!", message: "What mail app would you like to use?", preferredStyle: .alert)
-                    
-                    alert.addAction(UIAlertAction(title: "Gmail", style: .default, handler:   { action in
-                        
-                        self.mailUrl = "googlegmail://"
-                        self.openEmailUrl()
-                        self.TransitiontoLogin()
-                    }))
-                    
-                    alert.addAction(UIAlertAction(title: "Outlook", style: .default, handler: { action in
-                        
-                        self.mailUrl = "ms-outlook://"
-                        self.openEmailUrl()
-                        self.TransitiontoLogin()
-                    }))
-                    
-                    alert.addAction(UIAlertAction(title: "Default", style: .default, handler:  { action in
-                        
-                        self.mailUrl = "mailto:"
-                        self.openEmailUrl()
-                        self.TransitiontoLogin()
-                    }))
-                    
-                    self.present(alert, animated: true)
                     
                 }
             }

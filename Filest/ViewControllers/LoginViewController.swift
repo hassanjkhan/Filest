@@ -18,7 +18,6 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var registration: UIButton!
     @IBOutlet weak var loginButton: UIButton!
-    @IBOutlet weak var forgotPasswordButton: UIButton!
     
     var user: User!
     var height: CGFloat!
@@ -46,7 +45,6 @@ class LoginViewController: UIViewController {
         passwordTextField.attributedPlaceholder = NSAttributedString(string: "password", attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
         
         //allows for tap to dismiss keyboard
-        
         self.hideKeyboardWhenTappedAround()
         
         // observes keyboard to shift all items up and down
@@ -84,10 +82,12 @@ class LoginViewController: UIViewController {
         Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
             if error != nil {
                 //could not sign in
-
+                
                 //you could add a error label to see what text is shown
-                self.errorLabel.text = error!.localizedDescription
+            
+                self.errorLabel.text = self.signInErrorLabelHandler(error: error!)
                 self.errorLabel.alpha = 1
+                
             } else {
                 self.user = Auth.auth().currentUser
                 switch self.user?.isEmailVerified {
@@ -99,10 +99,10 @@ class LoginViewController: UIViewController {
                     self.errorLabel.alpha = 1
                     self.Logout()
                 case .none:
-                    self.errorLabel.text = "None error"
+                    self.errorLabel.text = "Error Signing In"
                     self.errorLabel.alpha = 1
                 case .some(_):
-                    self.errorLabel.text = "error# 112"
+                    self.errorLabel.text = "Error Signing In"
                     self.errorLabel.alpha = 1
                 }
             }
@@ -114,9 +114,7 @@ class LoginViewController: UIViewController {
         let firebaseAuth = Auth.auth()
         do {
             try
-
                 firebaseAuth.signOut()
-
         } catch let signOutError as NSError {
 
             errorLabel.text = signOutError.localizedFailureReason
@@ -166,11 +164,7 @@ class LoginViewController: UIViewController {
         var keyboardFrame:CGRect = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         keyboardFrame = self.view.convert(keyboardFrame, from: nil)
 
-        loginButton.frame.origin.y = height - keyboardFrame.size.height - loginButton.frame.height - 10
-        
-//       shift up
-        verticalConstraint = NSLayoutConstraint(item: view!, attribute: .bottom, relatedBy: .equal, toItem: loginButton, attribute: .bottom, multiplier: 1, constant: keyboardFrame.size.height + 10)
-        NSLayoutConstraint.activate([verticalConstraint])
+        animateButtonUp(height: keyboardFrame.height)
         
     }
     
@@ -180,17 +174,41 @@ class LoginViewController: UIViewController {
         if passwordTextField.text == ""{
             loginButton.backgroundColor = UIColor.init(red: 167.0/255.0, green: 171.0/255.0, blue: 176.0/255.0, alpha: 1)
         }
-        
-        
-//      shift down
-        if verticalConstraint != nil {
-            NSLayoutConstraint.deactivate([verticalConstraint])
-            loginButton.frame.origin.y = registration.frame.origin.y - loginButton.frame.height - 5
-        }
-        
-        
+        animateButtonDown()
     }
     
+    func signInErrorLabelHandler(error: Error) -> String{
+        if let errCode = AuthErrorCode(rawValue: error._code) {
+ 
+            switch errCode {
+                case .emailChangeNeedsVerification:
+                    return "Please verify your email and try again."
+                case .emailAlreadyInUse:
+                    return "The Email is already in use"
+                case .invalidEmail:
+                    return "Email is invalid"
+                case .wrongPassword:
+                    return "Incorrect Email or Password"
+                case .userNotFound:
+                    return "Incorrect Email or Password"
+                default:
+                    return "Error with Signing in"
+            }
+        }
+        return ""
+    }
     
+    @objc fileprivate func animateButtonUp(height: CGFloat){
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveLinear, animations: {
+            self.loginButton.transform = CGAffineTransform(translationX: 0, y: self.loginButton.frame.height + 10 - height)
+
+        })
+    }
     
+    @objc fileprivate func animateButtonDown(){
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveLinear, animations: {
+            self.loginButton.transform = .identity
+        })
+    }
+
 }
