@@ -70,10 +70,7 @@ class ProfileViewController: UIViewController {
         self.beginLabel.alpha = 0
         self.TopTabView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
         self.TopTabView.bottomAnchor.constraint(equalTo: jobTitle.bottomAnchor, constant: 10.0).isActive = true
-        
-        
-        
-        
+    
     }
     
     @IBAction func Logout(_ sender: UIButton) {
@@ -158,36 +155,11 @@ class ProfileViewController: UIViewController {
             }
         }
         
-        
-        
         group.notify(queue: .main) {
-            //set colors based images
-            var primaryColor = self.profileImage.image?.getColors().primary.withAlphaComponent(0.85)
-            var colors = primaryColor?.rgba
-            if (colors?.red == 1 && colors?.green == 1 && colors?.blue == 1){
-                primaryColor = self.profileImage.image?.getColors().secondary.withAlphaComponent(0.85)
-                colors = primaryColor?.rgba
-            }
-            if (colors?.red == 1 && colors?.green == 1 && colors?.blue == 1){
-                primaryColor = self.profileImage.image?.getColors().background.withAlphaComponent(0.85)
-                colors = primaryColor?.rgba
-            }
-            
-            
-            
-            if (colors!.red < 0.1 && colors!.green < 0.1 && colors!.blue < 0.1){
-                primaryColor = UIColor.init(red: 90/255, green: 90/255, blue: 90/255, alpha: 1)
-            } else if (colors!.blue > 0.5){
-                self.editButton.setTitleColor(.white, for: .normal)
-            }
-   
-            self.TopTabView.backgroundColor =  primaryColor ?? .systemGray
-            self.phoneButton.backgroundColor = primaryColor ?? .systemGray
-            self.emailButton.backgroundColor = primaryColor ?? .systemGray
+            //set colors based on profile image
+            self.setColorTheme()
             
         }
-        
-        
         
         
         // check if user is in a business
@@ -256,7 +228,7 @@ class ProfileViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Start a business", style: .default, handler:   { action in
 
             // adding user to users with their companyID create a new collection in companies collection containing all the basics for actions
-            self.startBussiness(db: database)
+            self.startBusiness(db: database)
             
         }))
         
@@ -333,7 +305,7 @@ class ProfileViewController: UIViewController {
         self.present(failedAlert, animated: true)
     }
     
-    func startBussiness(db: Firestore){
+    func startBusiness(db: Firestore){
         
         let rcg = RandomCodeGenerator()
         let code = rcg.GenerateCode()
@@ -346,7 +318,7 @@ class ProfileViewController: UIViewController {
                 if let document = document {
                     if document.exists {
                         // call again and it will generate a new code
-                        self.startBussiness(db: db)
+                        self.startBusiness(db: db)
                     } else {
                         // This adds the user to users with their new companyID
                         db.collection("users").document(self.user!.uid).setData(["companyID": code])
@@ -371,15 +343,7 @@ class ProfileViewController: UIViewController {
                         
                         db.collection("companies").document(code).setData(["exists" : true])
                         departmentDoc.setData(["exists" : true])
-                        
-//                        db.collection("companies").document(code).collection("absent").addDocument(data:
-//                                                                                                    ["Description" : "I am sick",
-//                                                                                                     "From" : self.user!.uid,
-//                                                                                                     "To" : [self.user!.uid],
-//                                                                                                     "Date From" : Date.init(),
-//                                                                                                     "Date To" : Date.init()])
-                            
-                        
+      
                         self.setUserInformation()
                         self.beginButton.isEnabled = false
                         self.beginButton.alpha = 0
@@ -394,6 +358,35 @@ class ProfileViewController: UIViewController {
         }
     }
     
+    func setColorTheme(){
+        var primaryColor = self.profileImage.image?.getColors().primary.withAlphaComponent(0.85)
+        var colors = primaryColor?.rgba
+        if (colors?.red == 1 && colors?.green == 1 && colors?.blue == 1){
+            primaryColor = self.profileImage.image?.getColors().secondary.withAlphaComponent(0.85)
+            colors = primaryColor?.rgba
+        }
+        if (colors?.red == 1 && colors?.green == 1 && colors?.blue == 1){
+            primaryColor = self.profileImage.image?.getColors().background.withAlphaComponent(0.85)
+            colors = primaryColor?.rgba
+        }
+        
+        let baseColor = UIColor.init(red: 125/255, green:  113/255, blue:  211/255, alpha: 1.0)
+        
+        if (colors!.red < 0.1 && colors!.green < 0.1 && colors!.blue < 0.1){
+            primaryColor = baseColor
+        }
+        
+        self.TopTabView.backgroundColor  = primaryColor ?? baseColor
+        self.phoneButton.backgroundColor = primaryColor ?? baseColor
+        self.emailButton.backgroundColor = primaryColor ?? baseColor
+        
+        
+        let finalColor = self.TopTabView.backgroundColor?.rgba
+        
+        if (finalColor!.blue > 0.5){
+            self.editButton.setTitleColor(.white, for: .normal)
+        }
+    }
     
 }
 

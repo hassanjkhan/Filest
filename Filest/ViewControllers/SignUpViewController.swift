@@ -51,20 +51,6 @@ class SignUpViewController: UIViewController {
         //allows for tap to dismiss keyboard
         self.hideKeyboardWhenTappedAround()
         
-        // observes keyboard to shift all items up and down
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(self.keyboardWillShow(notification:)),
-            name:UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(self.keyboardWillHide(notification:)),
-            name:UIResponder.keyboardWillHideNotification, object: nil)
-        
-        // Set Constraints
-        
-        
-
     }
 
     //     Check the fields and validate that the data is correct. if everytnign is correct, this method returns nil. otherise, it returns the error message
@@ -218,13 +204,5 @@ class SignUpViewController: UIViewController {
         
     }
     
-    @objc func keyboardWillShow(notification:NSNotification){
-
-
-    }
-    
-    @objc func keyboardWillHide(notification:NSNotification){
-
-    }
 }
 

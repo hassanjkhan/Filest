@@ -37,19 +37,10 @@ class EmployeeCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        if self.traitCollection.userInterfaceStyle == .light {
-            self.backgroundColor  = .white
-            jobUILabel.textColor  = .gray
-            nameUILabel.textColor = .black
-        } else {
-            self.backgroundColor  = .black
-            jobUILabel.textColor  = .white
-            nameUILabel.textColor = .white
-        }
-
+        jobUILabel.textColor = UIColor.label
+        nameUILabel.textColor = UIColor.label
+        self.backgroundColor = .systemBackground
         selectUISwitch.centerXAnchor.constraint(equalTo: self.rightAnchor, constant: -40).isActive = true
-        // Initialization code
     }
     
     func updateModeView(){
@@ -67,7 +58,6 @@ class EmployeeCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
     }
 
 }

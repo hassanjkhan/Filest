@@ -11,7 +11,6 @@
 		473807D825BE5CA300E0EF02 /* AbsentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473807D725BE5CA300E0EF02 /* AbsentViewController.swift */; };
 		4751B73E2604491100C149D3 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4751B73D2604491100C149D3 /* UIColorExtension.swift */; };
 		4767A45725A63D2A00BDAB6E /* MeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4767A45625A63D2A00BDAB6E /* MeetingViewController.swift */; };
-		47730A98260A5D9300233260 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47730A97260A5D9300233260 /* ContentView.swift */; };
 		47A57BB42607ED4C0024802D /* AbsentSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A57BB32607ED4C0024802D /* AbsentSingleton.swift */; };
 		47A57BB726081B290024802D /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A57BB626081B290024802D /* DateExtension.swift */; };
 		47A57BBA260902A90024802D /* ContactsUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A57BB9260902A90024802D /* ContactsUIView.swift */; };
@@ -48,7 +47,6 @@
 		473807D725BE5CA300E0EF02 /* AbsentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbsentViewController.swift; sourceTree = "<group>"; };
 		4751B73D2604491100C149D3 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		4767A45625A63D2A00BDAB6E /* MeetingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingViewController.swift; sourceTree = "<group>"; };
-		47730A97260A5D9300233260 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		47A57BB32607ED4C0024802D /* AbsentSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbsentSingleton.swift; sourceTree = "<group>"; };
 		47A57BB626081B290024802D /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		47A57BB9260902A90024802D /* ContactsUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsUIView.swift; sourceTree = "<group>"; };
@@ -113,7 +111,6 @@
 				47CB945825FD622C005E4FF6 /* addEmployeesUIView.swift */,
 				47A57BB9260902A90024802D /* ContactsUIView.swift */,
 				47A57BC526090AD00024802D /* ContactUIView.swift */,
-				47730A97260A5D9300233260 /* ContentView.swift */,
 			);
 			path = UIViews;
 			sourceTree = "<group>";
@@ -352,7 +349,6 @@
 			files = (
 				84D08A7D2538D01F00B6C487 /* EditViewController.swift in Sources */,
 				47A57BB726081B290024802D /* DateExtension.swift in Sources */,
-				47730A98260A5D9300233260 /* ContentView.swift in Sources */,
 				47CB945325FC41C1005E4FF6 /* DayRangeIndicatorView.swift in Sources */,
 				47A57BC626090AD00024802D /* ContactUIView.swift in Sources */,
 				84B1C07225104CE10051E6F6 /* Main.swift in Sources */,

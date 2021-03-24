@@ -61,7 +61,7 @@ class AbsentSingleton {
     }
     
     class func getto() -> [String]{
-        return sharedInstance.to
+        return sharedInstance.to.filter{$0 != ""}
     }
     
     class func removeto(uid: String){
@@ -90,8 +90,8 @@ class AbsentSingleton {
     }
     
     class func refresh(){
-        sharedInstance.fromDate =  Date(timeIntervalSinceReferenceDate: -123456789.0)
-        sharedInstance.toDate =  Date(timeIntervalSinceReferenceDate: -123456789.0)
+        sharedInstance.fromDate =  .yesterday
+        sharedInstance.toDate =  .yesterday
         sharedInstance.to = [String.init()]
         sharedInstance.description = String.init()
         sharedInstance.lockedView = false

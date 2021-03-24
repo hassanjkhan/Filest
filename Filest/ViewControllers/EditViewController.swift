@@ -19,6 +19,7 @@ class EditViewController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var phoneNumberTextField: UITextField!
     @IBOutlet weak var jobTitleTextField: UITextField!
+    @IBOutlet weak var saveButton: UIButton!
     
     var user: User!
     var verificationId: String?
@@ -51,6 +52,8 @@ class EditViewController: UIViewController {
         phoneNumberTextField.attributedPlaceholder = NSAttributedString(string: "Phone number", attributes: [NSAttributedString.Key.foregroundColor: UIColor.init(red: 171.0/255.0, green: 171.0/255.0, blue: 180.0/255.0, alpha: 1)])
         jobTitleTextField.attributedPlaceholder = NSAttributedString(string: "Job Title", attributes: [NSAttributedString.Key.foregroundColor: UIColor.init(red: 171.0/255.0, green: 171.0/255.0, blue: 180.0/255.0, alpha: 1)])
         
+        saveButton.layer.cornerRadius = 23
+        saveButton.clipsToBounds = true
     }
     
     //open image picker

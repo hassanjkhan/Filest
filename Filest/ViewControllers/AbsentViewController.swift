@@ -26,6 +26,18 @@ class AbsentViewController: UIViewController, UITextViewDelegate {
     var fs: Firestore!
     var companyID: String?
     
+    fileprivate lazy var stack: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [])
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.distribution = .equalCentering
+        stack.alignment = .leading
+        stack.spacing = 5
+        stack.axis = .horizontal
+
+        return stack
+    }()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -93,31 +105,34 @@ class AbsentViewController: UIViewController, UITextViewDelegate {
         
     }
     
-    func textViewDidChange(_ textView: UITextView) { //Handle the text changes here
-        if(textView.text == ""){
-            self.descriptionUILabel.alpha = 1
-        } else {
-            self.descriptionUILabel.alpha = 0
-        }
-        AbsentSingleton.setdescription(description: textView.text)
-        
-    }
+   
     
     @IBAction func submitButton(_ sender: Any) {
+        
         let db = Firestore.firestore()
         let AR = AbsentSingleton.sharedInstance
-        db.collection("companies").document(companyID ?? "" ).collection("absent").addDocument(data:
-                                                                                    ["description" : AR.description,
-                                                                                     "from" : self.user!.uid,
-                                                                                     "to" : AR.to,
-                                                                                     "dateFrom" : AR.fromDate,
-                                                                                     "dateTo" : AR.toDate,
-                                                                                     "approved:": false])
-        AbsentSingleton.refresh()
         
-        self.dismiss(animated: true) 
+        if allFieldsCompleted(){
+        
+            db.collection("companies").document(companyID ?? "" ).collection("absent").addDocument(data:
+                                                                                        ["description" : AR.description,
+                                                                                         "from" : self.user!.uid,
+                                                                                         "to" : AbsentSingleton.getto(),
+                                                                                         "dateFrom" : AR.fromDate,
+                                                                                         "dateTo" : AR.toDate,
+                                                                                         "approved": false])
+            AbsentSingleton.refresh()
+            
+            self.dismiss(animated: true)
+            
+        } else {
+            let fillFieldsAlert = UIAlertController(title: "Please fill out all the fields", message: "", preferredStyle: .alert)
+            fillFieldsAlert.addAction(UIAlertAction(title: "Okay", style: .default, handler:   { action in }))
+            self.present(fillFieldsAlert, animated: true)
+        }
             
     }
+    
     
     
     @objc func keyboardWillShow(notification:NSNotification){
@@ -134,6 +149,16 @@ class AbsentViewController: UIViewController, UITextViewDelegate {
         self.dateButtonOutlet.isEnabled = true
         self.isModalInPresentation = false
         
+        
+    }
+    
+    func textViewDidChange(_ textView: UITextView) { //Handle the text changes here
+        if(textView.text == ""){
+            self.descriptionUILabel.alpha = 1
+        } else {
+            self.descriptionUILabel.alpha = 0
+        }
+        AbsentSingleton.setdescription(description: textView.text)
         
     }
     
@@ -213,32 +238,18 @@ class AbsentViewController: UIViewController, UITextViewDelegate {
             
         }
     }
-
     
-    fileprivate lazy var stack: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [])
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.distribution = .equalCentering
-        stack.alignment = .leading
-        stack.spacing = 5
-        stack.axis = .horizontal
-
-        return stack
-    }()
     
 
     func updatetoEmployees(){
 
         let delegate = UIApplication.shared.delegate as! AppDelegate
-        
         scrollView.addSubview(stack)
         
         for s in stack.arrangedSubviews {
             stack.removeArrangedSubview(s)
             s.removeFromSuperview()
         }
-        
-        
         
         stack.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
         stack.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
@@ -262,6 +273,27 @@ class AbsentViewController: UIViewController, UITextViewDelegate {
             }
 
         }
+    }
+    
+    func allFieldsCompleted() -> Bool{
+
+        let AS = AbsentSingleton.sharedInstance
+        if AS.toDate == Date.yesterday {
+            return false
+        }
+        if AS.fromDate == Date.yesterday {
+            return false
+        }
+        if AS.to.count == 0 {
+            return false
+        }
+        if AS.description.isEmpty{
+            return false
+        }
+        if AS.description.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty{
+            return false
+        }
+        return true
     }
 }
 
