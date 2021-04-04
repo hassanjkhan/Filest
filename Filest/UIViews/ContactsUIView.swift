@@ -98,7 +98,11 @@ class ContactsUIView : UIView {
 
         user = Auth.auth().currentUser
         fs = Firestore.firestore()
-        SelectFetchEmployees(textField: UITextField.init())
+        
+        DispatchQueue.main.async {
+            self.SelectFetchEmployees(textField: UITextField.init())
+        }
+        
         
 
         
@@ -131,8 +135,10 @@ class ContactsUIView : UIView {
                                     let familyname  = document.get("familyName") as! String
                                     let jobTitle    = document.get("jobTitle") as! String
                                     let storageRef  = Storage.storage().reference().child((userID)+".png")
+                                    let email       = document.get("email") as! String
+                                    let phoneNumber = document.get("phoneNumber") as! String
                                     if let cachedImage = delegate.contactsCache.object(forKey: ((userID)+".png") as NSString) {
-                                        self.employees.append(Employees(name: (givenName + " " + familyname), job: jobTitle, photo: cachedImage, selected: selected, uid: userID)!)
+                                        self.employees.append(Employees(name: (givenName + " " + familyname), job: jobTitle, photo: cachedImage, selected: selected, uid: userID, email: email, phoneNumber: phoneNumber)!)
                                         
                                         self.employees.sort { (Employee1: Employees, Employee2: Employees) -> Bool in
                                             return Employee1.name < Employee2.name
@@ -148,9 +154,9 @@ class ContactsUIView : UIView {
                                                 if imageUrl != nil {
                                                     delegate.contactsCache.setObject(UIImage(data: imageData)!, forKey: ((userID)+".png") as NSString)
                                                 }
-                                                self.employees.append(Employees(name: (givenName + " " + familyname), job: jobTitle, photo: (UIImage(data: imageData) ??        UIImage(named: "user"))!, selected: selected, uid: userID)!)
+                                                self.employees.append(Employees(name: (givenName + " " + familyname), job: jobTitle, photo: (UIImage(data: imageData) ??        UIImage(named: "user"))!, selected: selected, uid: userID, email: email, phoneNumber: phoneNumber)!)
                                             } else {
-                                                self.employees.append(Employees(name: (givenName + " " + familyname), job: jobTitle, photo: UIImage(named: "user")!, selected: selected, uid: userID)!)
+                                                self.employees.append(Employees(name: (givenName + " " + familyname), job: jobTitle, photo: UIImage(named: "user")!, selected: selected, uid: userID, email: email, phoneNumber: phoneNumber)!)
                                             }
                                             self.employees.sort { (Employee1: Employees, Employee2: Employees) -> Bool in
                                                 return Employee1.name < Employee2.name
@@ -182,7 +188,7 @@ extension ContactsUIView: UITableViewDataSource, UITableViewDelegate{
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 95
+        return 90
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

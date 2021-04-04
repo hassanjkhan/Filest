@@ -62,6 +62,12 @@ class ProfileViewController: UIViewController {
         beginButton.layer.cornerRadius = 23
         beginButton.clipsToBounds = true
         
+        // Roudning edit button
+        editButton.backgroundColor = UIColor.init(red: 125/255, green:  113/255, blue:  211/255, alpha: 1.0)
+        editButton.layer.cornerRadius = 15
+        editButton.clipsToBounds = true
+        
+        
         setUserInformation();
         
         // Starts with begin label and button as disabled
@@ -79,6 +85,7 @@ class ProfileViewController: UIViewController {
           try
         
             firebaseAuth.signOut()
+            AbsentSingleton.refresh()
             self.TransitiontoLogin()
             
         } catch let signOutError as NSError {
@@ -138,15 +145,10 @@ class ProfileViewController: UIViewController {
                     
                 } else {
                     let imageUrlString = url?.absoluteString
-
                     let imageUrl = URL(string: imageUrlString!)!
-
                     let imageData = try! Data(contentsOf: imageUrl)
-
                     self.profileImage.image = UIImage(data: imageData)
-                
                     delegate.profileCache.setObject(self.profileImage.image!, forKey: ((self.user?.uid ?? "")+".png") as NSString)
-                    
                     self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width / 2
                     self.profileImage.clipsToBounds = true
                     group.leave()
@@ -274,11 +276,20 @@ class ProfileViewController: UIViewController {
                         // however we also need to add them to the companies
                         // collection with all of the required information to start their business
                         let employeeCollection = db.collection("companies").document(code).collection("employees").document(self.user.uid)
-                        employeeCollection.setData(["jobTitle" : "none"], merge: true)
-                        employeeCollection.setData(["department" : "none"], merge: true)
-                        employeeCollection.setData(["position" : "employee"], merge: true)
-                        employeeCollection.setData(["phoneNumber" : "none"], merge: true)
                         
+                        
+                        
+                        employeeCollection.setData(["jobTitle" : "none","department" : "none","phoneNumber" : "none"], merge: true)
+                        
+                        let namesArray = self.user.displayName?.split(separator: " ")
+                        let firstName  = String(namesArray![0])
+                        let lastName   = String(namesArray![1])
+                        
+                        employeeCollection.setData(["givenName" : firstName,"familyName" : lastName, "email" : self.user.email ?? " "], merge: true)
+                        
+                        let departmentDoc = db.collection("companies").document(code).collection("departments").document("unassigned")
+                        departmentDoc.collection("employees").document(self.user.uid).setData(["position" : "unassigned"])
+                    
                         
                         self.setUserInformation()
                         self.beginButton.isEnabled = false

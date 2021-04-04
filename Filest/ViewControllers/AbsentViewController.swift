@@ -86,25 +86,27 @@ class AbsentViewController: UIViewController, UITextViewDelegate {
             self.descriptionUILabel.alpha = 0
         }
         
+        updatetoEmployees()
+        self.isModalInPresentation = false
     }
-   
-
     
     
     @IBAction func addEmployeesButton(_ sender: Any) {
-        let addEmployee = addEmployeesUIView(VC: self)
+        
+        let addEmployee = addEmployeesUIView(VC: self, frame: self.view.bounds)
         self.view.addSubview(addEmployee)
         
     }
     
-
     
     @IBAction func dateButton(_ sender: UIButton) {
-        let pop = CalendarPopUpView(VC: self)
+        cancelsTouchesInView()
+        
+        let pop = CalendarPopUpView(VC: self, frame: self.view.bounds)//self.view.bounds)
+        
         self.view.addSubview(pop)
         
     }
-    
    
     
     @IBAction func submitButton(_ sender: Any) {
@@ -181,7 +183,7 @@ class AbsentViewController: UIViewController, UITextViewDelegate {
         case 3:
             return "Tuesday"
         case 4:
-            return "Wednesday"
+            return "Wed"
         case 5:
             return "Thursday"
         case 6:
@@ -258,19 +260,20 @@ class AbsentViewController: UIViewController, UITextViewDelegate {
         stack.heightAnchor.constraint(equalTo: scrollView.heightAnchor).isActive = true
 
         for e in AbsentSingleton.getto(){
-
+            let IV = UIImageView()
             if let cachedImage = delegate.contactsCache.object(forKey: (e+".png") as NSString) {
-                let IV = UIImageView()
                 IV.image = cachedImage
-                IV.layer.masksToBounds = false
-                IV.layer.cornerRadius = 30
-                IV.clipsToBounds = true
-                IV.contentMode = .scaleAspectFill
-                stack.addArrangedSubview(IV)
-                IV.topAnchor.constraint(equalTo: stack.topAnchor).isActive = true
-                IV.widthAnchor.constraint(equalToConstant: 60).isActive = true
-
+            } else {
+                IV.image = UIImage(named:"user")!
             }
+             
+            IV.layer.masksToBounds = false
+            IV.layer.cornerRadius = 30
+            IV.clipsToBounds = true
+            IV.contentMode = .scaleAspectFill
+            stack.addArrangedSubview(IV)
+            IV.topAnchor.constraint(equalTo: stack.topAnchor).isActive = true
+            IV.widthAnchor.constraint(equalToConstant: 60).isActive = true
 
         }
     }
@@ -284,7 +287,7 @@ class AbsentViewController: UIViewController, UITextViewDelegate {
         if AS.fromDate == Date.yesterday {
             return false
         }
-        if AS.to.count == 0 {
+        if AbsentSingleton.getto().count == 0 {
             return false
         }
         if AS.description.isEmpty{
@@ -295,6 +298,7 @@ class AbsentViewController: UIViewController, UITextViewDelegate {
         }
         return true
     }
+    
 }
 
 

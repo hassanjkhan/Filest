@@ -54,6 +54,8 @@ class EditViewController: UIViewController {
         
         saveButton.layer.cornerRadius = 23
         saveButton.clipsToBounds = true
+        
+        self.hideKeyboardWhenTappedAround()
     }
     
     //open image picker
@@ -63,8 +65,16 @@ class EditViewController: UIViewController {
     
     // Save changes and transition home
     @IBAction func Save(_ sender: UIButton) {
-        let firstName   = firstNameTextField.text
-        let lastName    = lastNameTextField.text
+        var firstName = firstNameTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+        let firstLetterFirstName = firstName.first
+        firstName.removeFirst()
+        firstName = (firstLetterFirstName?.uppercased())! + firstName
+        
+        var lastName = lastNameTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+        let firstLetterLastName = lastName.first
+        lastName.removeFirst()
+        lastName = (firstLetterLastName?.uppercased())! + lastName
+        
         let jobTitle    = jobTitleTextField.text
         let phoneNumber = phoneNumberTextField.text
         let email       = emailTextField.text
@@ -73,7 +83,7 @@ class EditViewController: UIViewController {
 
         //save personal data
         let changeRequest = self.user.createProfileChangeRequest()
-        changeRequest.displayName = (firstName ?? "") + " " + (lastName ?? "")
+        changeRequest.displayName = (firstName) + " " + (lastName)
        
         changeRequest.commitChanges { (error) in
             if error != nil {
@@ -83,16 +93,12 @@ class EditViewController: UIViewController {
         
         employeeData.setData(["jobTitle": jobTitle ?? "none"], merge: true)
         employeeData.setData(["phoneNumber": phoneNumber ?? "none"], merge: true)
-        employeeData.setData(["givenName" : firstName ?? "none"], merge: true)
-        employeeData.setData(["familyName" : lastName ?? "none"], merge: true)
+        employeeData.setData(["givenName" : firstName], merge: true)
+        employeeData.setData(["familyName" : lastName], merge: true)
         employeeData.setData(["email" : email ?? "none"], merge: true)
         
         // save image
         let storageRef = Storage.storage().reference().child((user?.uid ?? "")+".png")
-//        let ImageWidth = profileImage.image?.size.width
-//        let ImageHeight = profileImage.image?.size.height
-//        let scale = ImageWidth! / 200
-//        let compressedImage = profileImage.image?.sd_resizedImage(with: CGSize(width: ImageWidth! / scale, height: ImageHeight! / scale), scaleMode: .aspectFill)
         
         if let uploadData = profileImage.image?.pngData(){
             
@@ -130,7 +136,7 @@ class EditViewController: UIViewController {
      
         employeeData.getDocument { (document, error) in
             if error != nil {
-                print("joinbusiness Document Error => ", error!)
+                print("join business Document Error => ", error!)
             } else {
             
                 if let document = document {

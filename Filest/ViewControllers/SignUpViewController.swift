@@ -92,7 +92,6 @@ class SignUpViewController: UIViewController {
         } else {
             
             //Create cleaned version of data
-            
             var firstName = firstNameTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
             let firstLetterFirstName = firstName.first
             firstName.removeFirst()

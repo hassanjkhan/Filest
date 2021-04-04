@@ -59,8 +59,13 @@ class LoginViewController: UIViewController {
         
         // sets up background image to fit each phone
         height = UIScreen.main.bounds.size.height
-        width = UIScreen.main.bounds.size.width
-        backgroundImage.frame = CGRect(x: 0, y: 0, width: width, height: height)
+        if (height > 1000) {
+            backgroundImage.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 300).isActive = true
+        } else {
+            backgroundImage.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        }
+        backgroundImage.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        
         
         // sets up emailtextfield vertical constraint with view to fit for each phone
         emailConstraint = NSLayoutConstraint(item: view!, attribute: .bottom, relatedBy: .equal, toItem: emailTextField, attribute: .bottom, multiplier: 1, constant: height * 0.55)
@@ -164,7 +169,7 @@ class LoginViewController: UIViewController {
         var keyboardFrame:CGRect = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         keyboardFrame = self.view.convert(keyboardFrame, from: nil)
 
-        animateButtonUp(height: keyboardFrame.height)
+        animateUp(height: keyboardFrame.height)
         
     }
     
@@ -174,7 +179,7 @@ class LoginViewController: UIViewController {
         if passwordTextField.text == ""{
             loginButton.backgroundColor = UIColor.init(red: 167.0/255.0, green: 171.0/255.0, blue: 176.0/255.0, alpha: 1)
         }
-        animateButtonDown()
+        animateDown()
     }
     
     func signInErrorLabelHandler(error: Error) -> String{
@@ -198,16 +203,21 @@ class LoginViewController: UIViewController {
         return ""
     }
     
-    @objc fileprivate func animateButtonUp(height: CGFloat){
+    @objc fileprivate func animateUp(height: CGFloat){
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveLinear, animations: {
             self.loginButton.transform = CGAffineTransform(translationX: 0, y: self.loginButton.frame.height + 10 - height)
-
+            self.emailTextField.transform    = CGAffineTransform(translationX: 0, y: -50)
+            self.passwordTextField.transform = CGAffineTransform(translationX: 0, y: -50)
+            self.errorLabel.transform        = CGAffineTransform(translationX: 0, y: -50)
         })
     }
     
-    @objc fileprivate func animateButtonDown(){
+    @objc fileprivate func animateDown(){
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveLinear, animations: {
-            self.loginButton.transform = .identity
+            self.loginButton.transform       = .identity
+            self.emailTextField.transform    = .identity
+            self.passwordTextField.transform = .identity
+            self.errorLabel.transform        = .identity
         })
     }
 

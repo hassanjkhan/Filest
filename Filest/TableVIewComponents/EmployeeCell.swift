@@ -18,7 +18,7 @@ class EmployeeCell: UITableViewCell {
     @IBOutlet var EmployeeUIImage: UIImageView!{
         didSet {
             EmployeeUIImage.layer.masksToBounds = true
-            EmployeeUIImage.layer.cornerRadius = EmployeeUIImage.frame.width/2
+            EmployeeUIImage.layer.cornerRadius = EmployeeUIImage.frame.size.width/2
             EmployeeUIImage.clipsToBounds = true
             
         }

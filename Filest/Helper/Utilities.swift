@@ -51,12 +51,23 @@ class Utilities {
         return passwordTest.evaluate(with: password)
     }
     
+    
+    
 }
 
 extension UIViewController {
+    
     func hideKeyboardWhenTappedAround() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = true
         tap.numberOfTapsRequired = 1
+        view.addGestureRecognizer(tap)
+    }
+    
+    func cancelsTouchesInView(){
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.numberOfTapsRequired = 1
+        tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
     }
 

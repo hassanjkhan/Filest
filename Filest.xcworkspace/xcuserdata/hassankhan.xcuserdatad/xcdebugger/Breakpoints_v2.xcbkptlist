@@ -3,4 +3,150 @@
    uuid = "4751AD1E-2FDD-4E56-86B0-6918CCD6B072"
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2034A597-5AF4-437F-9829-DD1F28A7B92F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Filest/ViewControllers/SignUpViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "109"
+            endingLineNumber = "109"
+            landmarkName = "SignUpTapped(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "2034A597-5AF4-437F-9829-DD1F28A7B92F - 16ba3843ad8673a8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Filest.SignUpViewController.SignUpTapped(Any) -&gt; ()"
+                  moduleName = "Filest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hassankhan/Desktop/Filest_Project/Filest/Filest/ViewControllers/SignUpViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "109"
+                  endingLineNumber = "109"
+                  offsetFromSymbolStart = "4380">
+               </Location>
+               <Location
+                  uuid = "2034A597-5AF4-437F-9829-DD1F28A7B92F - e364280425520786"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "function signature specialization &lt;Arg[3] = Value Promoted from Box, Arg[4] = Value Promoted from Box&gt; of closure #1 (Swift.Optional&lt;__C.FIRAuthDataResult&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Filest.SignUpViewController.SignUpTapped(Any) -&gt; ()"
+                  moduleName = "Filest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hassankhan/Desktop/Filest_Project/Filest/Filest/ViewControllers/SignUpViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "110"
+                  endingLineNumber = "110"
+                  offsetFromSymbolStart = "342">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "20C5B8F4-E962-4FC9-931D-027EE87BF6A9"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Filest/ViewControllers/ProfileViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "325"
+            endingLineNumber = "325"
+            landmarkName = "startBusiness(db:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "20C5B8F4-E962-4FC9-931D-027EE87BF6A9 - 479117c539d055b7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Filest.ProfileViewController.startBusiness(db: __C.FIRFirestore) -&gt; ()"
+                  moduleName = "Filest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hassankhan/Desktop/Filest_Project/Filest/Filest/ViewControllers/ProfileViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "325"
+                  endingLineNumber = "325"
+                  offsetFromSymbolStart = "112">
+               </Location>
+               <Location
+                  uuid = "20C5B8F4-E962-4FC9-931D-027EE87BF6A9 - 20e1ecc80f8d524d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;__C.FIRDocumentSnapshot&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Filest.ProfileViewController.startBusiness(db: __C.FIRFirestore) -&gt; ()"
+                  moduleName = "Filest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hassankhan/Desktop/Filest_Project/Filest/Filest/ViewControllers/ProfileViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "326"
+                  endingLineNumber = "326"
+                  offsetFromSymbolStart = "454">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D06AC510-3A24-4457-81D3-82A4CE9A7C57"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Filest/ViewControllers/ProfileViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "267"
+            endingLineNumber = "267"
+            landmarkName = "joinBusiness(code:db:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "D06AC510-3A24-4457-81D3-82A4CE9A7C57 - fbc28d2d49ad50f9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Filest.ProfileViewController.joinBusiness(code: Swift.String, db: __C.FIRFirestore) -&gt; ()"
+                  moduleName = "Filest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hassankhan/Desktop/Filest_Project/Filest/Filest/ViewControllers/ProfileViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "267"
+                  endingLineNumber = "267"
+                  offsetFromSymbolStart = "50">
+               </Location>
+               <Location
+                  uuid = "D06AC510-3A24-4457-81D3-82A4CE9A7C57 - 819ce6d7c083931c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;__C.FIRDocumentSnapshot&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Filest.ProfileViewController.joinBusiness(code: Swift.String, db: __C.FIRFirestore) -&gt; ()"
+                  moduleName = "Filest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hassankhan/Desktop/Filest_Project/Filest/Filest/ViewControllers/ProfileViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "268"
+                  endingLineNumber = "268"
+                  offsetFromSymbolStart = "454">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

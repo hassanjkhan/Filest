@@ -17,10 +17,12 @@ class Employees {
     var photo: UIImage?
     var selected: Bool
     var uid: String
+    var email: String
+    var phoneNumber: String
     
     //MARK: Initialization
     
-    init?(name: String, job: String, photo: UIImage, selected: Bool, uid: String) {
+    init?(name: String, job: String, photo: UIImage, selected: Bool, uid: String, email: String, phoneNumber: String) {
         
         // The name must not be empty
         guard !name.isEmpty else {
@@ -33,6 +35,8 @@ class Employees {
         self.photo = photo
         self.selected = selected
         self.uid = uid
+        self.email = email
+        self.phoneNumber = phoneNumber
         
         
     }

@@ -21,18 +21,12 @@ class ContactUIView: UIView {
     fileprivate let container: UIView = {
         let v = UIView()
         v.translatesAutoresizingMaskIntoConstraints = false
-        v.backgroundColor = .systemGray6
+        v.backgroundColor = .systemBackground
         v.layer.cornerRadius = 24
         return v
     }()
     
-    fileprivate let profilePhoto: UIImageView = {
-        let p = UIImageView(image: UIImage(named: "user"))
-        p.layer.cornerRadius = p.frame.size.width / 2
-        p.clipsToBounds = true
-        return p
-    }()
-    
+
     fileprivate let topContainer: UIView = {
         let v = UIView()
         v.translatesAutoresizingMaskIntoConstraints = false
@@ -40,35 +34,34 @@ class ContactUIView: UIView {
         return v
     }()
     
-    @objc fileprivate func animateIn(){
-        self.container.transform = CGAffineTransform(translationX: self.frame.width, y: 0)
-        self.alpha = 0
-        UIView.animate(withDuration: 0.65, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1, options: .curveEaseIn, animations: {
-            self.container.transform = .identity
-            self.titleLabel.transform = .identity
-            self.alpha = 1
-        })
-        
-    }
-    
-    @objc fileprivate func animateOut(){
-        UIView.animate(withDuration: 0.65, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseIn, animations: {
-            self.container.transform = CGAffineTransform(translationX: 0, y: self.frame.height)
-            self.alpha = 0
-        }) { (complete) in
-            if complete {
-                self.removeFromSuperview()
-                
-            }
-        }
-        
+    fileprivate let profilePhoto: UIImageView = {
+        let p = UIImageView(image: UIImage(named: "user"))
+        p.translatesAutoresizingMaskIntoConstraints = false
+        p.layer.masksToBounds = false
+        p.layer.cornerRadius = 42
+        p.clipsToBounds = true
+        p.contentMode = .scaleAspectFill
+        return p
 
-    }
-        
-    fileprivate let titleLabel: UILabel = {
+    }()
+    
+    fileprivate let backButton: UIButton = {
+        let b = UIButton()
+        b.translatesAutoresizingMaskIntoConstraints = false
+        b.setTitle("Back", for: .normal)
+        b.setTitleColor(.white, for: .normal)
+        b.backgroundColor = UIColor.init(red: 125/255, green:  113/255, blue:  211/255, alpha: 1.0)
+        b.layer.cornerRadius = 15
+        b.clipsToBounds = true
+        b.addTarget(self, action: #selector(animateOut), for: .touchUpInside)
+        return b
+
+    }()
+    
+    fileprivate let nameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 31, weight: .bold)
+        label.font = UIFont.systemFont(ofSize: 20, weight: .regular)
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.2
         label.text = "Name"
@@ -76,6 +69,89 @@ class ContactUIView: UIView {
         label.textAlignment = .center
         return label
     }()
+    
+    
+    fileprivate let jobLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 13, weight: .regular)
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.2
+        label.text = "Job"
+        label.textColor = .white
+        label.textAlignment = .center
+        return label
+    }()
+    
+    fileprivate let phoneLabel: UILabel = {
+        let l = UILabel()
+        l.translatesAutoresizingMaskIntoConstraints = false
+        l.font = UIFont.systemFont(ofSize: 9, weight: .regular)
+        l.adjustsFontSizeToFitWidth = true
+        l.minimumScaleFactor = 0.2
+        l.text = "phone number"
+        l.textColor = .white
+        l.textAlignment = .center
+        return l
+    }()
+
+    
+    fileprivate let phoneButton: UIButton = {
+        let b = UIButton()
+        b.translatesAutoresizingMaskIntoConstraints = false
+        b.setTitle("(000)-000-0000", for: .normal)
+        b.setTitleColor(.white, for: .normal)
+        b.backgroundColor = UIColor.init(red: 125/255, green:  113/255, blue:  211/255, alpha: 1.0)
+        b.layer.cornerRadius = 17
+        b.clipsToBounds = true
+        return b
+    }()
+    
+    fileprivate let emailLabel: UILabel = {
+        let l = UILabel()
+        l.translatesAutoresizingMaskIntoConstraints = false
+        l.font = UIFont.systemFont(ofSize: 9, weight: .regular)
+        l.adjustsFontSizeToFitWidth = true
+        l.minimumScaleFactor = 0.2
+        l.text = "email"
+        l.textColor = .white
+        l.textAlignment = .center
+        return l
+    }()
+
+    
+    fileprivate let emailButton: UIButton = {
+        let b = UIButton()
+        b.translatesAutoresizingMaskIntoConstraints = false
+        b.setTitle("user@email.com", for: .normal)
+        b.setTitleColor(.white, for: .normal)
+        b.backgroundColor = UIColor.init(red: 125/255, green:  113/255, blue:  211/255, alpha: 1.0)
+        b.layer.cornerRadius = 17
+        b.clipsToBounds = true
+        return b
+    }()
+    
+    @objc fileprivate func animateIn(){
+        self.container.transform = CGAffineTransform(translationX: self.frame.width, y: 0)
+        self.alpha = 0
+        UIView.animate(withDuration: 0.65, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1, options: .curveEaseIn, animations: {
+            self.container.transform = .identity
+            self.alpha = 1
+        })
+        
+    }
+    
+    @objc fileprivate func animateOut(){
+        UIView.animate(withDuration: 0.65, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseIn, animations: {
+            self.container.transform = CGAffineTransform(translationX: self.frame.width, y: 0)
+            self.alpha = 0
+        }) { (complete) in
+            if complete {
+                self.removeFromSuperview()
+            }
+        }
+
+    }
 
     
     required init(View: UIView, employee: Employees){
@@ -83,26 +159,68 @@ class ContactUIView: UIView {
         self.frame = UIScreen.main.bounds
         self.backgroundColor = .systemBackground
         
-                
         self.addSubview(container)
         
         container.addSubview(topContainer)
-        container.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        container.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        container.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        container.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
+        container.topAnchor.constraint(equalTo:      self.topAnchor).isActive = true
+        container.bottomAnchor.constraint(equalTo:   self.bottomAnchor).isActive = true
+        container.leftAnchor.constraint(equalTo:     self.leftAnchor).isActive = true
+        container.rightAnchor.constraint(equalTo:    self.rightAnchor).isActive = true
         
-        topContainer.topAnchor.constraint(equalTo:container.topAnchor).isActive = true
-        topContainer.leftAnchor.constraint(equalTo: container.leftAnchor).isActive = true
-        topContainer.rightAnchor.constraint(equalTo: container.rightAnchor).isActive = true
-        topContainer.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        topContainer.topAnchor.constraint(equalTo:   self.topAnchor).isActive = true
+        topContainer.leftAnchor.constraint(equalTo:  self.leftAnchor).isActive = true
+        topContainer.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
         
-        topContainer.addSubview(titleLabel)
-        titleLabel.centerYAnchor.constraint(equalTo: topContainer.bottomAnchor, constant: -30).isActive = true
-        titleLabel.centerXAnchor.constraint(equalTo: topContainer.centerXAnchor).isActive = true
-        titleLabel.rightAnchor.constraint(lessThanOrEqualTo: topContainer.rightAnchor, constant: -25).isActive = true
-        titleLabel.leftAnchor.constraint(lessThanOrEqualTo: topContainer.leftAnchor, constant: 25).isActive = true
+        topContainer.addSubview(backButton)
+        backButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
+        backButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        backButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        backButton.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor).isActive = true
+         
+        topContainer.addSubview(profilePhoto)
+        profilePhoto.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor).isActive = true
+        profilePhoto.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        profilePhoto.widthAnchor.constraint(equalToConstant: 84).isActive = true
+        profilePhoto.heightAnchor.constraint(equalToConstant: 84).isActive = true
+        
+            
+        topContainer.addSubview(nameLabel)
+        nameLabel.topAnchor.constraint(equalTo: profilePhoto.bottomAnchor, constant: 12).isActive = true
+        nameLabel.rightAnchor.constraint(equalTo: topContainer.rightAnchor, constant: -25).isActive = true
+        nameLabel.leftAnchor.constraint(equalTo: topContainer.leftAnchor, constant: 25).isActive = true
+        
+        topContainer.addSubview(jobLabel)
+        jobLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 12).isActive = true
+        jobLabel.rightAnchor.constraint(equalTo: topContainer.rightAnchor, constant: -25).isActive = true
+        jobLabel.leftAnchor.constraint(equalTo: topContainer.leftAnchor, constant: 25).isActive = true
+        
+        topContainer.bottomAnchor.constraint(equalTo: jobLabel.bottomAnchor, constant: 13).isActive = true
 
+        
+        container.addSubview(phoneButton)
+        phoneButton.topAnchor.constraint(equalTo: topContainer.bottomAnchor, constant: 45).isActive = true
+        phoneButton.leftAnchor.constraint(equalTo: container.leftAnchor, constant:  15).isActive = true
+        phoneButton.rightAnchor.constraint(equalTo: container.rightAnchor, constant:  -15).isActive = true
+        phoneButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        
+        container.addSubview(phoneLabel)
+        phoneLabel.leadingAnchor.constraint(equalTo: phoneButton.leadingAnchor, constant:  17).isActive = true
+        phoneLabel.topAnchor.constraint(equalTo: phoneButton.topAnchor, constant: 9).isActive = true
+        phoneLabel.heightAnchor.constraint(equalToConstant: 10).isActive = true
+        phoneLabel.widthAnchor.constraint(equalToConstant: 64).isActive = true
+        
+        container.addSubview(emailButton)
+        emailButton.topAnchor.constraint(equalTo: phoneButton.bottomAnchor, constant: 5).isActive = true
+        emailButton.leftAnchor.constraint(equalTo: container.leftAnchor, constant:  15).isActive = true
+        emailButton.rightAnchor.constraint(equalTo: container.rightAnchor, constant:  -15).isActive = true
+        emailButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        
+        container.addSubview(emailLabel)
+        emailLabel.leadingAnchor.constraint(equalTo: emailButton.leadingAnchor, constant:  17).isActive = true
+        emailLabel.topAnchor.constraint(equalTo: emailButton.topAnchor, constant: 9).isActive = true
+        emailLabel.heightAnchor.constraint(equalToConstant: 10).isActive = true
+        emailLabel.widthAnchor.constraint(equalToConstant: 24).isActive = true
+        
         user = Auth.auth().currentUser
         fs = Firestore.firestore()
         FetchEmployee(employee: employee)
@@ -115,69 +233,12 @@ class ContactUIView: UIView {
     }
         
     func FetchEmployee(employee: Employees){
-        
+        self.jobLabel.text = employee.job
+        self.nameLabel.text = employee.name
+        self.profilePhoto.image = employee.photo
+        self.emailButton.setTitle(employee.email, for: .normal)
+        self.phoneButton.setTitle(employee.phoneNumber, for: .normal)        
     }
-    /*
-     func SelectFetchEmployees(textField: UITextField){
-         let docref =  fs.collection("users").document(user!.uid)
-         
-         docref.getDocument{ (document, error) in
-             if error != nil {
-                 print("Friend Document Error => ", error!)
-             } else {
-                 if let document = document {
-                     if document.exists {
-                         self.businessCode = (document.get("companyID") as! String)
-                         self.fs.collection("companies").document(self.businessCode).collection("employees").getDocuments { (querySnapshot, err) in
-                             
-                             if let err = err {
-                                 print("Error getting documents getEmployeesData: \(err)")
-                             } else {
-                                 let delegate = UIApplication.shared.delegate as! AppDelegate
-                                 
-                                 for document in querySnapshot!.documents {
-                                     let userID = document.documentID
-                                     let selected = false
-                                     let givenName   = document.get("givenName") as! String
-                                     let familyname  = document.get("familyName") as! String
-                                     let jobTitle    = document.get("jobTitle") as! String
-                                     let storageRef  = Storage.storage().reference().child((userID)+".png")
-                                     if let cachedImage = delegate.contactsCache.object(forKey: ((userID)+".png") as NSString) {
-                                         self.employees.append(Employees(name: (givenName + " " + familyname), job: jobTitle, photo: cachedImage, selected: selected, uid: userID)!)
-                                         
-                                         self.employees.sort { (Employee1: Employees, Employee2: Employees) -> Bool in
-                                             return Employee1.name < Employee2.name
-                                         }
-                                         self.tableView.reloadData()
-                                     } else {
-                                         storageRef.downloadURL { (url, error) in
-                                             if error == nil {
-                                                 let imageUrlString = url?.absoluteString
-                                                 let imageUrl = URL(string: imageUrlString!)
-                                                 let imageData = try! Data(contentsOf: imageUrl!)
-                                                 
-                                                 if imageUrl != nil {
-                                                     delegate.contactsCache.setObject(UIImage(data: imageData)!, forKey: ((userID)+".png") as NSString)
-                                                 }
-                                                 self.employees.append(Employees(name: (givenName + " " + familyname), job: jobTitle, photo: (UIImage(data: imageData) ??        UIImage(named: "user"))!, selected: selected, uid: userID)!)
-                                             } else {
-                                                 self.employees.append(Employees(name: (givenName + " " + familyname), job: jobTitle, photo: UIImage(named: "user")!, selected: selected, uid: userID)!)
-                                             }
-                                             self.employees.sort { (Employee1: Employees, Employee2: Employees) -> Bool in
-                                                 return Employee1.name < Employee2.name
-                                             }
-                                             self.tableView.reloadData()
-                                         }
-                                     }
-                                 }
-                             }
-                         }
-                     }
-                 }
-             }
-         }
-     }
-     */
     
     
     

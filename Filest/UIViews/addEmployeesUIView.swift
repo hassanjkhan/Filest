@@ -101,9 +101,9 @@ class addEmployeesUIView: UIView {
 
     }
     
-    required init(VC: AbsentViewController){
-        super.init(frame: VC.accessibilityFrame)
-        self.frame = UIScreen.main.bounds
+    required init(VC: AbsentViewController, frame: CGRect){
+        super.init(frame: frame)
+        self.frame = frame
         self.backgroundColor = UIColor.init(red: 125/255, green: 113/255, blue:  211/255, alpha: 0.6)
         self.parentVC = VC
                 
@@ -166,53 +166,58 @@ class addEmployeesUIView: UIView {
         
     func SelectFetchEmployees(textField: UITextField){
         let docref =  fs.collection("users").document(user!.uid)
+        DispatchQueue.global(qos: .utility).async {
         
-        docref.getDocument{ (document, error) in
-            if error != nil {
-                print("Friend Document Error => ", error!)
-            } else {
-                if let document = document {
-                    if document.exists {
-                        self.businessCode = (document.get("companyID") as! String)
-                        self.fs.collection("companies").document(self.businessCode).collection("employees").getDocuments { (querySnapshot, err) in
-                            
-                            if let err = err {
-                                print("Error getting documents getEmployeesData: \(err)")
-                            } else {
-                                let delegate = UIApplication.shared.delegate as! AppDelegate
+        
+            docref.getDocument{ (document, error) in
+                if error != nil {
+                    print("Friend Document Error => ", error!)
+                } else {
+                    if let document = document {
+                        if document.exists {
+                            self.businessCode = (document.get("companyID") as! String)
+                            self.fs.collection("companies").document(self.businessCode).collection("employees").getDocuments { (querySnapshot, err) in
                                 
-                                for document in querySnapshot!.documents {
-                                    let userID = document.documentID
-                                    let selected = AbsentSingleton.getto().contains(userID)
-                                    let givenName   = document.get("givenName") as! String
-                                    let familyname  = document.get("familyName") as! String
-                                    let jobTitle    = document.get("jobTitle") as! String
-                                    let storageRef  = Storage.storage().reference().child((userID)+".png")
-                                    if let cachedImage = delegate.contactsCache.object(forKey: ((userID)+".png") as NSString) {
-                                        self.employees.append(Employees(name: (givenName + " " + familyname), job: jobTitle, photo: cachedImage, selected: selected, uid: userID)!)
-                                        
-                                        self.employees.sort { (Employee1: Employees, Employee2: Employees) -> Bool in
-                                            return Employee1.name < Employee2.name
-                                        }
-                                        self.tableView.reloadData()
-                                    } else {
-                                        storageRef.downloadURL { (url, error) in
-                                            if error == nil {
-                                                let imageUrlString = url?.absoluteString
-                                                let imageUrl = URL(string: imageUrlString!)
-                                                let imageData = try! Data(contentsOf: imageUrl!)
-                                                
-                                                if imageUrl != nil {
-                                                    delegate.contactsCache.setObject(UIImage(data: imageData)!, forKey: ((userID)+".png") as NSString)
-                                                }
-                                                self.employees.append(Employees(name: (givenName + " " + familyname), job: jobTitle, photo: (UIImage(data: imageData) ??        UIImage(named: "user"))!, selected: selected, uid: userID)!)
-                                            } else {
-                                                self.employees.append(Employees(name: (givenName + " " + familyname), job: jobTitle, photo: UIImage(named: "user")!, selected: selected, uid: userID)!)
-                                            }
+                                if let err = err {
+                                    print("Error getting documents getEmployeesData: \(err)")
+                                } else {
+                                    let delegate = UIApplication.shared.delegate as! AppDelegate
+                                    
+                                    for document in querySnapshot!.documents {
+                                        let userID = document.documentID
+                                        let selected = AbsentSingleton.getto().contains(userID)
+                                        let givenName   = document.get("givenName") as! String
+                                        let familyname  = document.get("familyName") as! String
+                                        let jobTitle    = document.get("jobTitle") as! String
+                                        let storageRef  = Storage.storage().reference().child((userID)+".png")
+                                        let email       = document.get("email") as! String
+                                        let phoneNumber = document.get("phoneNumber") as! String
+                                        if let cachedImage = delegate.contactsCache.object(forKey: ((userID)+".png") as NSString) {
+                                            self.employees.append(Employees(name: (givenName + " " + familyname), job: jobTitle, photo: cachedImage, selected: selected, uid: userID, email: email, phoneNumber: phoneNumber)!)
+                                            
                                             self.employees.sort { (Employee1: Employees, Employee2: Employees) -> Bool in
                                                 return Employee1.name < Employee2.name
                                             }
                                             self.tableView.reloadData()
+                                        } else {
+                                            storageRef.downloadURL { (url, error) in
+                                                if error == nil {
+                                                    let imageUrlString = url?.absoluteString
+                                                    let imageUrl = URL(string: imageUrlString!)
+                                                    let imageData = try! Data(contentsOf: imageUrl!)
+                                                    
+                                                    if imageUrl != nil {
+                                                        delegate.contactsCache.setObject(UIImage(data: imageData)!, forKey: ((userID)+".png") as NSString)
+                                                    }
+                                                    self.employees.append(Employees(name: (givenName + " " + familyname), job: jobTitle, photo: (UIImage(data: imageData) ??        UIImage(named: "user"))!, selected: selected, uid: userID, email: email, phoneNumber: phoneNumber)!)
+                                                } else {
+                                                    self.employees.append(Employees(name: (givenName + " " + familyname), job: jobTitle, photo: UIImage(named: "user")!, selected: selected, uid: userID, email: email, phoneNumber: phoneNumber)!)
+                                                }
+                                                self.employees.sort { (Employee1: Employees, Employee2: Employees) -> Bool in
+                                                    return Employee1.name < Employee2.name
+                                                }
+                                                self.tableView.reloadData()
+                                            }
                                         }
                                     }
                                 }

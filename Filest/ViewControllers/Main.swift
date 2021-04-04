@@ -12,15 +12,12 @@ class Main: UIViewController {
     
 
     @IBOutlet weak var Absent: UIButton!
-    @IBOutlet weak var Vacation: UIButton!
     @IBOutlet weak var Meeting: UIButton!
     
     @IBOutlet weak var AbsentTitle: UILabel!
     @IBOutlet weak var AbsentDescription: UILabel!
     @IBOutlet weak var MeetingTitle: UILabel!
     @IBOutlet weak var MeetingDescription: UILabel!
-    @IBOutlet weak var VacationTitle: UILabel!
-    @IBOutlet weak var VacationDescription: UILabel!
     
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask{ get { return .portrait } }
@@ -35,10 +32,6 @@ class Main: UIViewController {
         MeetingTitle.alpha = 0
         MeetingDescription.alpha = 0
         
-        Vacation.isEnabled = false
-        Vacation.alpha = 0
-        VacationTitle.alpha = 0
-        VacationDescription.alpha = 0
         
 
         let height = UIScreen.main.bounds.size.height * 0.27
@@ -55,12 +48,10 @@ class Main: UIViewController {
         Meeting.heightAnchor.constraint(equalToConstant: height).isActive = true
         
 
-        Vacation.layer.cornerRadius = 20
-        Vacation.clipsToBounds = true
-        Vacation.layer.borderWidth = 4
-        Vacation.heightAnchor.constraint(equalToConstant: height).isActive = true
         
-        
+       
     }
+    
+
     
 }

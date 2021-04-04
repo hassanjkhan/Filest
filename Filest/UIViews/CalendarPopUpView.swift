@@ -14,7 +14,6 @@ class CalendarPopUpView: UIView {
     private var secondSelectedDay: Day?
     var parentVC: AbsentViewController!
     var calendar: Calendar!
-
     
     fileprivate func makeContent() -> CalendarViewContent {
         
@@ -184,9 +183,7 @@ class CalendarPopUpView: UIView {
                                                                 year: (self.firstSelectedDay?.month.year),
                                                                 month: (self.firstSelectedDay?.month.month),
                                                                 day: (self.firstSelectedDay?.day))) ?? Date.init())
-//            if(secondDate < firstDate){
-//                
-//            }
+
             AbsentSingleton.settoDate(toDate: calendar.date(from: DateComponents(
                                                             year: (self.secondSelectedDay?.month.year),
                                                             month: (self.secondSelectedDay?.month.month),
@@ -217,7 +214,7 @@ class CalendarPopUpView: UIView {
             self.alpha = 1
         })
         parentVC.isModalInPresentation = true
-        
+    
     }
     
     fileprivate lazy var stack: UIStackView = {
@@ -229,16 +226,20 @@ class CalendarPopUpView: UIView {
     
 
     
-    required init(VC: AbsentViewController){
-        super.init(frame:VC.accessibilityFrame)
+    required init(VC: AbsentViewController, frame: CGRect){
+        super.init(frame: frame)
         calendar = Calendar.current
         
         self.backgroundColor = UIColor.init(red: 125/255, green: 113/255, blue:  211/255, alpha: 0.6)
-        self.frame = UIScreen.main.bounds
+        self.frame = frame
+        
         self.parentVC = VC
+        
         self.addSubview(container)
         self.addSubview(titleLabel)
         
+        // troycrane115@gmail.com
+        // Password123321!
         titleLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         titleLabel.bottomAnchor.constraint(equalTo:  container.topAnchor, constant: -15).isActive = true
         titleLabel.rightAnchor.constraint(lessThanOrEqualTo: container.rightAnchor, constant: 0).isActive = true
