@@ -40,6 +40,7 @@ class Main: UIViewController {
         Absent.clipsToBounds = true
         Absent.layer.borderWidth = 4
         Absent.heightAnchor.constraint(equalToConstant: height).isActive = true
+        Absent.imageView?.contentMode = .scaleAspectFill
         
         
         Meeting.layer.cornerRadius = 20

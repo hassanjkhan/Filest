@@ -18,6 +18,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var registration: UIButton!
     @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var forgotPasswordButton: UIButton!
     
     var user: User!
     var height: CGFloat!
@@ -129,6 +130,73 @@ class LoginViewController: UIViewController {
         }
     }
     
+    
+    @IBAction func forgotPasswordButton(_ sender: Any) {
+//        Auth.auth().sendPasswordReset(withEmail: email) { (error) in
+//
+//        }
+        let emailAlert = UIAlertController(title: "Enter your email so we can send you a reset email", message: "", preferredStyle: .alert)
+        
+        let successfulEmailSent = UIAlertController(title: "Sent we've sent you an email to reset your password!", message: "", preferredStyle: .alert)
+        
+        successfulEmailSent.addAction(UIAlertAction(title: "Thanks!", style: .default))
+        
+        emailAlert.addTextField { (textField) in
+            textField.placeholder = "name@email.com"
+        }
+        
+        emailAlert.addAction(UIAlertAction(title: "Send", style: .default, handler: { action in
+            let forgottenEmail = emailAlert.textFields![0].text ?? ""
+            Auth.auth().sendPasswordReset(withEmail: forgottenEmail) { (error) in
+                self.present(successfulEmailSent, animated: true)
+                
+            }
+            
+        }))
+        self.present(emailAlert, animated: true)
+    }
+    
+    func assignCompany(){
+        
+//        let alert = UIAlertController(title: "Connect with your company", message: "Start or join a business!", preferredStyle: .alert)
+
+//
+//
+//        alert.addAction(UIAlertAction(title: "Recieve a reset email", style: .default, handler: { action in
+//
+//            joinAlert.addTextField { (textField) in
+//                textField.placeholder = "name@email.com"
+//            }
+//
+//            joinAlert.addAction(UIAlertAction(title: "Send", style: .default, handler:   { action in
+//
+//                //add another alert that asks for code, checks if code exists, if it does then adds user to business
+//
+//
+//            }))
+//
+//            self.present(joinAlert, animated: true)
+//
+//        }))
+//
+//
+//
+//
+//        alert.addAction(UIAlertAction(title: "Start a business", style: .default, handler:   { action in
+//
+//            // adding user to users with their companyID create a new collection in companies collection containing all the basics for actions
+//      //      self.startBusiness(db: database)
+//
+//        }))
+//
+//
+//
+//        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler:  { action in}))
+//
+//        self.present(alert, animated: true)
+        
+    }
+    
     //sets up cache for profile image
     func setProfileCache(){
         let delegate = UIApplication.shared.delegate as! AppDelegate
@@ -157,6 +225,26 @@ class LoginViewController: UIViewController {
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(mainTabBarController)
     }
     
+    func signInErrorLabelHandler(error: Error) -> String{
+        if let errCode = AuthErrorCode(rawValue: error._code) {
+ 
+            switch errCode {
+                case .emailChangeNeedsVerification:
+                    return "Please verify your email and try again."
+                case .emailAlreadyInUse:
+                    return "The Email is already in use"
+                case .invalidEmail:
+                    return "Email is invalid"
+                case .wrongPassword:
+                    return "Incorrect Email or Password"
+                case .userNotFound:
+                    return "Incorrect Email or Password"
+                default:
+                    return "Error with Signing in"
+            }
+        }
+        return ""
+    }
     
     //Online Helper functions
     @objc func textFieldDidChange(_ textField: UITextField) {
@@ -182,42 +270,25 @@ class LoginViewController: UIViewController {
         animateDown()
     }
     
-    func signInErrorLabelHandler(error: Error) -> String{
-        if let errCode = AuthErrorCode(rawValue: error._code) {
- 
-            switch errCode {
-                case .emailChangeNeedsVerification:
-                    return "Please verify your email and try again."
-                case .emailAlreadyInUse:
-                    return "The Email is already in use"
-                case .invalidEmail:
-                    return "Email is invalid"
-                case .wrongPassword:
-                    return "Incorrect Email or Password"
-                case .userNotFound:
-                    return "Incorrect Email or Password"
-                default:
-                    return "Error with Signing in"
-            }
-        }
-        return ""
-    }
+    
     
     @objc fileprivate func animateUp(height: CGFloat){
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveLinear, animations: {
             self.loginButton.transform = CGAffineTransform(translationX: 0, y: self.loginButton.frame.height + 10 - height)
-            self.emailTextField.transform    = CGAffineTransform(translationX: 0, y: -50)
-            self.passwordTextField.transform = CGAffineTransform(translationX: 0, y: -50)
-            self.errorLabel.transform        = CGAffineTransform(translationX: 0, y: -50)
+            self.emailTextField.transform       = CGAffineTransform(translationX: 0, y: -75)
+            self.passwordTextField.transform    = CGAffineTransform(translationX: 0, y: -75)
+            self.errorLabel.transform           = CGAffineTransform(translationX: 0, y: -75)
+            self.forgotPasswordButton.transform = CGAffineTransform(translationX: 0, y: -75)
         })
     }
     
     @objc fileprivate func animateDown(){
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveLinear, animations: {
-            self.loginButton.transform       = .identity
-            self.emailTextField.transform    = .identity
-            self.passwordTextField.transform = .identity
-            self.errorLabel.transform        = .identity
+            self.loginButton.transform          = .identity
+            self.emailTextField.transform       = .identity
+            self.passwordTextField.transform    = .identity
+            self.errorLabel.transform           = .identity
+            self.forgotPasswordButton.transform = .identity
         })
     }
 

@@ -72,8 +72,19 @@
                                     <action selector="loginTapped:" destination="YXK-yq-S9x" eventType="touchUpInside" id="DfV-FO-h5b"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3w5-RL-YJ1">
+                                <rect key="frame" x="327" y="480" width="115" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="115" id="lrD-Wa-GgS"/>
+                                    <constraint firstAttribute="height" constant="30" id="xbG-lL-Nyf"/>
+                                </constraints>
+                                <state key="normal" title="Forgot Password"/>
+                                <connections>
+                                    <action selector="forgotPasswordButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="g9w-Yz-nZU"/>
+                                </connections>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Error Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="g21-XD-zAV">
-                                <rect key="frame" x="15" y="473" width="738" height="48"/>
+                                <rect key="frame" x="15" y="518" width="738" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="Zj8-Wy-apb"/>
                                 </constraints>
@@ -85,9 +96,11 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="3w5-RL-YJ1" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="13E-as-u48"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ZqI-th-8gB" secondAttribute="trailing" constant="29" id="1DS-vp-Z9g"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="tFF-ad-8h6" secondAttribute="trailing" id="4AV-Ba-1KH"/>
                             <constraint firstItem="hWS-Rg-7yL" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="29" id="4fZ-e3-Mda"/>
+                            <constraint firstItem="3w5-RL-YJ1" firstAttribute="top" secondItem="ZqI-th-8gB" secondAttribute="bottom" constant="13" id="5kt-XB-3X9"/>
                             <constraint firstItem="ZqI-th-8gB" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="29" id="7Xf-Tt-rr5"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="g21-XD-zAV" secondAttribute="trailing" constant="15" id="9zG-ZC-Ni5"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="hWS-Rg-7yL" secondAttribute="trailing" constant="29" id="BS3-go-uS8"/>
@@ -99,7 +112,7 @@
                             <constraint firstItem="8lw-mH-D3d" firstAttribute="top" secondItem="iAW-Bf-lii" secondAttribute="bottom" constant="25" id="Ywi-JQ-6xp"/>
                             <constraint firstItem="hWS-Rg-7yL" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="a9J-9q-3Zg"/>
                             <constraint firstItem="ZqI-th-8gB" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="g9G-K0-wH3"/>
-                            <constraint firstItem="g21-XD-zAV" firstAttribute="top" secondItem="ZqI-th-8gB" secondAttribute="bottom" constant="6" id="vbP-ER-eb0"/>
+                            <constraint firstItem="g21-XD-zAV" firstAttribute="top" secondItem="3w5-RL-YJ1" secondAttribute="bottom" constant="5" id="uVj-53-opa"/>
                             <constraint firstAttribute="bottom" secondItem="8lw-mH-D3d" secondAttribute="bottom" constant="30" id="yAC-fI-RuG"/>
                             <constraint firstItem="g21-XD-zAV" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="yvO-28-5tx"/>
                         </constraints>
@@ -109,6 +122,7 @@
                         <outlet property="backgroundImage" destination="tFF-ad-8h6" id="MzB-RB-9pW"/>
                         <outlet property="emailTextField" destination="hWS-Rg-7yL" id="KFL-rA-AvS"/>
                         <outlet property="errorLabel" destination="g21-XD-zAV" id="umQ-wf-kYJ"/>
+                        <outlet property="forgotPasswordButton" destination="3w5-RL-YJ1" id="lkI-Sw-8w7"/>
                         <outlet property="loginButton" destination="iAW-Bf-lii" id="crt-YA-TQS"/>
                         <outlet property="passwordTextField" destination="ZqI-th-8gB" id="LaI-VM-c6N"/>
                         <outlet property="registration" destination="8lw-mH-D3d" id="cVX-i7-XGY"/>
