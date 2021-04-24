@@ -7,54 +7,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "2034A597-5AF4-437F-9829-DD1F28A7B92F"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Filest/ViewControllers/SignUpViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109"
-            landmarkName = "SignUpTapped(_:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "2034A597-5AF4-437F-9829-DD1F28A7B92F - 16ba3843ad8673a8"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Filest.SignUpViewController.SignUpTapped(Any) -&gt; ()"
-                  moduleName = "Filest"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/hassankhan/Desktop/Filest_Project/Filest/Filest/ViewControllers/SignUpViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "109"
-                  endingLineNumber = "109"
-                  offsetFromSymbolStart = "4380">
-               </Location>
-               <Location
-                  uuid = "2034A597-5AF4-437F-9829-DD1F28A7B92F - e364280425520786"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "function signature specialization &lt;Arg[3] = Value Promoted from Box, Arg[4] = Value Promoted from Box&gt; of closure #1 (Swift.Optional&lt;__C.FIRAuthDataResult&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Filest.SignUpViewController.SignUpTapped(Any) -&gt; ()"
-                  moduleName = "Filest"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/hassankhan/Desktop/Filest_Project/Filest/Filest/ViewControllers/SignUpViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "110"
-                  endingLineNumber = "110"
-                  offsetFromSymbolStart = "342">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "20C5B8F4-E962-4FC9-931D-027EE87BF6A9"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -80,7 +32,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "325"
                   endingLineNumber = "325"
-                  offsetFromSymbolStart = "112">
+                  offsetFromSymbolStart = "144">
                </Location>
                <Location
                   uuid = "20C5B8F4-E962-4FC9-931D-027EE87BF6A9 - 20e1ecc80f8d524d"
@@ -95,7 +47,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "326"
                   endingLineNumber = "326"
-                  offsetFromSymbolStart = "454">
+                  offsetFromSymbolStart = "260">
                </Location>
             </Locations>
          </BreakpointContent>

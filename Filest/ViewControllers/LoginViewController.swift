@@ -73,6 +73,14 @@ class LoginViewController: UIViewController {
      
         NSLayoutConstraint.activate([emailConstraint])
         
+        Auth.auth().addStateDidChangeListener() { auth, user in
+            if user != nil {
+                self.setProfileCache()
+                self.TransitiontoHome()
+            }
+        }
+
+        
     }
 
     
@@ -130,11 +138,7 @@ class LoginViewController: UIViewController {
         }
     }
     
-    
     @IBAction func forgotPasswordButton(_ sender: Any) {
-//        Auth.auth().sendPasswordReset(withEmail: email) { (error) in
-//
-//        }
         let emailAlert = UIAlertController(title: "Enter your email so we can send you a reset email", message: "", preferredStyle: .alert)
         
         let successfulEmailSent = UIAlertController(title: "Sent we've sent you an email to reset your password!", message: "", preferredStyle: .alert)
@@ -154,47 +158,6 @@ class LoginViewController: UIViewController {
             
         }))
         self.present(emailAlert, animated: true)
-    }
-    
-    func assignCompany(){
-        
-//        let alert = UIAlertController(title: "Connect with your company", message: "Start or join a business!", preferredStyle: .alert)
-
-//
-//
-//        alert.addAction(UIAlertAction(title: "Recieve a reset email", style: .default, handler: { action in
-//
-//            joinAlert.addTextField { (textField) in
-//                textField.placeholder = "name@email.com"
-//            }
-//
-//            joinAlert.addAction(UIAlertAction(title: "Send", style: .default, handler:   { action in
-//
-//                //add another alert that asks for code, checks if code exists, if it does then adds user to business
-//
-//
-//            }))
-//
-//            self.present(joinAlert, animated: true)
-//
-//        }))
-//
-//
-//
-//
-//        alert.addAction(UIAlertAction(title: "Start a business", style: .default, handler:   { action in
-//
-//            // adding user to users with their companyID create a new collection in companies collection containing all the basics for actions
-//      //      self.startBusiness(db: database)
-//
-//        }))
-//
-//
-//
-//        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler:  { action in}))
-//
-//        self.present(alert, animated: true)
-        
     }
     
     //sets up cache for profile image
